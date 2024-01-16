@@ -1,13 +1,48 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+/**
+ * 2024.01.16
+ * dueto park
+ * 라우터 설정
+ */
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import App from "./App";
+import Products from "./pages/Products";
+import ProductDetail from "./pages/ProductDetail";
+import Cart from "./pages/Cart";
+import Bookmark from "./pages/Bookmark";
+import Admin from "./Admin";
+import ProductTable from "./admin/ProductTable";
+import ApplyForm from "./admin/ApplyForm";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      { index: true, element: <Products /> },
+      { path: "/product/:productId", element: <ProductDetail /> },
+      { path: "/cart", element: <Cart /> },
+      { path: "/bookmark", element: <Bookmark /> },
+    ],
+  },
+  {
+    path: "/admin",
+    element: <Admin />,
+    children: [
+      { index: true, element: <ProductTable /> },
+      { path: "/admin/apply", element: <ApplyForm /> },
+    ],
+  },
+]);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 

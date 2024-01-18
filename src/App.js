@@ -1,13 +1,16 @@
 /**
  * 2024.01.16
- * dueto park
  * app 구조
+ *
+ * 2024.01.18
+ * app 구조 수정
  */
 
 // import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 
 import { Link, Outlet } from "react-router-dom";
+import Logo from "./components/Logo";
 
 // const firebaseConfig = {
 //   apiKey: "AIzaSyAJbFKyxuwxiIuAUsZDUCXoysLT09iDZXE",
@@ -27,18 +30,23 @@ import { Link, Outlet } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
+    <section className="">
       <header>
-        <Link to="/">홈</Link>
-        <Link to="/product/asdf">상세</Link>
-        <Link to="/cart">카트</Link>
-        <Link to="/bookmark">북마크</Link>
+        <div className="wrapper">
+          <Logo />
+          <Link to="/product/new">새상품</Link>
+          <Link to="/cart">카트</Link>
+          <Link to="/admin">어드민</Link>
+          <button type="button">로그인</button>
+        </div>
       </header>
 
       <div>
-        <Outlet />
+        <div className="wrapper">
+          <Outlet />
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 

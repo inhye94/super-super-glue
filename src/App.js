@@ -1,5 +1,16 @@
+/**
+ * 2024.01.16
+ * app 구조
+ *
+ * 2024.01.18
+ * app 구조 수정
+ */
+
 // import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
+
+import { Link, Outlet } from "react-router-dom";
+import Logo from "./components/Logo";
 
 // const firebaseConfig = {
 //   apiKey: "AIzaSyAJbFKyxuwxiIuAUsZDUCXoysLT09iDZXE",
@@ -18,7 +29,25 @@
 // const analytics = getAnalytics(app);
 
 function App() {
-  return <div className="App">잘 지내고 있니?</div>;
+  return (
+    <section className="">
+      <header>
+        <div className="wrapper">
+          <Logo />
+          <Link to="/product/new">새상품</Link>
+          <Link to="/cart">카트</Link>
+          <Link to="/admin">어드민</Link>
+          <button type="button">로그인</button>
+        </div>
+      </header>
+
+      <div>
+        <div className="wrapper">
+          <Outlet />
+        </div>
+      </div>
+    </section>
+  );
 }
 
 export default App;

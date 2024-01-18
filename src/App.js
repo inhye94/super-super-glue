@@ -37,6 +37,7 @@ function App() {
           <Link to="/product/new">새상품</Link>
           <Link to="/cart">카트</Link>
           <Link to="/admin">어드민</Link>
+          <Link to="/modules">모듈</Link>
           <button type="button">로그인</button>
         </div>
       </header>

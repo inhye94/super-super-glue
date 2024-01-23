@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React from "react";
-import "./button.scss";
+import "../modules/button.scss";
 
 export default function Button({
   children,

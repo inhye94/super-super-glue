@@ -17,7 +17,7 @@ import Bookmark from "./pages/Bookmark";
 import Admin from "./Admin";
 import ProductTable from "./admin/ProductTable";
 import ApplyForm from "./admin/ApplyForm";
-import Modules from "./modules/Modules";
+import Modules from "./pages/Modules";
 
 const router = createBrowserRouter([
   {

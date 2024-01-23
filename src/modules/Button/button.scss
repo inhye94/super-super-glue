@@ -1,4 +1,5 @@
 @use "../constants/colors";
+@use "../mixins/text-style.scss" as text;
 
 @mixin matchColorAndStyle($color, $style) {
   @if ($color == "primary") {
@@ -90,6 +91,7 @@
 }
 
 .button {
+  @include text.text-style(16);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -97,7 +99,6 @@
   height: 48px;
   padding: 0 8px;
   border-radius: 8px;
-  font-size: 14px;
   font-weight: 700;
   white-space: nowrap;
   transition: background-color 150ms ease-in-out, color 150ms ease-in-out,
@@ -105,14 +106,17 @@
 
   // NOTE: size
   &.tiny {
+    @include text.text-style(12);
     height: 32px;
   }
 
   &.small {
+    @include text.text-style(14);
     height: 40px;
   }
 
   &.medium {
+    @include text.text-style(14);
     height: 44px;
   }
 

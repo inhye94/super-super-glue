@@ -17,6 +17,7 @@ import Bookmark from "./pages/Bookmark";
 import Admin from "./Admin";
 import ProductTable from "./admin/ProductTable";
 import ApplyForm from "./admin/ApplyForm";
+import Modules from "./pages/Modules";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
       { path: "/product/:productId", element: <ProductDetail /> },
       { path: "/cart", element: <Cart /> },
       { path: "/bookmark", element: <Bookmark /> },
+      { path: "/modules", element: <Modules /> },
     ],
   },
   {

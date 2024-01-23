@@ -1,0 +1,170 @@
+@use "./constants/colors";
+@use "./mixins/text-style.scss" as text;
+
+@mixin matchColorAndStyle($color, $style) {
+  @if ($color == "primary") {
+    $bg-main: colors.$green-light;
+    $bg-hover: colors.$green-dark;
+    $text-main: colors.$white;
+    $text-hover: colors.$white;
+
+    @if ($style == "full") {
+      @include fullStyle($bg-main, $bg-hover, $text-main);
+    }
+
+    @if ($style == "outlined") {
+      @include outlinedStyle($bg-main, $bg-hover);
+    }
+
+    @if ($style == "ghost") {
+      @include ghostStyle($bg-main, $bg-hover);
+    }
+  }
+
+  @if ($color == "secondary") {
+    $bg-main: colors.$pink;
+    $bg-hover: colors.$pink-dark;
+    $text-main: colors.$green;
+    $text-hover: colors.$green-dark;
+
+    @if ($style == "full") {
+      @include fullStyle($bg-main, $bg-hover, $text-main);
+    }
+
+    @if ($style == "outlined") {
+      @include outlinedStyle($bg-main, $bg-hover);
+    }
+
+    @if ($style == "ghost") {
+      @include ghostStyle($bg-main, $bg-hover);
+    }
+  }
+
+  @if ($color == "tertiary") {
+    $bg-main: colors.$gray;
+    $bg-hover: colors.$gray-dark;
+    $text-main: colors.$white;
+    $text-hover: colors.$white;
+
+    @if ($style == "full") {
+      @include fullStyle($bg-main, $bg-hover, $text-main);
+    }
+
+    @if ($style == "outlined") {
+      @include outlinedStyle($bg-main, $bg-hover);
+    }
+
+    @if ($style == "ghost") {
+      @include ghostStyle($bg-main, $bg-hover);
+    }
+  }
+}
+
+// NOTE: 버튼 스타일
+@mixin fullStyle($bgMain, $bgHover, $textMain) {
+  background-color: $bgMain;
+  color: $textMain;
+
+  &:hover {
+    background-color: $bgHover;
+  }
+}
+
+@mixin outlinedStyle($main, $hover) {
+  background-color: colors.$white;
+  border: 1px solid $main;
+  color: $main;
+
+  &:hover {
+    border-color: $hover;
+    color: $hover;
+  }
+}
+
+@mixin ghostStyle($main, $hover) {
+  background-color: colors.$white;
+  color: $main;
+
+  &:hover {
+    color: $hover;
+  }
+}
+
+.button {
+  @include text.text-style(16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 48px;
+  padding: 0 8px;
+  border-radius: 8px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out,
+    border-color 150ms ease-in-out;
+
+  // NOTE: size
+  &.tiny {
+    @include text.text-style(12);
+    height: 32px;
+  }
+
+  &.small {
+    @include text.text-style(14);
+    height: 40px;
+  }
+
+  &.medium {
+    @include text.text-style(14);
+    height: 44px;
+  }
+
+  // NOTE: style
+  &.primary {
+    &.full {
+      @include matchColorAndStyle("primary", "full");
+    }
+
+    &.outlined {
+      @include matchColorAndStyle("primary", "outlined");
+    }
+
+    &.ghost {
+      @include matchColorAndStyle("primary", "ghost");
+    }
+  }
+
+  &.secondary {
+    &.full {
+      @include matchColorAndStyle("secondary", "full");
+    }
+
+    &.outlined {
+      @include matchColorAndStyle("secondary", "outlined");
+    }
+
+    &.ghost {
+      @include matchColorAndStyle("secondary", "ghost");
+    }
+  }
+
+  &.tertiary {
+    &.full {
+      @include matchColorAndStyle("tertiary", "full");
+    }
+
+    &.outlined {
+      @include matchColorAndStyle("tertiary", "outlined");
+    }
+
+    &.ghost {
+      @include matchColorAndStyle("tertiary", "ghost");
+    }
+  }
+
+  // NOTE: rouned
+  &.round {
+    border-radius: 100px;
+  }
+}

@@ -4,16 +4,18 @@
  * admin 구조
  */
 
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import Gnb from "./components/Gnb";
+
+const _menu = [
+  { path: "/admin", text: "등록 상품 리스트" },
+  { path: "/admin/apply", text: "상품 등록" },
+];
 
 function Admin() {
   return (
     <div className="Admin">
-      <header>
-        <Link to="/">홈</Link>
-        <Link to="/admin">등록 상품 리스트</Link>
-        <Link to="/admin/apply">상품 등록</Link>
-      </header>
+      <Gnb menu={_menu} />
 
       <div>
         <Outlet />

@@ -11,7 +11,7 @@ export default function Logo() {
   return (
     <h1>
       <Link
-        className="block text-[24px] font-extrabold italic text-green-900 border-y-2 border-pink-300 whitespace-nowrap leading-none md:text-[48px] md:border-y-4"
+        className="block text-[24px] font-extrabold italic text-green-dark whitespace-nowrap leading-none md:text-[48px]"
         to="/"
       >
         SUPER SUPER GLUE

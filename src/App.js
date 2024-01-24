@@ -9,8 +9,12 @@
 // import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 
-import { Link, Outlet } from "react-router-dom";
-import Logo from "./components/Logo";
+import { Outlet } from "react-router-dom";
+import Gnb from "./components/Gnb";
+import { BsCake2 } from "react-icons/bs";
+import { IoCartOutline } from "react-icons/io5";
+import { SiStyledcomponents } from "react-icons/si";
+import { ImTable } from "react-icons/im";
 
 // const firebaseConfig = {
 //   apiKey: "AIzaSyAJbFKyxuwxiIuAUsZDUCXoysLT09iDZXE",
@@ -28,19 +32,29 @@ import Logo from "./components/Logo";
 // const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 
+const _menu = [
+  { path: "/product/new", text: "new", icon: <BsCake2 aria-hidden="true" /> },
+  {
+    path: "/cart",
+    text: "장바구니",
+    icon: <IoCartOutline aria-hidden="true" />,
+  },
+  {
+    path: "/admin",
+    text: "어드민",
+    icon: <ImTable aria-hidden="true" />,
+  },
+  {
+    path: "/modules",
+    text: "모듈",
+    icon: <SiStyledcomponents aria-hidden="true" />,
+  },
+];
+
 function App() {
   return (
     <section className="">
-      <header>
-        <div className="wrapper">
-          <Logo />
-          <Link to="/product/new">새상품</Link>
-          <Link to="/cart">카트</Link>
-          <Link to="/admin">어드민</Link>
-          <Link to="/modules">모듈</Link>
-          <button type="button">로그인</button>
-        </div>
-      </header>
+      <Gnb menu={_menu} />
 
       <div>
         <div className="wrapper">

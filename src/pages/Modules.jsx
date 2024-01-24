@@ -105,6 +105,16 @@ export default function Modules() {
             url="/"
           />
         </FlexBox>
+
+        <FlexBox subtitle="icon-button | size">
+          <IconButton icon={<FiAlertCircle />} text="버튼이에용" />
+          <IconButton
+            icon={<FiAlertCircle />}
+            text="버튼이에용"
+            size="medium"
+          />
+          <IconButton icon={<FiAlertCircle />} text="버튼이에용" size="small" />
+        </FlexBox>
       </SectionWrapper>
     </div>
   );
@@ -131,7 +141,7 @@ function FlexBox({ children, subtitle }) {
     <div>
       {subtitle && <Subtitle>{subtitle}</Subtitle>}
 
-      <div className="flex gap-x-[8px] gap-y-[16px] flex-wrap md:flex-nowrap">
+      <div className="flex gap-x-[8px] gap-y-[16px] items-center flex-wrap md:flex-nowrap">
         {children}
       </div>
     </div>

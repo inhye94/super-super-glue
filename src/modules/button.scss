@@ -182,15 +182,15 @@
 
   // NOTE: size
   &.medium {
-    @include text.text-style-24;
+    @include text.text-style-20;
     --icon-size: 40px;
     width: var(--icon-size);
     height: var(--icon-size);
   }
 
   &.small {
-    @include text.text-style-24;
-    --icon-size: 44px;
+    @include text.text-style-16;
+    --icon-size: 32px;
     width: var(--icon-size);
     height: var(--icon-size);
   }

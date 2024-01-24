@@ -8,12 +8,13 @@ export default function IconButton({
   url,
   color = "primary",
   tag = "button",
+  size,
   callback,
 }) {
   if (tag === "button") {
     return (
       <button
-        className={classNames("icon-button", color)}
+        className={classNames("icon-button", color, size)}
         type="button"
         title={text}
         onClick={callback}
@@ -26,7 +27,7 @@ export default function IconButton({
   if (tag === "link") {
     return (
       <Link
-        className={classNames("icon-button", color)}
+        className={classNames("icon-button", color, size)}
         title={text}
         to={url}
         onClick={callback}

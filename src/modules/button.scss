@@ -168,3 +168,87 @@
     border-radius: 100px;
   }
 }
+
+.icon-button {
+  --icon-size: 44px;
+  @include text.text-style-24;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  border-radius: 50%;
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
+
+  // NOTE: size
+  &.medium {
+    @include text.text-style-20;
+    --icon-size: 40px;
+    width: var(--icon-size);
+    height: var(--icon-size);
+  }
+
+  &.small {
+    @include text.text-style-16;
+    --icon-size: 32px;
+    width: var(--icon-size);
+    height: var(--icon-size);
+  }
+
+  // NOTE: color
+  &.black {
+    color: colors.$black;
+  }
+
+  &.dark {
+    color: colors.$dark;
+  }
+
+  &.primary {
+    color: colors.$primary;
+  }
+
+  &.secondary {
+    color: colors.$secondary;
+  }
+
+  &.tertiary {
+    color: colors.$tertiary;
+  }
+
+  &.orange {
+    color: colors.$orange;
+
+    &:hover {
+      color: colors.$orange-dark;
+    }
+  }
+
+  &.yellow {
+    color: colors.$yellow;
+
+    &:hover {
+      color: colors.$yellow-dark;
+    }
+  }
+
+  &.green {
+    color: colors.$green;
+
+    &:hover {
+      color: colors.$green-dark;
+    }
+  }
+
+  &.pink {
+    color: colors.$pink;
+
+    &:hover {
+      color: colors.$pink-dark;
+    }
+  }
+
+  &:hover {
+    background-color: colors.$gray-light;
+  }
+}

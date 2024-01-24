@@ -1,5 +1,7 @@
 import React from "react";
 import Button from "../components/Button";
+import IconButton from "../components/IconButton";
+import { FiAlertCircle } from "react-icons/fi";
 
 export default function Modules() {
   return (
@@ -46,6 +48,73 @@ export default function Modules() {
           <Button>default 버튼이에용</Button>
           <Button rounded="round">rounded 버튼이에용</Button>
         </FlexBox>
+
+        <FlexBox subtitle="icon-button | color">
+          <IconButton
+            icon={<FiAlertCircle />}
+            text="버튼이에용"
+            color="black"
+          />
+
+          <IconButton
+            icon={<FiAlertCircle />}
+            text="버튼이에용"
+            color="primary"
+          />
+
+          <IconButton
+            icon={<FiAlertCircle />}
+            text="버튼이에용"
+            color="secondary"
+          />
+
+          <IconButton
+            icon={<FiAlertCircle />}
+            text="버튼이에용"
+            color="tertiary"
+          />
+
+          <IconButton
+            icon={<FiAlertCircle />}
+            text="버튼이에용"
+            color="orange"
+          />
+
+          <IconButton
+            icon={<FiAlertCircle />}
+            text="버튼이에용"
+            color="yellow"
+          />
+
+          <IconButton
+            icon={<FiAlertCircle />}
+            text="버튼이에용"
+            color="green"
+          />
+
+          <IconButton icon={<FiAlertCircle />} text="버튼이에용" color="pink" />
+        </FlexBox>
+
+        <FlexBox subtitle="icon-button | type">
+          <IconButton icon={<FiAlertCircle />} text="버튼이에용" />
+
+          <IconButton
+            icon={<FiAlertCircle />}
+            text="링크에용"
+            tag="link"
+            url="/"
+          />
+        </FlexBox>
+
+        <FlexBox subtitle="icon-button | size">
+          <IconButton icon={<FiAlertCircle />} text="버튼이에용" />
+          <IconButton
+            icon={<FiAlertCircle />}
+            text="버튼이에용"
+            size="medium"
+          />
+          <IconButton icon={<FiAlertCircle />} text="버튼이에용" size="small" />
+        </FlexBox>
       </SectionWrapper>
     </div>
   );
@@ -72,7 +141,7 @@ function FlexBox({ children, subtitle }) {
     <div>
       {subtitle && <Subtitle>{subtitle}</Subtitle>}
 
-      <div className="flex gap-x-[8px] gap-y-[16px] flex-wrap md:flex-nowrap">
+      <div className="flex gap-x-[8px] gap-y-[16px] items-center flex-wrap md:flex-nowrap">
         {children}
       </div>
     </div>

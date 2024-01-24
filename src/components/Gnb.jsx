@@ -4,8 +4,22 @@ import Logo from "./Logo";
 import IconButton from "./IconButton";
 import Button from "./Button";
 import ContentWrapper from "./ContentWrapper";
+import { useGoogleAuthContext } from "../context/GoogleAuthContext";
+import { useScreenStateContext } from "../context/ScreenStateContext";
 
 export default function Gnb({ menu }) {
+  const { loginByMobile, loginByDesktop, logout, userInfo } =
+    useGoogleAuthContext();
+  const { isMobile } = useScreenStateContext();
+
+  const handleLogin = () => {
+    isMobile ? loginByMobile() : loginByDesktop();
+  };
+
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <header className="sticky left-0 top-0 py-[8px] border-y-2 bg-white border-pink md:border-y-4">
       <ContentWrapper extraStyle="flex justify-between flex-wrap gap-y-[6px] items-center">
@@ -48,10 +62,28 @@ export default function Gnb({ menu }) {
                 )}
               </li>
             ))}
-            <li className="min-w-[80px] ml-[12px] md:min-w-[100px] md:ml-[24px]">
-              <Button size="tiny">로그인</Button>
-            </li>
+            {userInfo && (
+              <li className="shrink-0">
+                <img
+                  src={userInfo.photoURL}
+                  alt={`${userInfo.displayName}님의 프로필`}
+                  className="w-[32px] h-[32px] rounded-full object-cover"
+                />
+              </li>
+            )}
           </ul>
+
+          <div className="min-w-[64px] ml-[4px] md:min-w-[100px] md:ml-[24px]">
+            {userInfo ? (
+              <Button size="tiny" color="tertiary" clickCallback={handleLogout}>
+                로그아웃
+              </Button>
+            ) : (
+              <Button size="tiny" clickCallback={handleLogin}>
+                로그인
+              </Button>
+            )}
+          </div>
         </nav>
       </ContentWrapper>
     </header>

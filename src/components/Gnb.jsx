@@ -94,28 +94,36 @@ export default function Gnb({ menu }) {
               md:border-y-0
               md:bg-transparent"
           >
-            {_menu.map(({ path, text, icon }, i) => (
-              <li key={i}>
-                {icon ? (
-                  <IconButton
-                    tag="link"
-                    url={path}
-                    icon={icon}
-                    text={text}
-                    size="medium"
-                    color="secondary"
-                  />
-                ) : (
-                  <Link
-                    to={path}
-                    title={text}
-                    className="text-[14px] font-bold text-secondary hover:text-tertiary"
-                  >
-                    {text.toUpperCase()}
-                  </Link>
-                )}
-              </li>
-            ))}
+            {_menu
+              .filter((v) => {
+                if (userInfo) {
+                  return userInfo.isAdmin ? true : v.role === "normal";
+                } else {
+                  return v.login;
+                }
+              })
+              .map(({ path, text, icon }, i) => (
+                <li key={i}>
+                  {icon ? (
+                    <IconButton
+                      tag="link"
+                      url={path}
+                      icon={icon}
+                      text={text}
+                      size="medium"
+                      color="secondary"
+                    />
+                  ) : (
+                    <Link
+                      to={path}
+                      title={text}
+                      className="text-[14px] font-bold text-secondary hover:text-tertiary"
+                    >
+                      {text.toUpperCase()}
+                    </Link>
+                  )}
+                </li>
+              ))}
             {userInfo && (
               <li className="shrink-0">
                 <img

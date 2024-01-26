@@ -12,6 +12,54 @@ import {
   logout,
 } from "../api/firebase";
 
+import {
+  LuPartyPopper,
+  LuShoppingCart,
+  LuTable2,
+  LuPictureInPicture2,
+} from "react-icons/lu";
+import { RiMenuAddLine } from "react-icons/ri";
+
+const _menu = [
+  {
+    path: "/product/new",
+    text: "new",
+    icon: <LuPartyPopper aria-hidden="true" />,
+    login: true,
+    role: "normal",
+  },
+  {
+    path: "/cart",
+    text: "장바구니",
+    icon: <LuShoppingCart aria-hidden="true" />,
+    login: false,
+    role: "normal",
+  },
+
+  {
+    path: "/admin",
+    text: "어드민 메인",
+    icon: <LuTable2 aria-hidden="true" />,
+    login: false,
+    role: "admin",
+  },
+  {
+    path: "/admin/regist",
+    text: "상품 등록",
+    icon: <RiMenuAddLine aria-hidden="true" />,
+    login: false,
+    role: "admin",
+  },
+
+  {
+    path: "/modules",
+    text: "모듈",
+    icon: <LuPictureInPicture2 aria-hidden="true" />,
+    login: true,
+    role: "normal",
+  },
+];
+
 export default function Gnb({ menu }) {
   const [userInfo, setUserInfo] = useState();
   const { isMobile } = useScreenStateContext();
@@ -46,7 +94,7 @@ export default function Gnb({ menu }) {
               md:border-y-0
               md:bg-transparent"
           >
-            {menu.map(({ path, text, icon }, i) => (
+            {_menu.map(({ path, text, icon }, i) => (
               <li key={i}>
                 {icon ? (
                   <IconButton

@@ -14,7 +14,6 @@ import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
 import Bookmark from "./pages/Bookmark";
-import Admin from "./Admin";
 import ProductTable from "./admin/ProductTable";
 import ApplyForm from "./admin/ApplyForm";
 import Modules from "./pages/Modules";
@@ -30,14 +29,8 @@ const router = createBrowserRouter([
       { path: "/cart", element: <Cart /> },
       { path: "/bookmark", element: <Bookmark /> },
       { path: "/modules", element: <Modules /> },
-    ],
-  },
-  {
-    path: "/admin",
-    element: <Admin />,
-    children: [
-      { index: true, element: <ProductTable /> },
-      { path: "/admin/apply", element: <ApplyForm /> },
+      { path: "/admin", element: <ProductTable /> },
+      { path: "/admin/regist", element: <ApplyForm /> },
     ],
   },
 ]);

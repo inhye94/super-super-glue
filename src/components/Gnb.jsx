@@ -1,24 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
 import IconButton from "./IconButton";
 import Button from "./Button";
 import ContentWrapper from "./ContentWrapper";
-import { useGoogleAuthContext } from "../context/GoogleAuthContext";
 import { useScreenStateContext } from "../context/ScreenStateContext";
+import {
+  onUserStateChanged,
+  loginByDesktop,
+  loginByMobile,
+  logout,
+} from "../api/firebase";
 
 export default function Gnb({ menu }) {
-  const { loginByMobile, loginByDesktop, logout, userInfo } =
-    useGoogleAuthContext();
+  const [userInfo, setUserInfo] = useState();
   const { isMobile } = useScreenStateContext();
 
   const handleLogin = () => {
     isMobile ? loginByMobile() : loginByDesktop();
   };
 
-  const handleLogout = () => {
-    logout();
-  };
+  useEffect(() => {
+    onUserStateChanged((user) => {
+      setUserInfo(user);
+    });
+  }, []);
 
   return (
     <header className="sticky left-0 top-0 py-[8px] border-y-2 bg-white border-pink md:border-y-4">
@@ -75,7 +81,7 @@ export default function Gnb({ menu }) {
 
           <div className="min-w-[64px] ml-[4px] md:min-w-[100px] md:ml-[24px]">
             {userInfo ? (
-              <Button size="tiny" color="tertiary" clickCallback={handleLogout}>
+              <Button size="tiny" color="tertiary" clickCallback={logout}>
                 로그아웃
               </Button>
             ) : (

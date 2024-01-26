@@ -12,7 +12,6 @@ import { BsCake2 } from "react-icons/bs";
 import { IoCartOutline } from "react-icons/io5";
 import { SiStyledcomponents } from "react-icons/si";
 import { ImTable } from "react-icons/im";
-import AuthProvider from "./context/GoogleAuthContext";
 import ScreenStateProvider from "./context/ScreenStateContext";
 
 const _menu = [
@@ -37,17 +36,15 @@ const _menu = [
 function App() {
   return (
     <section className="">
-      <AuthProvider>
-        <ScreenStateProvider>
-          <Gnb menu={_menu} />
+      <ScreenStateProvider>
+        <Gnb menu={_menu} />
 
-          <div>
-            <div className="wrapper">
-              <Outlet />
-            </div>
+        <div>
+          <div className="wrapper">
+            <Outlet />
           </div>
-        </ScreenStateProvider>
-      </AuthProvider>
+        </div>
+      </ScreenStateProvider>
     </section>
   );
 }

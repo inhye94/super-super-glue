@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import Logo from "./Logo";
 import IconButton from "./IconButton";
 import Button from "./Button";
@@ -60,7 +59,7 @@ const _menu = [
   },
 ];
 
-export default function Gnb({ menu }) {
+export default function Gnb() {
   const [userInfo, setUserInfo] = useState();
   const { isMobile } = useScreenStateContext();
 
@@ -104,24 +103,14 @@ export default function Gnb({ menu }) {
               })
               .map(({ path, text, icon }, i) => (
                 <li key={i}>
-                  {icon ? (
-                    <IconButton
-                      tag="link"
-                      url={path}
-                      icon={icon}
-                      text={text}
-                      size="medium"
-                      color="secondary"
-                    />
-                  ) : (
-                    <Link
-                      to={path}
-                      title={text}
-                      className="text-[14px] font-bold text-secondary hover:text-tertiary"
-                    >
-                      {text.toUpperCase()}
-                    </Link>
-                  )}
+                  <IconButton
+                    tag="link"
+                    url={path}
+                    icon={icon}
+                    text={text}
+                    size="medium"
+                    color="secondary"
+                  />
                 </li>
               ))}
             {userInfo && (

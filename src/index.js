@@ -14,10 +14,10 @@ import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
 import Bookmark from "./pages/Bookmark";
-import Admin from "./Admin";
 import ProductTable from "./admin/ProductTable";
 import ApplyForm from "./admin/ApplyForm";
 import Modules from "./pages/Modules";
+import ProtectPage from "./components/ProtectPage";
 
 const router = createBrowserRouter([
   {
@@ -26,19 +26,33 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Products /> },
       { path: "/product/new", element: <Products /> },
-
       { path: "/product/:productId", element: <ProductDetail /> },
-      { path: "/cart", element: <Cart /> },
+      {
+        path: "/cart",
+        element: (
+          <ProtectPage>
+            <Cart />
+          </ProtectPage>
+        ),
+      },
       { path: "/bookmark", element: <Bookmark /> },
       { path: "/modules", element: <Modules /> },
-    ],
-  },
-  {
-    path: "/admin",
-    element: <Admin />,
-    children: [
-      { index: true, element: <ProductTable /> },
-      { path: "/admin/apply", element: <ApplyForm /> },
+      {
+        path: "/admin",
+        element: (
+          <ProtectPage requiredAdmin>
+            <ProductTable />
+          </ProtectPage>
+        ),
+      },
+      {
+        path: "/admin/regist",
+        element: (
+          <ProtectPage requiredAdmin>
+            <ApplyForm />
+          </ProtectPage>
+        ),
+      },
     ],
   },
 ]);

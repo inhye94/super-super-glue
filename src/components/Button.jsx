@@ -9,11 +9,13 @@ export default function Button({
   size = "big",
   color = "primary",
   rounded,
+  clickCallback,
 }) {
   return (
     <button
       type={buttonType}
       className={classNames("button", size, color, rounded, buttonStyle)}
+      onClick={clickCallback}
     >
       {children}
     </button>

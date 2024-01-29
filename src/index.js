@@ -17,6 +17,7 @@ import Bookmark from "./pages/Bookmark";
 import ProductTable from "./admin/ProductTable";
 import ApplyForm from "./admin/ApplyForm";
 import Modules from "./pages/Modules";
+import ProtectPage from "./components/ProtectPage";
 
 const router = createBrowserRouter([
   {
@@ -26,11 +27,32 @@ const router = createBrowserRouter([
       { index: true, element: <Products /> },
       { path: "/product/new", element: <Products /> },
       { path: "/product/:productId", element: <ProductDetail /> },
-      { path: "/cart", element: <Cart /> },
+      {
+        path: "/cart",
+        element: (
+          <ProtectPage>
+            <Cart />
+          </ProtectPage>
+        ),
+      },
       { path: "/bookmark", element: <Bookmark /> },
       { path: "/modules", element: <Modules /> },
-      { path: "/admin", element: <ProductTable /> },
-      { path: "/admin/regist", element: <ApplyForm /> },
+      {
+        path: "/admin",
+        element: (
+          <ProtectPage requiredAdmin>
+            <ProductTable />
+          </ProtectPage>
+        ),
+      },
+      {
+        path: "/admin/regist",
+        element: (
+          <ProtectPage requiredAdmin>
+            <ApplyForm />
+          </ProtectPage>
+        ),
+      },
     ],
   },
 ]);

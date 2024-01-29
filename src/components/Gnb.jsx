@@ -1,16 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Logo from "./Logo";
 import IconButton from "./IconButton";
 import Button from "./Button";
 import ContentWrapper from "./ContentWrapper";
 import { useScreenStateContext } from "../context/ScreenStateContext";
-import {
-  onUserStateChanged,
-  loginByDesktop,
-  loginByMobile,
-  logout,
-} from "../api/firebase";
-
+import { useAuthContext } from "../context/AuthContext";
 import {
   LuPartyPopper,
   LuShoppingCart,
@@ -60,18 +54,12 @@ const _menu = [
 ];
 
 export default function Gnb() {
-  const [userInfo, setUserInfo] = useState();
+  const { userInfo, loginByDesktop, loginByMobile, logout } = useAuthContext();
   const { isMobile } = useScreenStateContext();
 
   const handleLogin = () => {
     isMobile ? loginByMobile() : loginByDesktop();
   };
-
-  useEffect(() => {
-    onUserStateChanged((user) => {
-      setUserInfo(user);
-    });
-  }, []);
 
   return (
     <header className="sticky left-0 top-0 py-[8px] border-y-2 bg-white border-pink md:border-y-4">

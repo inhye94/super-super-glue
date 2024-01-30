@@ -25,7 +25,7 @@ export default function Input({
   const _isInvalid = isFormInvalid(_inputError);
 
   return (
-    <div className={classNames("input-wrapper", _isInvalid && "error")}>
+    <div className={classNames("input-wrapper", "text", _isInvalid && "error")}>
       <div className="input-text">
         <label htmlFor={id} className="input-label">
           {label}

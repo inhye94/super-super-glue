@@ -1,10 +1,10 @@
 import classNames from "classnames";
 import React from "react";
 import "../modules/form.scss";
-import Badge from "./Badge";
 import { useFormContext } from "react-hook-form";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { findInputError, isFormInvalid } from "../api/form";
+import InputError from "./InputError";
 
 export default function Input({
   name,
@@ -51,18 +51,3 @@ export default function Input({
     </div>
   );
 }
-
-const InputError = ({ message }) => {
-  return (
-    <motion.p {..._framer_error}>
-      <Badge text={message} color="red" alert />
-    </motion.p>
-  );
-};
-
-const _framer_error = {
-  initial: { opacity: 0, y: 10 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: 10 },
-  transition: { duration: 0.2 },
-};

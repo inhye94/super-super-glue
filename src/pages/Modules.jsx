@@ -4,6 +4,16 @@ import IconButton from "../components/IconButton";
 import { FiAlertCircle } from "react-icons/fi";
 import ContentWrapper from "../components/ContentWrapper";
 import Badge from "../components/Badge";
+import Input from "../components/Input";
+import { FormProvider, useForm } from "react-hook-form";
+import {
+  required_validation,
+  num_validation,
+  min_validation,
+  kr_en_validation,
+  special_validation,
+  only_kr_validation,
+} from "../utils/validations";
 
 export default function Modules() {
   return (
@@ -15,6 +25,7 @@ export default function Modules() {
 
         <ButtonSection />
         <BadgeSection />
+        <FormSection />
       </div>
     </ContentWrapper>
   );
@@ -166,5 +177,168 @@ function BadgeSection() {
         <Badge text="삐뽀삐뽀" color="green" close />
       </FlexBox>
     </SectionWrapper>
+  );
+}
+
+function FormSection() {
+  const methods = useForm({
+    defaultValues: {
+      test: {
+        password: "공식적인 비밀번호",
+        name: "박빙구",
+        age: 232323,
+      },
+    },
+  });
+  const [_success, setSuccess] = useState(false);
+
+  const handleSubmitEvent = methods.handleSubmit((data) => {
+    console.log(data);
+    methods.reset();
+    setSuccess(true);
+  });
+
+  console.log(methods.formState.isDirty);
+  console.log(methods.formState.dirtyFields);
+
+  return (
+    <FormProvider {...methods}>
+      <form
+        className="form"
+        noValidate
+        onSubmit={(e) => e.preventDefault()}
+        autoComplete="off"
+      >
+        {/* 모양 (disabled) */}
+        {/* 타입 (text, radio, checkbox, select) */}
+        <SectionWrapper title="폼">
+          <FlexBox subtitle="text | 선택과 필수">
+            <Input
+              id="password"
+              name="password"
+              label="선택"
+              placeholder="비밀번호(선택)"
+            />
+
+            <Input
+              id="name"
+              name="name"
+              label="필수"
+              placeholder="이름(필수)"
+              validation={{ ...required_validation() }}
+            />
+          </FlexBox>
+
+          <FlexBox subtitle="text | 유효성 검사 (숫자, 한글, 영어, 특수문자)">
+            <Input
+              id="age"
+              name="age"
+              label="숫자입력"
+              placeholder="나이(필수, 숫자만, 6자 이상 10자 이하)"
+              maxLength="10"
+              validation={{
+                ...required_validation(),
+                ...num_validation(),
+                ...min_validation(6),
+              }}
+            />
+
+            <Input
+              id="address"
+              name="address"
+              label="한글과 영어"
+              placeholder="주소(필수, 한글과 영어)"
+              validation={{
+                ...required_validation(),
+                ...kr_en_validation(),
+              }}
+            />
+
+            <Input
+              id="pick"
+              name="pick"
+              label="특수문자 (-_&만 허용)"
+              placeholder="pick(필수, 특수문자)"
+              validation={{
+                ...required_validation(),
+                ...special_validation(),
+              }}
+            />
+
+            <Input
+              id="bear"
+              name="bear"
+              label="한글만 허용"
+              placeholder="bear(필수, 한글만)"
+              validation={{
+                ...required_validation(),
+                ...only_kr_validation(),
+              }}
+            />
+          </FlexBox>
+
+          <FlexBox subtitle="text | disabled">
+            <Input
+              id="normal"
+              name="normal"
+              label="normal"
+              placeholder="normal"
+            />
+
+            <Input
+              id="disabled"
+              name="disabled"
+              label="disabled"
+              placeholder="disabled"
+              disabled
+            />
+          </FlexBox>
+
+          <FlexBox subtitle="controls">
+            <Button type="submit" clickCallback={handleSubmitEvent}>
+              submit
+            </Button>
+            <Button
+              buttonStyle="outlined"
+              clickCallback={() => {
+                // methods.setValue(
+                //   "test",
+                //   {
+                //     password: "쉿 비밀이야",
+                //     name: "푸바오",
+                //     age: 454545,
+                //   },
+                //   { shouldDirty: true }
+                // );
+
+                methods.setValue("password", "쉿 비밀이야", {
+                  shouldDirty: true,
+                  shouldValidate: true,
+                });
+                methods.setValue("name", "푸바오", {
+                  shouldDirty: true,
+                  shouldValidate: true,
+                });
+                methods.setValue("age", 454545, {
+                  shouldDirty: true,
+                  shouldValidate: true,
+                });
+              }}
+            >
+              setValue
+            </Button>
+
+            <Button
+              buttonStyle="outlined"
+              clickCallback={() => {
+                methods.trigger(undefined, { shouldFocus: true });
+              }}
+            >
+              trigger
+            </Button>
+          </FlexBox>
+        </SectionWrapper>
+      </form>
+    </FormProvider>
   );
 }

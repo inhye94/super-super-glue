@@ -1,0 +1,71 @@
+@use "./constants/colors";
+@use "./mixins/text-style.scss" as text;
+
+$color-pass: colors.$green-light;
+$color-errer: colors.$pink-dark;
+
+.form,
+.input-wrapper {
+  width: 100%;
+}
+
+.input {
+  @include text.text-style(16);
+  display: block;
+  width: 100%;
+  min-width: 150px;
+  height: 48px;
+  padding: 0 12px;
+  border: 1px solid colors.$gray-light;
+  border-radius: 8px;
+  font-weight: 500;
+  color: colors.$primary;
+  background-color: colors.$white;
+  transition: border-color 150ms ease-in-out;
+
+  &::placeholder {
+    color: colors.$gray-dark;
+  }
+
+  &:active,
+  &:focus {
+    border-color: colors.$gray-dark;
+  }
+
+  &:disabled {
+    background-color: colors.$gray-light;
+    color: colors.$gray-dark;
+  }
+}
+
+.input-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-height: 28px;
+  margin-bottom: 4px;
+}
+
+.input-label {
+  @include text.text-style(14);
+  font-weight: 600;
+  color: colors.$dark;
+}
+
+.input-msg {
+  @include text.text-style(12);
+  margin-top: 4px;
+  color: colors.$tertiary;
+}
+
+// NOTE: 유효성 검사 error
+.error {
+  .input {
+    border-color: $color-errer;
+  }
+
+  .input-msg {
+    color: $color-errer;
+  }
+}

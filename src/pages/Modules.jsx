@@ -198,8 +198,8 @@ function FormSection() {
     setSuccess(true);
   });
 
-  console.log(methods.formState.isDirty);
-  console.log(methods.formState.dirtyFields);
+  // console.log(methods.formState.isDirty);
+  // console.log(methods.formState.dirtyFields);
 
   return (
     <FormProvider {...methods}>
@@ -209,7 +209,6 @@ function FormSection() {
         onSubmit={(e) => e.preventDefault()}
         autoComplete="off"
       >
-        {/* 모양 (disabled) */}
         {/* 타입 (text, radio, checkbox, select) */}
         <SectionWrapper title="폼">
           <FlexBox subtitle="text | 선택과 필수">
@@ -257,7 +256,7 @@ function FormSection() {
             <Input
               id="pick"
               name="pick"
-              label="특수문자 (-_&만 허용)"
+              label="한글, 영어, 특수문자(-_&만 허용)"
               placeholder="pick(필수, 특수문자)"
               validation={{
                 ...required_validation(),

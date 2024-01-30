@@ -9,36 +9,36 @@ export const required_validation = () => {
 
 export const num_validation = () => {
   return {
-    pattern: {
-      value: /^[0-9]*$/,
-      message: "숫자만!",
+    onChange: (e) => {
+      const _value = e.target.value;
+      e.target.value = _value.replace(/[^0-9]/, "");
     },
   };
 };
 
 export const kr_en_validation = () => {
   return {
-    pattern: {
-      value: /^[ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z]*$/,
-      message: "한글, 영어만 허용",
+    onChange: (e) => {
+      const _value = e.target.value;
+      e.target.value = _value.replace(/[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z]/, "");
     },
   };
 };
 
 export const only_kr_validation = () => {
   return {
-    pattern: {
-      value: /^[ㄱ-ㅎㅏ-ㅣ가-힣]*$/,
-      message: "한글만 허용",
+    onChange: (e) => {
+      const _value = e.target.value;
+      e.target.value = _value.replace(/[^ㄱ-ㅎㅏ-ㅣ가-힣]/, "");
     },
   };
 };
 
 export const special_validation = () => {
   return {
-    pattern: {
-      value: /^[&-_ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z ]*$/,
-      message: "한글, 영어, 특수문자 &_- 만 허용",
+    onChange: (e) => {
+      const _value = e.target.value;
+      e.target.value = _value.replace(/[^\w\-&ㄱ-ㅎㅏ-ㅣ가-힣]/, "");
     },
   };
 };

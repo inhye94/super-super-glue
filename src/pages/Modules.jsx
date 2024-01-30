@@ -14,6 +14,7 @@ import {
   special_validation,
   only_kr_validation,
 } from "../utils/validations";
+import FileInput from "../components/FileInput";
 
 export default function Modules() {
   return (
@@ -290,6 +291,18 @@ function FormSection() {
               label="disabled"
               placeholder="disabled"
               disabled
+            />
+          </FlexBox>
+
+          <FlexBox subtitle="file">
+            <FileInput id="file" name="file" label="단일 이미지" size="1" />
+
+            <FileInput
+              id="multipleFile"
+              name="multipleFile"
+              label="다중 이미지"
+              multiple="5"
+              size="10"
             />
           </FlexBox>
 

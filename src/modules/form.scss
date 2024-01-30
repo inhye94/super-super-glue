@@ -76,6 +76,7 @@ $color-border: colors.$gray-light;
     text-align: center;
     background-color: colors.$white;
     color: colors.$tertiary;
+    word-break: keep-all;
     cursor: pointer;
     transition: color 150ms ease-in-out, border-color 150ms ease-in-out;
 
@@ -91,6 +92,12 @@ $color-border: colors.$gray-light;
       background-color: $color-border;
       color: colors.$white;
       transition: background-color 150ms ease-in-out;
+    }
+
+    p {
+      margin-bottom: 4px;
+      font-size: 16px;
+      font-weight: 500;
     }
 
     &:hover {

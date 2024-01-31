@@ -182,20 +182,13 @@ function BadgeSection() {
 }
 
 function FormSection() {
-  const methods = useForm({
-    defaultValues: {
-      test: {
-        password: "공식적인 비밀번호",
-        name: "박빙구",
-        age: 232323,
-      },
-    },
-  });
+  // const methods = useForm({..._initValue});
+  const methods = useForm();
   const [_success, setSuccess] = useState(false);
 
   const handleSubmitEvent = methods.handleSubmit((data) => {
     console.log(data);
-    methods.reset();
+    // methods.reset();
     setSuccess(true);
   });
 
@@ -295,14 +288,21 @@ function FormSection() {
           </FlexBox>
 
           <FlexBox subtitle="file">
-            <FileInput id="file" name="file" label="단일 이미지" size="1" />
+            <FileInput
+              id="file"
+              name="file"
+              label="단일 이미지"
+              limitSize="1"
+              validation={{ ...required_validation() }}
+            />
 
             <FileInput
               id="multipleFile"
               name="multipleFile"
               label="다중 이미지"
-              multiple="5"
-              size="10"
+              limitCount="5"
+              limitSize="1"
+              validation={{ ...required_validation() }}
             />
           </FlexBox>
 
@@ -335,6 +335,18 @@ function FormSection() {
                   shouldDirty: true,
                   shouldValidate: true,
                 });
+                methods.setValue("address", "에버랜드", {
+                  shouldDirty: true,
+                  shouldValidate: true,
+                });
+                methods.setValue("pick", "아쿠아리움", {
+                  shouldDirty: true,
+                  shouldValidate: true,
+                });
+                methods.setValue("bear", "팬더", {
+                  shouldDirty: true,
+                  shouldValidate: true,
+                });
               }}
             >
               setValue
@@ -354,3 +366,13 @@ function FormSection() {
     </FormProvider>
   );
 }
+
+const _initValue = {
+  defaultValues: {
+    test: {
+      password: "공식적인 비밀번호",
+      name: "박빙구",
+      age: 232323,
+    },
+  },
+};

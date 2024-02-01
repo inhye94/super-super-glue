@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../components/Button";
 import IconButton from "../components/IconButton";
 import { FiAlertCircle } from "react-icons/fi";
@@ -182,8 +182,8 @@ function BadgeSection() {
 }
 
 function FormSection() {
-  // const methods = useForm({..._initValue});
-  const methods = useForm();
+  const methods = useForm({ ..._initValue });
+  // const methods = useForm();
   const [_success, setSuccess] = useState(false);
 
   const handleSubmitEvent = methods.handleSubmit((data) => {
@@ -192,8 +192,33 @@ function FormSection() {
     setSuccess(true);
   });
 
-  // console.log(methods.formState.isDirty);
-  // console.log(methods.formState.dirtyFields);
+  // 초기값
+  // useEffect(() => {
+  //   methods.setValue("password", "쉿 비밀이야", {
+  //     shouldDirty: true,
+  //     shouldValidate: true,
+  //   });
+  //   methods.setValue("name", "푸바오", {
+  //     shouldDirty: true,
+  //     shouldValidate: true,
+  //   });
+  //   methods.setValue("age", 454545, {
+  //     shouldDirty: true,
+  //     shouldValidate: true,
+  //   });
+  //   methods.setValue("address", "에버랜드", {
+  //     shouldDirty: true,
+  //     shouldValidate: true,
+  //   });
+  //   methods.setValue("pick", "아쿠아리움", {
+  //     shouldDirty: true,
+  //     shouldValidate: true,
+  //   });
+  //   methods.setValue("bear", "팬더", {
+  //     shouldDirty: true,
+  //     shouldValidate: true,
+  //   });
+  // }, [methods]);
 
   return (
     <FormProvider {...methods}>
@@ -369,10 +394,11 @@ function FormSection() {
 
 const _initValue = {
   defaultValues: {
-    test: {
-      password: "공식적인 비밀번호",
-      name: "박빙구",
-      age: 232323,
-    },
+    password: "공식적인 비밀번호",
+    name: "박빙구",
+    age: 232323,
+    address: "당신의 마음속",
+    pick: "눈동자에 치얼스",
+    bear: "곰돌",
   },
 };

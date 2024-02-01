@@ -15,7 +15,7 @@ import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
 import Bookmark from "./pages/Bookmark";
 import ProductTable from "./admin/ProductTable";
-import ApplyForm from "./admin/ApplyForm";
+import RegistForm from "./admin/RegistForm";
 import Modules from "./pages/Modules";
 import ProtectPage from "./components/ProtectPage";
 
@@ -49,7 +49,7 @@ const router = createBrowserRouter([
         path: "/admin/regist",
         element: (
           <ProtectPage requiredAdmin>
-            <ApplyForm />
+            <RegistForm />
           </ProtectPage>
         ),
       },

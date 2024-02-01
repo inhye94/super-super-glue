@@ -34,6 +34,14 @@ $color-border: colors.$gray-light;
   }
 }
 
+%boxBase {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid $color-border;
+  border-radius: 16px;
+  background-color: colors.$white;
+}
+
 .form,
 .input-wrapper {
   width: 100%;
@@ -55,6 +63,11 @@ $color-border: colors.$gray-light;
 .error {
   .input {
     border-color: $color-errer;
+
+    &:active,
+    &:focus {
+      border-color: $color-errer;
+    }
   }
 }
 
@@ -67,14 +80,11 @@ $color-border: colors.$gray-light;
 
 .file {
   .input-label {
+    @extend %boxBase;
     @include text.text-style(12);
     display: block;
-    width: 100%;
     padding: 32px 16px;
-    border: 1px solid $color-border;
-    border-radius: 16px;
     text-align: center;
-    background-color: colors.$white;
     color: colors.$tertiary;
     word-break: keep-all;
     cursor: pointer;
@@ -108,5 +118,36 @@ $color-border: colors.$gray-light;
         background-color: $color-pass;
       }
     }
+  }
+
+  .image-preview {
+    @extend %boxBase;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 16px;
+    column-gap: 8px;
+    margin-top: 16px;
+    animation: 300ms ease-in-out 0s fadeIn;
+
+    img {
+      object-fit: cover;
+      border: 1px solid $color-border;
+      border-radius: 16px;
+      animation: 300ms ease-in-out 0s fadeIn;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-12px);
+  }
+
+  100% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 }

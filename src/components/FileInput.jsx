@@ -17,7 +17,6 @@ export default function FileInput({
 }) {
   const {
     register,
-    setValue,
     clearErrors,
     formState: { errors },
   } = useFormContext();
@@ -42,7 +41,7 @@ export default function FileInput({
     clearErrors(name);
 
     setFileData(_newFileList);
-    setValue(name, _newFileList.files);
+    e.target.files = _newFileList.files;
   };
 
   return (

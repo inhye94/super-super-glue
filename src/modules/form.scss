@@ -55,6 +55,11 @@ $color-border: colors.$gray-light;
 .error {
   .input {
     border-color: $color-errer;
+
+    &:active,
+    &:focus {
+      border-color: $color-errer;
+    }
   }
 }
 

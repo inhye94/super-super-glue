@@ -40,12 +40,17 @@ Firebase와 클라우디너리로 리액트 프로젝트 제작
 
 - react-dom-route
 
+### 폼
+
+- react-hook-form
+
 ### 스타일
 
 - tailwind
 - react-icons
 - scss
 - classnames
+- framer-motion
 
 ## 🎨 페이지 구성 및 기능
 

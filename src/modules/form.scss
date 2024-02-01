@@ -1,0 +1,112 @@
+@use "./constants/colors";
+@use "./mixins/text-style.scss" as text;
+
+$color-pass: colors.$green-light;
+$color-errer: colors.$pink-dark;
+$color-border: colors.$gray-light;
+
+%inputBase {
+  @include text.text-style(16);
+  display: block;
+  width: 100%;
+  min-width: 150px;
+  height: 48px;
+  padding: 0 12px;
+  border: 1px solid $color-border;
+  border-radius: 8px;
+  font-weight: 500;
+  color: colors.$primary;
+  background-color: colors.$white;
+  transition: border-color 150ms ease-in-out;
+
+  &::placeholder {
+    color: colors.$gray-dark;
+  }
+
+  &:active,
+  &:focus {
+    border-color: colors.$gray-dark;
+  }
+
+  &:disabled {
+    background-color: colors.$gray-light;
+    color: colors.$gray-dark;
+  }
+}
+
+.form,
+.input-wrapper {
+  width: 100%;
+}
+
+.input-text {
+  @include text.text-style(14);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-height: 28px;
+  margin-bottom: 4px;
+  font-weight: 600;
+  color: colors.$dark;
+}
+
+// NOTE: 유효성 검사 error
+.error {
+  .input {
+    border-color: $color-errer;
+  }
+}
+
+// NOTE: type
+.text {
+  .input {
+    @extend %inputBase;
+  }
+}
+
+.file {
+  .input-label {
+    @include text.text-style(12);
+    display: block;
+    width: 100%;
+    padding: 32px 16px;
+    border: 1px solid $color-border;
+    border-radius: 16px;
+    text-align: center;
+    background-color: colors.$white;
+    color: colors.$tertiary;
+    word-break: keep-all;
+    cursor: pointer;
+    transition: color 150ms ease-in-out, border-color 150ms ease-in-out;
+
+    &-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+      border-radius: 50%;
+      font-size: 24px;
+      background-color: $color-border;
+      color: colors.$white;
+      transition: background-color 150ms ease-in-out;
+    }
+
+    p {
+      margin-bottom: 4px;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    &:hover {
+      color: $color-pass;
+      border-color: $color-pass;
+
+      .input-label-icon {
+        background-color: $color-pass;
+      }
+    }
+  }
+}

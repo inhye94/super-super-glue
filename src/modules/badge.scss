@@ -1,0 +1,40 @@
+@use "./constants/colors";
+@use "./mixins/text-style.scss" as text;
+
+.badge {
+  @include text.text-style(12);
+  display: inline-flex;
+  align-items: center;
+  column-gap: 4px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+
+  // NOTE: icon
+  &-icon {
+    &.is-alert {
+      font-size: 14px;
+    }
+
+    &.is-check,
+    &.is-close {
+      font-size: 18px;
+    }
+  }
+
+  // NOTE: color
+  &.gray {
+    background-color: colors.$gray-light;
+    color: colors.$secondary;
+  }
+
+  &.red {
+    background-color: colors.$pink-light;
+    color: colors.$orange-dark;
+  }
+
+  &.green {
+    background-color: colors.$green-bright;
+    color: colors.$green;
+  }
+}

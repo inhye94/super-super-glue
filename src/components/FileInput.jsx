@@ -4,7 +4,12 @@ import "../modules/form.scss";
 import InputError from "./InputError";
 import { LuUpload } from "react-icons/lu";
 import { useFormContext } from "react-hook-form";
-import { findInputError, isFormInvalid, mergeFileList } from "../api/form";
+import {
+  findInputError,
+  isFormInvalid,
+  mergeFileList,
+  transferFileToImageSrc,
+} from "../api/form";
 import { AnimatePresence } from "framer-motion";
 
 export default function FileInput({
@@ -20,25 +25,32 @@ export default function FileInput({
     formState: { errors },
   } = useFormContext();
 
+  const [_savedDataTrasfer, setSavedDataTrasnfer] = useState(
+    new DataTransfer()
+  );
+  const [preview, setPreview] = useState();
+
   const _inputError = findInputError(errors, id);
   const _isInvalid = isFormInvalid(_inputError);
-
-  const [_fileData, setFileData] = useState(new DataTransfer());
 
   const handleFile = (e) => {
     const _selectedFiles = e.target.files;
 
-    if (_selectedFiles.length === 0) return;
+    if (_selectedFiles && _selectedFiles.length) {
+      const _newDataTransfer = mergeFileList({
+        _savedDataTrasfer,
+        _selectedFiles,
+        limitCount,
+        limitSize,
+      });
 
-    const _newFileList = mergeFileList({
-      _fileData,
-      _selectedFiles,
-      limitCount,
-      limitSize,
-    });
+      setSavedDataTrasnfer((prev) => _newDataTransfer);
+      setPreview((prev) => transferFileToImageSrc(_newDataTransfer));
 
-    setFileData(_newFileList);
-    e.target.files = _newFileList.files;
+      e.target.files = _newDataTransfer.files;
+    } else {
+      e.target.files = _savedDataTrasfer.files;
+    }
   };
 
   return (
@@ -75,6 +87,14 @@ export default function FileInput({
         multiple={limitCount > 1 ? true : false}
         {...register(name, { ...validation, onChange: (e) => handleFile(e) })}
       />
+
+      {preview && (
+        <div className="image-preview">
+          {preview.map((v) => (
+            <img key={v} src={v} alt="" />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

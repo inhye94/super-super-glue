@@ -30,12 +30,12 @@ export const getTotalFileSize = (filesOfDataTransfer) => {
 };
 
 export const mergeFileList = ({
-  _fileData,
+  _savedDataTrasfer,
   _selectedFiles,
   limitCount,
   limitSize,
 }) => {
-  let { files: savedFiles } = _fileData;
+  let { files: savedFiles } = _savedDataTrasfer;
   let _savedFileSize = 0;
   let _savedFileCount = 0;
 
@@ -43,7 +43,7 @@ export const mergeFileList = ({
     _savedFileSize = getTotalFileSize(savedFiles);
     _savedFileCount = savedFiles.length;
   } else {
-    _fileData.clearData();
+    _savedDataTrasfer.clearData();
   }
 
   if (_savedFileCount + _selectedFiles.length > limitCount) {
@@ -63,7 +63,11 @@ export const mergeFileList = ({
       }
       return false;
     })
-    .forEach((file) => _fileData.items.add(file));
+    .forEach((file) => _savedDataTrasfer.items.add(file));
 
-  return _fileData;
+  return _savedDataTrasfer;
+};
+
+export const transferFileToImageSrc = (_data) => {
+  return [..._data.files].map((v) => URL.createObjectURL(v));
 };

@@ -1,3 +1,5 @@
+const _MAX_PRISE = 100000000;
+
 export const required_validation = () => {
   return {
     required: {
@@ -7,17 +9,38 @@ export const required_validation = () => {
   };
 };
 
-export const num_validation = () => {
+export const num_validation = (max) => {
   return {
+    required: false,
+    max: {
+      value: max,
+      message: `${max} 이하`,
+    },
     onChange: (e) => {
       const _value = e.target.value;
-      e.target.value = _value.replace(/[^0-9]/, "");
+      e.target.value = +_value.replace(/[^0-9]/, "");
     },
+  };
+};
+
+export const price_validation = (limit) => {
+  return {
+    required: false,
+    max: {
+      value: limit || _MAX_PRISE,
+      message: `${(limit || _MAX_PRISE).toLocaleString()}원 이하`,
+    },
+    onChange: (e) => {
+      const _value = e.target.value.replaceAll(/[^0-9]/g, "");
+      e.target.value = Number(_value).toLocaleString();
+    },
+    setValueAs: (v) => Number(v.replaceAll(/[^0-9]/g, "")),
   };
 };
 
 export const kr_en_validation = () => {
   return {
+    required: false,
     onChange: (e) => {
       const _value = e.target.value;
       e.target.value = _value.replace(/[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z]/, "");
@@ -27,6 +50,7 @@ export const kr_en_validation = () => {
 
 export const only_kr_validation = () => {
   return {
+    required: false,
     onChange: (e) => {
       const _value = e.target.value;
       e.target.value = _value.replace(/[^ㄱ-ㅎㅏ-ㅣ가-힣]/, "");
@@ -36,9 +60,23 @@ export const only_kr_validation = () => {
 
 export const special_validation = () => {
   return {
+    required: false,
     onChange: (e) => {
       const _value = e.target.value;
       e.target.value = _value.replace(/[^\w\-&ㄱ-ㅎㅏ-ㅣ가-힣]/, "");
+    },
+  };
+};
+
+export const option_validation = () => {
+  return {
+    required: false,
+    onChange: (e) => {
+      const _value = e.target.value;
+      e.target.value = _value.replace(
+        /[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9 ,(){}[\]]/,
+        ""
+      );
     },
   };
 };

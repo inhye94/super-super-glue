@@ -9,12 +9,14 @@ export default function Button({
   size = "big",
   color = "primary",
   rounded,
+  disabled,
   clickCallback,
 }) {
   return (
     <button
       type={buttonType}
       className={classNames("button", size, color, rounded, buttonStyle)}
+      disabled={disabled}
       onClick={clickCallback}
     >
       {children}

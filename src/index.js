@@ -53,6 +53,14 @@ const router = createBrowserRouter([
           </ProtectPage>
         ),
       },
+      {
+        path: "/admin/modify/:productId",
+        element: (
+          <ProtectPage requiredAdmin>
+            <RegistForm />
+          </ProtectPage>
+        ),
+      },
     ],
   },
 ]);

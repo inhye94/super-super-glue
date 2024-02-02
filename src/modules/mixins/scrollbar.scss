@@ -1,0 +1,63 @@
+@mixin no-scrollbar() {
+  &::-webkit-scrollbar {
+    display: none !important;
+  }
+}
+
+@mixin scrollbar($axis, $backgroundColor) {
+  @if ($axis == "x") {
+    overflow-x: overlay;
+
+    &::-webkit-scrollbar {
+      height: 24px;
+    }
+
+    &::-webkit-scrollbar-button:horizontal:increment,
+    &::-webkit-scrollbar-button:horizontal:decrement {
+      display: none;
+    }
+
+    &::-webkit-scrollbar-button:horizontal:start:decrement,
+    &::-webkit-scrollbar-button:horizontal:start:increment,
+    &::-webkit-scrollbar-button:horizontal:end:decrement,
+    &::-webkit-scrollbar-button:horizontal:end:increment {
+      display: block;
+      width: 8px;
+    }
+  }
+
+  @if ($axis == "y") {
+    overflow-y: overlay;
+
+    &::-webkit-scrollbar {
+      width: 24px;
+    }
+
+    &::-webkit-scrollbar-button:vertical:increment,
+    &::-webkit-scrollbar-button:vertical:decrement {
+      display: none;
+    }
+
+    &::-webkit-scrollbar-button:vertical:start:decrement,
+    &::-webkit-scrollbar-button:vertical:start:increment,
+    &::-webkit-scrollbar-button:vertical:end:decrement,
+    &::-webkit-scrollbar-button:vertical:end:increment {
+      display: block;
+      width: 8px;
+    }
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $backgroundColor; /* 스크롤바 색상 */
+    border-radius: 100px; /* 스크롤바 둥근 테두리 */
+    min-width: 150px;
+    min-height: 50px;
+    border: 8px solid $backgroundColor;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.3); /* 스크롤바 색상 */
+    }
+  }
+}

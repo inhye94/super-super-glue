@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "../components/Button";
 import IconButton from "../components/IconButton";
 import { FiAlertCircle } from "react-icons/fi";
@@ -9,7 +9,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import {
   required_validation,
   num_validation,
-  min_validation,
+  minlength_validation,
   kr_en_validation,
   special_validation,
   only_kr_validation,
@@ -257,7 +257,7 @@ function FormSection() {
               validation={{
                 ...required_validation(),
                 ...num_validation(),
-                ...min_validation(6),
+                ...minlength_validation(6),
               }}
             />
 

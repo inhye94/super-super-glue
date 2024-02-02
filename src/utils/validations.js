@@ -31,7 +31,7 @@ export const price_validation = (limit) => {
       message: `${(limit || _MAX_PRISE).toLocaleString()}원 이하`,
     },
     onChange: (e) => {
-      const _value = e.target.value.replaceAll(/[^0-9]/g, "");
+      const _value = e.target.value.replaceAll(/[^0-9]/g, "").slice(0, 9);
       e.target.value = Number(_value).toLocaleString();
     },
     setValueAs: (v) => Number(v.replaceAll(/[^0-9]/g, "")),
@@ -81,7 +81,7 @@ export const option_validation = () => {
   };
 };
 
-export const min_validation = (min) => {
+export const minlength_validation = (min) => {
   return {
     minLength: {
       value: min,
@@ -90,11 +90,11 @@ export const min_validation = (min) => {
   };
 };
 
-export const max_validation = (max) => {
+export const maxlength_validation = (max) => {
   return {
     maxLength: {
       value: max,
-      message: `최소 ${max}자`,
+      message: `최대 ${max}자`,
     },
   };
 };

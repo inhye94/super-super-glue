@@ -1,5 +1,6 @@
 @use "./constants/colors";
 @use "./mixins/text-style.scss" as text;
+@use "./mixins/scrollbar.scss" as scroll;
 
 $color-pass: colors.$green-light;
 $color-errer: colors.$pink-dark;
@@ -59,15 +60,20 @@ $color-border: colors.$gray-light;
   color: colors.$dark;
 }
 
-// NOTE: 유효성 검사 error
-.error {
-  .input {
-    border-color: $color-errer;
+.image-preview {
+  @extend %boxBase;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 16px;
+  column-gap: 8px;
+  margin-top: 16px;
+  animation: 300ms ease-in-out 0s fadeIn;
 
-    &:active,
-    &:focus {
-      border-color: $color-errer;
-    }
+  img {
+    object-fit: cover;
+    border: 1px solid $color-border;
+    border-radius: 16px;
+    animation: 300ms ease-in-out 0s fadeIn;
   }
 }
 
@@ -119,25 +125,42 @@ $color-border: colors.$gray-light;
       }
     }
   }
+}
 
-  .image-preview {
-    @extend %boxBase;
-    display: flex;
-    flex-wrap: wrap;
-    row-gap: 16px;
-    column-gap: 8px;
-    margin-top: 16px;
-    animation: 300ms ease-in-out 0s fadeIn;
+// NOTE: 유효성 검사 error
+.error {
+  &.text {
+    .input {
+      border-color: $color-errer;
 
-    img {
-      object-fit: cover;
-      border: 1px solid $color-border;
-      border-radius: 16px;
-      animation: 300ms ease-in-out 0s fadeIn;
+      &:active,
+      &:focus {
+        border-color: $color-errer;
+      }
+    }
+  }
+
+  &.file {
+    .input-label {
+      border-color: $color-errer;
     }
   }
 }
 
+// NOTE: 반응형 (데스크탑)
+@media screen and (min-width: 768px) {
+  .image-preview {
+    @include scroll.scrollbar("x", colors.$white);
+    flex-wrap: nowrap;
+
+    img {
+      width: 220px;
+      aspect-ratio: 1 / 1;
+    }
+  }
+}
+
+// NOTE: 애니메이션
 @keyframes fadeIn {
   0% {
     opacity: 0;

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "../components/Button";
 import IconButton from "../components/IconButton";
 import { FiAlertCircle } from "react-icons/fi";
-import ContentWrapper from "../components/ContentWrapper";
+import LayoutWrapper from "../components/LayoutWrapper";
 import Badge from "../components/Badge";
 import Input from "../components/Input";
 import { FormProvider, useForm } from "react-hook-form";
@@ -18,7 +18,7 @@ import FileInput from "../components/FileInput";
 
 export default function Modules() {
   return (
-    <ContentWrapper>
+    <LayoutWrapper>
       <div className="flex flex-col gap-y-[64px] pb-[100px] pt-[24px]">
         <h2 className="p-[16px] text-[24px] font-extrabold text-[#333] bg-[#efefef] rounded-md">
           👻 모듈 페이지에용
@@ -28,7 +28,7 @@ export default function Modules() {
         <BadgeSection />
         <FormSection />
       </div>
-    </ContentWrapper>
+    </LayoutWrapper>
   );
 }
 

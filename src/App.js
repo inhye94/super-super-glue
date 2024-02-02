@@ -10,7 +10,7 @@ import { Outlet } from "react-router-dom";
 import Gnb from "./components/Gnb";
 import ScreenStateProvider from "./context/ScreenStateContext";
 import AuthContextProvider from "./context/AuthContext";
-import ContentWrapper from "./components/ContentWrapper";
+import LayoutWrapper from "./components/LayoutWrapper";
 
 function App() {
   return (
@@ -19,9 +19,9 @@ function App() {
         <section className="">
           <Gnb />
 
-          <ContentWrapper>
+          <LayoutWrapper extraStyle="mt-[16px] mb-[84px] md:mt-[36px]">
             <Outlet />
-          </ContentWrapper>
+          </LayoutWrapper>
         </section>
       </ScreenStateProvider>
     </AuthContextProvider>

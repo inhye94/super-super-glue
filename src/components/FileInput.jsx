@@ -56,8 +56,7 @@ export default function FileInput({
   return (
     <div className={classNames("input-wrapper", "file", _isInvalid && "error")}>
       <div className="input-text">
-        {label}
-
+        {label} {validation && validation.required.value && "*"}
         <AnimatePresence mode="wait" initial={false}>
           {_isInvalid && <InputError message={_inputError.error.message} />}
         </AnimatePresence>
@@ -73,9 +72,11 @@ export default function FileInput({
         <span>
           .png, .jpeg, .jpg, .gif 파일만 등록 가능하며,
           <br />
-          최대 {limitCount ? limitCount : 1}장까지 등록할 수 있습니다. (최대{" "}
-          {limitSize}
-          MB)
+          최대 {limitCount ? limitCount : 1}장까지 등록할 수 있습니다. (최대
+          {limitSize < 1000
+            ? `${limitSize}MB`
+            : `${Math.floor(limitSize / 1000)}GB`}
+          )
         </span>
       </label>
 

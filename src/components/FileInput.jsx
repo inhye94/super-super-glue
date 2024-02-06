@@ -7,7 +7,6 @@ import { useFormContext } from "react-hook-form";
 import {
   findInputError,
   isFormInvalid,
-  mergeFileList,
   transferFileToImageSrc,
 } from "../api/form";
 import { AnimatePresence } from "framer-motion";
@@ -19,34 +18,27 @@ export default function FileInput({
   limitSize,
   limitCount = 1,
   validation,
+  changeCallback,
 }) {
   const {
     register,
     formState: { errors },
   } = useFormContext();
 
-  const [_savedDataTrasfer, setSavedDataTrasnfer] = useState(
-    new DataTransfer()
-  );
   const [preview, setPreview] = useState();
 
   const _inputError = findInputError(errors, id);
   const _isInvalid = isFormInvalid(_inputError);
 
   const handleFile = (e) => {
-    const _selectedFiles = e.target.files;
+    const [_newDataTransfer, _savedDataTrasfer] = changeCallback(
+      e,
+      limitCount,
+      limitSize
+    );
 
-    if (_selectedFiles && _selectedFiles.length) {
-      const _newDataTransfer = mergeFileList({
-        _savedDataTrasfer,
-        _selectedFiles,
-        limitCount,
-        limitSize,
-      });
-
-      setSavedDataTrasnfer((prev) => _newDataTransfer);
+    if (_newDataTransfer) {
       setPreview((prev) => transferFileToImageSrc(_newDataTransfer));
-
       e.target.files = _newDataTransfer.files;
     } else {
       e.target.files = _savedDataTrasfer.files;
@@ -86,7 +78,7 @@ export default function FileInput({
         className="visually-hidden"
         accept="image/png, image/jpeg, image/jpg, image/gif"
         multiple={limitCount > 1 ? true : false}
-        {...register(name, { ...validation, onChange: (e) => handleFile(e) })}
+        {...register(name, { ...validation, onChange: handleFile })}
       />
 
       {preview && (

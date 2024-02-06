@@ -62,15 +62,20 @@ const addUserData = (user) => {
       return user;
     })
     .catch((error) => {
-      console.error(error);
+      alert(`(${error.code}) ${error.message}`);
     });
 };
 
-export const writeProductData = (userId, data) => {
+export const registProduct = async (userId, data, image, detailImage) => {
   const _path = `product/${userId}`;
   const id = data.id || push(child(ref(database), _path)).key;
 
-  return set(ref(database, `${_path}/${id}`), { ...data, id })
+  return set(ref(database, `${_path}/${id}`), {
+    ...data,
+    id,
+    image,
+    detailImage,
+  })
     .then(() => {
       return id;
     })

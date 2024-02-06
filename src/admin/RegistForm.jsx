@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Input from "../components/Input";
-// import FileInput from "../components/FileInput";
+import FileInput from "../components/FileInput";
 import Button from "../components/Button";
 import { FormProvider, useForm } from "react-hook-form";
 import {
@@ -12,31 +12,73 @@ import {
 } from "../utils/validations.js";
 import ContentWrapper from "../components/ContentWrapper";
 import { useAuthContext } from "../context/AuthContext";
-import { writeProductData } from "../api/firebase";
-import { useParams } from "react-router-dom";
+import { registProduct } from "../api/firebase";
+import { uploadFile } from "../api/uploadFile";
+import { mergeFileList } from "../api/form";
 
 export default function RegistForm() {
-  const [_processing, setProcessing] = useState(false);
+  const [files, setFiles] = useState({ ...initFiles });
+
+  const methods = useForm();
+  const { handleSubmit } = methods;
+  const { userInfo } = useAuthContext();
+
   const [_id, setId] = useState();
 
-  const { productId } = useParams();
-  const { userInfo } = useAuthContext();
-  const methods = useForm();
-  const { handleSubmit, setValue } = methods;
+  const handleFormSubmit = () => {
+    handleSubmit(
+      async (data) => {
+        // 로딩중
 
-  const handleFormSubmit = handleSubmit(async (data) => {
-    console.log(data);
+        // 이미지 url로 변경
+        const image = await Promise.all(
+          [...files.image.datatransfer.files].map(
+            async (file) => await uploadFile(file)
+          )
+        );
 
-    setProcessing(true);
-    setId(await writeProductData(userInfo.uid, data));
-    setTimeout(() => setProcessing(false), 2000);
-  });
+        const detailImage = await Promise.all(
+          [...files.detailImage.datatransfer.files].map(
+            async (file) => await uploadFile(file)
+          )
+        );
 
-  useEffect(() => {
-    if (productId || _id) {
-      setValue("id", productId || _id);
+        // 데이터 저장
+        await registProduct(userInfo.uid, data, image, detailImage).then(
+          (result) => {
+            setId(result);
+          }
+        );
+
+        // 로딩중 해제
+      },
+      async (error) => {
+        console.log(error);
+      }
+    )();
+  };
+
+  const handleFiles = (e, limitCount, limitSize) => {
+    const { name, files: _selectedFiles } = e.target;
+    const _savedDataTrasfer = files[name].datatransfer;
+
+    let _newDataTransfer = null;
+
+    if (_selectedFiles && _selectedFiles.length) {
+      _newDataTransfer = mergeFileList({
+        _savedDataTrasfer,
+        _selectedFiles,
+        limitCount,
+        limitSize,
+      });
+
+      files[name].datatransfer = _newDataTransfer;
+
+      setFiles((prev) => ({ ...files }));
     }
-  }, [setValue, productId, _id]);
+
+    return [_newDataTransfer, _savedDataTrasfer];
+  };
 
   return (
     <ContentWrapper title="✨ 상품 등록 ✨">
@@ -55,6 +97,7 @@ export default function RegistForm() {
             placeholder="상품명 (최대 100자, 한글, 영어, 숫자, 특수문자는 -_&만 허용)"
             validation={{ ...special_validation(), ...required_validation() }}
           />
+
           <Input
             id="price"
             name="price"
@@ -62,6 +105,7 @@ export default function RegistForm() {
             placeholder="가격 (숫자, 0 ~ 1,000,000 이하)"
             validation={{ ...price_validation(), ...required_validation() }}
           />
+
           <Input
             id="category"
             name="category"
@@ -70,6 +114,7 @@ export default function RegistForm() {
             placeholder="카테고리 (한글, 최대 10자)"
             validation={{ ...only_kr_validation(), ...required_validation() }}
           />
+
           <Input
             id="option"
             name="option"
@@ -77,14 +122,17 @@ export default function RegistForm() {
             placeholder="옵션 (콤마(,)로 구분)"
             validation={{ ...option_validation(), ...required_validation() }}
           />
-          {/* <FileInput
+
+          <FileInput
             id="image"
             name="image"
             label="대표 이미지"
             limitCount="5"
             limitSize="10"
             validation={{ ...required_validation() }}
+            changeCallback={handleFiles}
           />
+
           <FileInput
             id="detailImage"
             name="detailImage"
@@ -92,7 +140,9 @@ export default function RegistForm() {
             limitCount="20"
             limitSize="2500"
             validation={{ ...required_validation() }}
-          /> */}
+            changeCallback={handleFiles}
+          />
+
           <Input
             id="description"
             name="description"
@@ -106,12 +156,18 @@ export default function RegistForm() {
             type="submit"
             color="primary"
             clickCallback={handleFormSubmit}
-            disabled={_processing}
+            // disabled={_processing}
           >
-            {_processing ? "처리중 ... " : "저장"}
+            {/* {_processing ? "처리중 ... " : "저장"} */}
+            저장
           </Button>
         </div>
       </FormProvider>
     </ContentWrapper>
   );
 }
+
+const initFiles = {
+  image: { url: [], datatransfer: new DataTransfer() },
+  detailImage: { url: [], datatransfer: new DataTransfer() },
+};

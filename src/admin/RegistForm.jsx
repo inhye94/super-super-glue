@@ -16,6 +16,7 @@ import { registProduct } from "../api/firebase";
 import { uploadFile } from "../api/uploadFile";
 import { mergeFileList } from "../api/form";
 import Spinner from "../components/Spinner";
+import Toast from "../components/Toast";
 
 export default function RegistForm() {
   const [files, setFiles] = useState({ ...initFiles });
@@ -89,7 +90,7 @@ export default function RegistForm() {
 
   return (
     <ContentWrapper title="✨ 상품 등록 ✨">
-      {success && <p>✅ 등록됐슴당~!</p>}
+      {success && <Toast text="✅ 등록이 완료됐습니다~!" />}
 
       <FormProvider {...methods}>
         <form

@@ -84,3 +84,20 @@ export const registProduct = async (userId, data, image, detailImage) => {
       return null;
     });
 };
+
+export const getUserProduct = (userId) => {
+  return get(ref(database, `product/${userId}`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+
+        return data;
+      }
+
+      return null;
+    })
+    .catch((error) => {
+      alert(`(${error.code}) ${error.message}`);
+      return null;
+    });
+};

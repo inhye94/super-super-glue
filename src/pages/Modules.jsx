@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "../components/Button";
 import IconButton from "../components/IconButton";
 import { FiAlertCircle } from "react-icons/fi";
@@ -176,12 +176,10 @@ function BadgeSection() {
 function FormSection() {
   const methods = useForm({ ..._initValue });
   // const methods = useForm();
-  const [_success, setSuccess] = useState(false);
 
   const handleSubmitEvent = methods.handleSubmit((data) => {
     console.log(data);
     // methods.reset();
-    setSuccess(true);
   });
 
   // 초기값

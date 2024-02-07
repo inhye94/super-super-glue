@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../components/Input";
 import FileInput from "../components/FileInput";
 import Button from "../components/Button";
@@ -18,44 +18,44 @@ import { mergeFileList } from "../api/form";
 
 export default function RegistForm() {
   const [files, setFiles] = useState({ ...initFiles });
+  const [isUploading, setIsUploading] = useState(false);
+  const [success, setSuccess] = useState();
 
   const methods = useForm();
-  const { handleSubmit } = methods;
+  const { handleSubmit, formState } = methods;
   const { userInfo } = useAuthContext();
 
   const [_id, setId] = useState();
 
-  const handleFormSubmit = () => {
-    handleSubmit(
-      async (data) => {
-        // 로딩중
+  useEffect(() => {
+    setIsUploading(formState.isSubmitting);
+  }, [formState]);
 
-        // 이미지 url로 변경
-        const image = await Promise.all(
-          [...files.image.datatransfer.files].map(
-            async (file) => await uploadFile(file)
-          )
-        );
+  const handleFormSubmit = async (data) => {
+    // 이미지 url로 변경
+    const image = await Promise.all(
+      [...files.image.datatransfer.files].map(
+        async (file) => await uploadFile(file)
+      )
+    );
 
-        const detailImage = await Promise.all(
-          [...files.detailImage.datatransfer.files].map(
-            async (file) => await uploadFile(file)
-          )
-        );
+    const detailImage = await Promise.all(
+      [...files.detailImage.datatransfer.files].map(
+        async (file) => await uploadFile(file)
+      )
+    );
 
-        // 데이터 저장
-        await registProduct(userInfo.uid, data, image, detailImage).then(
-          (result) => {
-            setId(result);
-          }
-        );
-
-        // 로딩중 해제
-      },
-      async (error) => {
-        console.log(error);
-      }
-    )();
+    // 데이터 저장
+    await registProduct(userInfo.uid, data, image, detailImage) //
+      .then((result) => {
+        setId(result);
+      })
+      .then(() => {
+        setSuccess(true);
+        setTimeout(() => {
+          setSuccess(false);
+        }, 4000);
+      });
   };
 
   const handleFiles = (e, limitCount, limitSize) => {
@@ -82,6 +82,8 @@ export default function RegistForm() {
 
   return (
     <ContentWrapper title="✨ 상품 등록 ✨">
+      {success && <p>✅ 등록됐슴당~!</p>}
+
       <FormProvider {...methods}>
         <form
           autoComplete="off"
@@ -155,11 +157,10 @@ export default function RegistForm() {
           <Button
             type="submit"
             color="primary"
-            clickCallback={handleFormSubmit}
-            // disabled={_processing}
+            clickCallback={handleSubmit(handleFormSubmit)}
+            disabled={isUploading}
           >
-            {/* {_processing ? "처리중 ... " : "저장"} */}
-            저장
+            {isUploading ? "처리중 ... " : "저장"}
           </Button>
         </div>
       </FormProvider>

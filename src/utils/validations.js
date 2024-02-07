@@ -63,7 +63,7 @@ export const special_validation = () => {
     required: false,
     onChange: (e) => {
       const _value = e.target.value;
-      e.target.value = _value.replace(/[^\w\-&ㄱ-ㅎㅏ-ㅣ가-힣]/, "");
+      e.target.value = _value.replace(/[^\w\-&ㄱ-ㅎㅏ-ㅣ가-힣 _]/, "");
     },
   };
 };
@@ -78,6 +78,7 @@ export const option_validation = () => {
         ""
       );
     },
+    setValueAs: (v) => v.split(","),
   };
 };
 

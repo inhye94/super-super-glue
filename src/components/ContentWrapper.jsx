@@ -1,9 +1,15 @@
 import React from "react";
 
-export default function ContentWrapper({ children, extraStyle }) {
+export default function ContentWrapper({ children, title }) {
   return (
-    <div className={"w-full max-w-[1200px] px-[10px] mx-auto " + extraStyle}>
+    <section className="flex flex-col gap-y-[64px] pb-[32px] pt-[24px]">
+      {title && (
+        <h2 className="p-[16px] text-[24px] font-extrabold text-[#333] bg-[#efefef] rounded-md">
+          {title}
+        </h2>
+      )}
+
       {children}
-    </div>
+    </section>
   );
 }

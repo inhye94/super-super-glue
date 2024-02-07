@@ -8,7 +8,7 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { getDatabase, ref, get } from "firebase/database";
+import { getDatabase, ref, get, set, push, child } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -44,17 +44,17 @@ export const logout = () => {
 
 export const onUserStateChanged = (callback) => {
   onAuthStateChanged(auth, async (user) => {
-    const updateData = user ? await addAdminState(user) : null;
+    const updateData = user ? await addUserData(user) : null;
     callback(updateData);
   });
 };
 
-const addAdminState = (user) => {
-  return get(ref(database, "admin"))
+const addUserData = (user) => {
+  return get(ref(database))
     .then((snapshot) => {
       if (snapshot.exists()) {
         const data = snapshot.val();
-        const isAdmin = data.includes(user.uid);
+        const isAdmin = data.admin.includes(user.uid);
 
         return { ...user, isAdmin };
       }
@@ -62,6 +62,25 @@ const addAdminState = (user) => {
       return user;
     })
     .catch((error) => {
-      console.error(error);
+      alert(`(${error.code}) ${error.message}`);
+    });
+};
+
+export const registProduct = async (userId, data, image, detailImage) => {
+  const _path = `product/${userId}`;
+  const id = data.id || push(child(ref(database), _path)).key;
+
+  return set(ref(database, `${_path}/${id}`), {
+    ...data,
+    id,
+    image,
+    detailImage,
+  })
+    .then(() => {
+      return id;
+    })
+    .catch((error) => {
+      alert(`(${error.code}) ${error.message}`);
+      return null;
     });
 };

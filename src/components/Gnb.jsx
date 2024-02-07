@@ -2,7 +2,7 @@ import React from "react";
 import Logo from "./Logo";
 import IconButton from "./IconButton";
 import Button from "./Button";
-import ContentWrapper from "./ContentWrapper";
+import LayoutWrapper from "./LayoutWrapper";
 import { useScreenStateContext } from "../context/ScreenStateContext";
 import { useAuthContext } from "../context/AuthContext";
 import {
@@ -63,7 +63,7 @@ export default function Gnb() {
 
   return (
     <header className="sticky left-0 top-0 py-[8px] border-y-2 bg-white border-pink md:border-y-4">
-      <ContentWrapper extraStyle="flex justify-between flex-wrap gap-y-[6px] items-center">
+      <LayoutWrapper extraStyle="flex justify-between flex-wrap gap-y-[6px] items-center">
         <Logo />
 
         <nav className="flex items-center">
@@ -124,7 +124,7 @@ export default function Gnb() {
             )}
           </div>
         </nav>
-      </ContentWrapper>
+      </LayoutWrapper>
     </header>
   );
 }

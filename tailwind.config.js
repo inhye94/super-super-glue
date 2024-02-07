@@ -24,6 +24,15 @@ module.exports = {
         "pink-light": "#fbcfe8",
         "pink-dark": "#f472b6",
       },
+      animation: {
+        pop: "pop 300ms ease-in-out",
+      },
+      keyframes: {
+        pop: {
+          "0%": { opacity: 0, transform: "translateY(32px)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
+        },
+      },
     },
   },
   plugins: [],

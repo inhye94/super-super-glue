@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Button from "../components/Button";
 import IconButton from "../components/IconButton";
 import { FiAlertCircle } from "react-icons/fi";
-import ContentWrapper from "../components/ContentWrapper";
 import Badge from "../components/Badge";
 import Input from "../components/Input";
 import { FormProvider, useForm } from "react-hook-form";
@@ -15,19 +14,14 @@ import {
   only_kr_validation,
 } from "../utils/validations";
 import FileInput from "../components/FileInput";
+import ContentWrapper from "../components/ContentWrapper";
 
 export default function Modules() {
   return (
-    <ContentWrapper>
-      <div className="flex flex-col gap-y-[64px] pb-[100px] pt-[24px]">
-        <h2 className="p-[16px] text-[24px] font-extrabold text-[#333] bg-[#efefef] rounded-md">
-          👻 모듈 페이지에용
-        </h2>
-
-        <ButtonSection />
-        <BadgeSection />
-        <FormSection />
-      </div>
+    <ContentWrapper title="👻 모듈 페이지에용">
+      <ButtonSection />
+      <BadgeSection />
+      <FormSection />
     </ContentWrapper>
   );
 }
@@ -35,23 +29,21 @@ export default function Modules() {
 function SectionWrapper({ children, title }) {
   return (
     <section className="flex flex-col gap-y-[24px] p-[16px] bg-[#efefef] rounded-md">
-      <h3 className="p-y-[12px] mb-[24px] text-[24px] font-extrabold text-[#333]">
-        🍟 {title} 🍟
-      </h3>
+      {title && (
+        <h3 className="p-y-[12px] mb-[24px] text-[24px] font-extrabold text-[#333]">
+          🍟 {title} 🍟
+        </h3>
+      )}
 
       {children}
     </section>
   );
 }
 
-function Subtitle({ children }) {
-  return <h4 className="mb-[12px] text-[#aaa]">- {children}</h4>;
-}
-
 function FlexBox({ children, subtitle }) {
   return (
     <div>
-      {subtitle && <Subtitle>{subtitle}</Subtitle>}
+      {subtitle && <h4 className="mb-[12px] text-[#aaa]">- {subtitle}</h4>}
 
       <div className="flex gap-x-[8px] gap-y-[16px] items-center flex-wrap md:flex-nowrap">
         {children}

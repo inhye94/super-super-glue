@@ -15,6 +15,7 @@ import { useAuthContext } from "../context/AuthContext";
 import { registProduct } from "../api/firebase";
 import { uploadFile } from "../api/uploadFile";
 import { mergeFileList } from "../api/form";
+import Spinner from "../components/Spinner";
 
 export default function RegistForm() {
   const [files, setFiles] = useState({ ...initFiles });
@@ -29,6 +30,12 @@ export default function RegistForm() {
 
   useEffect(() => {
     setIsUploading(formState.isSubmitting);
+
+    if (formState.isSubmitting) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
   }, [formState]);
 
   const handleFormSubmit = async (data) => {
@@ -164,6 +171,8 @@ export default function RegistForm() {
           </Button>
         </div>
       </FormProvider>
+
+      {isUploading && <Spinner text="상품 등록 중입니다~!" />}
     </ContentWrapper>
   );
 }

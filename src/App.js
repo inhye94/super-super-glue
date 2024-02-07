@@ -11,18 +11,23 @@ import Gnb from "./components/Gnb";
 import ScreenStateProvider from "./context/ScreenStateContext";
 import AuthContextProvider from "./context/AuthContext";
 import LayoutWrapper from "./components/LayoutWrapper";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
     <AuthContextProvider>
       <ScreenStateProvider>
-        <section className="">
-          <Gnb />
+        <QueryClientProvider client={queryClient}>
+          <section className="">
+            <Gnb />
 
-          <LayoutWrapper extraStyle="mt-[16px] mb-[84px] md:mt-[36px]">
-            <Outlet />
-          </LayoutWrapper>
-        </section>
+            <LayoutWrapper extraStyle="mt-[16px] mb-[84px] md:mt-[36px]">
+              <Outlet />
+            </LayoutWrapper>
+          </section>
+        </QueryClientProvider>
       </ScreenStateProvider>
     </AuthContextProvider>
   );

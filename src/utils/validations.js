@@ -34,7 +34,10 @@ export const price_validation = (limit) => {
       const _value = e.target.value.replaceAll(/[^0-9]/g, "").slice(0, 9);
       e.target.value = Number(_value).toLocaleString();
     },
-    setValueAs: (v) => Number(v.replaceAll(/[^0-9]/g, "")),
+    setValueAs: (v) => {
+      if (Number(v) === 0) return "무료";
+      return Number(v.replaceAll(/[^0-9]/g, ""));
+    },
   };
 };
 

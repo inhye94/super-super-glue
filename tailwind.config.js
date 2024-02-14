@@ -33,6 +33,9 @@ module.exports = {
           "100%": { opacity: 1, transform: "translateY(0)" },
         },
       },
+      backgroundImage: {
+        banner: `url('../public/assets/images/img-fireworks.jpg')`,
+      },
     },
   },
   plugins: [],

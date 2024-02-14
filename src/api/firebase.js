@@ -101,3 +101,26 @@ export const getUserProduct = (userId) => {
       return null;
     });
 };
+
+export const getAllProducts = () => {
+  return get(ref(database, "product"))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+
+        const allProducts = [];
+
+        [...Object.values(data)].forEach((v) =>
+          allProducts.push(...Object.values(v))
+        );
+
+        return allProducts;
+      }
+
+      return null;
+    })
+    .catch((error) => {
+      alert(`(${error.code}) ${error.message}`);
+      return null;
+    });
+};

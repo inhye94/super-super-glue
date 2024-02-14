@@ -10,7 +10,6 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "./App";
-import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
 import Bookmark from "./pages/Bookmark";
@@ -18,14 +17,19 @@ import ProductTable from "./admin/ProductTable";
 import RegistForm from "./admin/RegistForm";
 import Modules from "./pages/Modules";
 import ProtectPage from "./components/ProtectPage";
+import Home from "./pages/Home";
+import AllProducts from "./pages/AllProducts";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
-      { index: true, element: <Products /> },
-      { path: "/product/new", element: <Products /> },
+      {
+        index: true,
+        element: <Home />,
+      },
+      { path: "/product/new", element: <AllProducts /> },
       { path: "/product/:productId", element: <ProductDetail /> },
       {
         path: "/cart",

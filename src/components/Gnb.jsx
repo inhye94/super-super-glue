@@ -62,7 +62,7 @@ export default function Gnb() {
   };
 
   return (
-    <header className="sticky left-0 top-0 py-[8px] border-y-2 bg-white border-pink md:border-y-4">
+    <header className="sticky left-0 top-0 z-20 py-[8px] border-y-2 bg-white border-pink md:border-y-4">
       <LayoutWrapper extraStyle="flex justify-between flex-wrap gap-y-[6px] items-center">
         <Logo />
 

@@ -12,6 +12,8 @@ export default function ProductTable() {
   const { data: productList, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: async () => await getUserProduct(userInfo.uid),
+    refetchOnWindowFocus: false,
+    staleTime: 1000 * 60 * 1,
   });
 
   if (isLoading) return <Spinner text="등록 상품 정보를 불러오는 중입니다!" />;

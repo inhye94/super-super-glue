@@ -97,7 +97,7 @@ export default function RegistForm() {
           autoComplete="off"
           noValidate
           onSubmit={(e) => e.preventDefault()}
-          className="flex flex-col gap-y-[24px] p-[16px] bg-[#efefef] rounded-md md:py-[32px]"
+          className="flex flex-col gap-y-[24px] p-[16px] bg-background rounded-md md:py-[32px]"
         >
           <Input
             id="name"

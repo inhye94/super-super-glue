@@ -8,7 +8,15 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { getDatabase, ref, get, set, push, child } from "firebase/database";
+import {
+  getDatabase,
+  ref,
+  get,
+  set,
+  push,
+  child,
+  remove,
+} from "firebase/database";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -132,4 +140,28 @@ export const updateCart = (userID, product) => {
       return null;
     }
   );
+};
+
+export const getCart = (userID) => {
+  return get(ref(database, `cart/${userID}`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        const data = snapshot.val() || {};
+
+        return Object.values(data);
+      }
+
+      return null;
+    })
+    .catch((error) => {
+      alert(`(${error.code}) ${error.message}`);
+      return null;
+    });
+};
+
+export const removeCartItem = (userID, productID) => {
+  return remove(ref(database, `cart/${userID}/${productID}`)).catch((error) => {
+    alert(`(${error.code}) ${error.message}`);
+    return null;
+  });
 };

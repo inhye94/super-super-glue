@@ -124,3 +124,12 @@ export const getAllProducts = () => {
       return null;
     });
 };
+
+export const updateCart = (userID, product) => {
+  return set(ref(database, `cart/${userID}/${product.id}`), product).catch(
+    (error) => {
+      alert(`(${error.code}) ${error.message}`);
+      return null;
+    }
+  );
+};

@@ -2,8 +2,15 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import ContentWrapper from "../components/ContentWrapper";
 import Button from "../components/Button";
+import { useAuthContext } from "../context/AuthContext";
+import { useScreenStateContext } from "../context/ScreenStateContext";
+import { updateCart } from "../api/firebase";
+import Toast from "../components/Toast";
 
 export default function ProductDetail() {
+  const { userInfo, loginByDesktop, loginByMobile } = useAuthContext();
+  const { isMobile } = useScreenStateContext();
+
   const {
     state: {
       product: {
@@ -19,14 +26,42 @@ export default function ProductDetail() {
     },
   } = useLocation();
 
-  const [selected, setSelected] = useState("");
+  const [_selected, setSelected] = useState("");
+  const [_success, setSuccess] = useState(false);
 
   const handleSelected = (e) => {
     setSelected(e.target.value);
   };
 
+  const handelAddCart = () => {
+    // 로그인을 하지 않은 경우,
+    if (!userInfo) {
+      isMobile ? loginByMobile() : loginByDesktop();
+      return;
+    }
+
+    // 로그인을 한 경우,
+    // cart 메뉴 활성화
+    const _product = {
+      id,
+      image: image[0],
+      name,
+      price,
+      option: _selected,
+      quantity: 1,
+    };
+    updateCart(userInfo.uid, _product).then(() => {
+      setSuccess(true);
+      setTimeout(() => {
+        setSuccess(false);
+      }, 4000);
+    });
+  };
+
   return (
     <ContentWrapper>
+      {_success && <Toast text="✅ 장바구니에 추가했습니다~!" />}
+
       <section className="flex flex-col gap-[8px] *:w-full md:flex-row md:gap-[16px]">
         <div className="w-full aspect-square rounded-lg overflow-hidden md:w-7/12">
           <img
@@ -55,15 +90,17 @@ export default function ProductDetail() {
 
           <select
             className={`button outlined appearance-none md:mb-[0px] cursor-pointer ${
-              selected ? "tertiary" : "secondary"
+              _selected ? "tertiary" : "secondary"
             }`}
             name="option"
             onChange={handleSelected}
-            value={selected}
+            value={_selected}
           >
             <option value="">--옵션을 선택해주세요--</option>
             {option.map((v) => (
-              <option value={v}>{v}</option>
+              <option value={v} key={v}>
+                {v}
+              </option>
             ))}
           </select>
 
@@ -77,7 +114,13 @@ export default function ProductDetail() {
           )}
 
           <div className="flex gap-[8px] mt-[24px] md:mt-[32px]">
-            <Button buttonStyle="outlined">장바구니</Button>
+            <Button
+              buttonStyle="outlined"
+              clickCallback={handelAddCart}
+              disabled={_success}
+            >
+              장바구니
+            </Button>
 
             <Button>구매하기</Button>
           </div>

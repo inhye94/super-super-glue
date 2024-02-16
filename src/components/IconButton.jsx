@@ -9,6 +9,7 @@ export default function IconButton({
   color = "primary",
   tag = "button",
   size,
+  count,
   callback,
 }) {
   if (tag === "button") {
@@ -20,6 +21,7 @@ export default function IconButton({
         onClick={callback}
       >
         {icon}
+        {count ? <span>{count}</span> : ""}
       </button>
     );
   }
@@ -33,6 +35,7 @@ export default function IconButton({
         onClick={callback}
       >
         {icon}
+        {count ? <span>{count}</span> : ""}
       </Link>
     );
   }

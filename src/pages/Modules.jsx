@@ -28,7 +28,7 @@ export default function Modules() {
 
 function SectionWrapper({ children, title }) {
   return (
-    <section className="flex flex-col gap-y-[24px] p-[16px] bg-[#efefef] rounded-md">
+    <section className="flex flex-col gap-y-[24px] p-[16px] bg-background rounded-md">
       {title && (
         <h3 className="p-y-[12px] mb-[24px] text-[24px] font-extrabold text-[#333]">
           🍟 {title} 🍟

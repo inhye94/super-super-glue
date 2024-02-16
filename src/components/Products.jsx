@@ -19,7 +19,7 @@ export default function Products() {
     return <p>상품 준비중입니다!</p>;
   } else {
     return (
-      <ContentWrapper title="✨ 상품 리스트 ✨">
+      <ContentWrapper>
         <ul className="flex flex-wrap -mx-[4px]">
           {productAll.map((product) => (
             <li

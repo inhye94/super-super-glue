@@ -133,17 +133,8 @@ export const getAllProducts = () => {
     });
 };
 
-export const updateCart = (userID, product) => {
-  return set(ref(database, `cart/${userID}/${product.id}`), product).catch(
-    (error) => {
-      alert(`(${error.code}) ${error.message}`);
-      return null;
-    }
-  );
-};
-
-export const getCart = (userID) => {
-  return get(ref(database, `cart/${userID}`))
+export const getCart = (userId) => {
+  return get(ref(database, `cart/${userId}`))
     .then((snapshot) => {
       if (snapshot.exists()) {
         const data = snapshot.val() || {};
@@ -159,8 +150,17 @@ export const getCart = (userID) => {
     });
 };
 
-export const removeCartItem = (userID, productID) => {
-  return remove(ref(database, `cart/${userID}/${productID}`)).catch((error) => {
+export const updateCart = (userId, product) => {
+  return set(ref(database, `cart/${userId}/${product.id}`), product).catch(
+    (error) => {
+      alert(`(${error.code}) ${error.message}`);
+      return null;
+    }
+  );
+};
+
+export const removeCartItem = (userId, productId) => {
+  return remove(ref(database, `cart/${userId}/${productId}`)).catch((error) => {
     alert(`(${error.code}) ${error.message}`);
     return null;
   });

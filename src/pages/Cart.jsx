@@ -1,21 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { getCart } from "../api/firebase";
-import { useAuthContext } from "../context/AuthContext";
 import Spinner from "../components/Spinner";
 import ContentWrapper from "../components/ContentWrapper";
 import Button from "../components/Button";
 import CartCard from "../components/CartCard";
+import useCart from "../hooks/useCart";
 
 const _delivery = 5000;
 
 export default function Cart() {
-  const { userInfo } = useAuthContext();
-  const { data: cart, isLoading } = useQuery({
-    queryKey: ["cart"],
-    queryFn: () => getCart(userInfo.uid),
-    refetchOnWindowFocus: false,
-  });
+  const {
+    cartQuery: { data: cart, isLoading },
+  } = useCart();
 
   const _totalPrice =
     cart &&
@@ -41,7 +36,7 @@ export default function Cart() {
                     key={v.id}
                     className="p-[16px] rounded-lg border border-gray-light"
                   >
-                    <CartCard product={v} userId={userInfo.uid} />
+                    <CartCard product={v} />
                   </li>
                 ))}
             </ul>

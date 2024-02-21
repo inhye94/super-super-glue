@@ -2,47 +2,44 @@ import React, { useState } from "react";
 import IconButton from "./IconButton";
 import { PiPlusCircle, PiMinusCircle } from "react-icons/pi";
 import { IoMdClose } from "react-icons/io";
-import { removeCartItem, updateCart } from "../api/firebase";
 import Toast from "./Toast";
+import useCart from "../hooks/useCart";
 
 export default function CartCard({
   product,
   product: { id, name, image, price, option, quantity },
-  userId,
 }) {
   const [_success, setSuccess] = useState(false);
-  const [_text, setText] = useState("");
+
+  const {
+    updateCart: { mutate: update },
+    removeCartItem: { mutate: remove },
+  } = useCart();
 
   const handleRemoveCartItem = async () => {
-    removeCartItem(userId, id).then(() => {
-      setText("장바구니에서 삭제되었습니다!");
-      setSuccess(true);
-
-      setTimeout(() => {
-        setSuccess(false);
-        setText("");
-      }, 4000);
-    });
+    if (window.confirm("장바구니에서 삭제하겠습니까?")) {
+      await remove({ id });
+    }
   };
 
   const handleUpdateQuantity = async (e) => {
-    updateCart(userId, {
-      ...product,
-      quantity: quantity + +e.currentTarget.value,
-    }).then(() => {
-      setText("수량이 변경되었습니다!");
-      setSuccess(true);
+    await update(
+      { product, quantity: quantity + +e.currentTarget.value },
+      {
+        onSuccess: () => {
+          setSuccess(true);
 
-      setTimeout(() => {
-        setSuccess(false);
-        setText("");
-      }, 4000);
-    });
+          setTimeout(() => {
+            setSuccess(false);
+          }, 4000);
+        },
+      }
+    );
   };
 
   return (
     <article className="relative flex flex-col gap-[8px] md:gap-[16px]">
-      {_success && <Toast text={_text} />}
+      {_success && <Toast text="수량이 변경되었습니다!" />}
 
       <div className="flex gap-[12px]">
         <img

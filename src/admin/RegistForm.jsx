@@ -12,22 +12,26 @@ import {
 } from "../utils/validations.js";
 import ContentWrapper from "../components/ContentWrapper";
 import { useAuthContext } from "../context/AuthContext";
-import { registProduct } from "../api/firebase";
 import { uploadFile } from "../api/uploadFile";
 import { mergeFileList } from "../api/form";
 import Spinner from "../components/Spinner";
 import Toast from "../components/Toast";
+import useProducts from "../hooks/useProducts";
 
 export default function RegistForm() {
+  const { userInfo } = useAuthContext();
+
   const [files, setFiles] = useState({ ...initFiles });
   const [isUploading, setIsUploading] = useState(false);
   const [success, setSuccess] = useState();
+  const [_id, setId] = useState();
 
   const methods = useForm();
   const { handleSubmit, formState } = methods;
-  const { userInfo } = useAuthContext();
 
-  const [_id, setId] = useState();
+  const {
+    addProduct: { mutate },
+  } = useProducts();
 
   useEffect(() => {
     setIsUploading(formState.isSubmitting);
@@ -54,16 +58,19 @@ export default function RegistForm() {
     );
 
     // 데이터 저장
-    await registProduct(userInfo.uid, data, image, detailImage) //
-      .then((result) => {
-        setId(result);
-      })
-      .then(() => {
-        setSuccess(true);
-        setTimeout(() => {
-          setSuccess(false);
-        }, 4000);
-      });
+    await mutate(
+      { userID: userInfo.uid, data, image, detailImage },
+      {
+        onSuccess: (result) => {
+          setId(result);
+
+          setSuccess(true);
+          setTimeout(() => {
+            setSuccess(false);
+          }, 4000);
+        },
+      }
+    );
   };
 
   const handleFiles = (e, limitCount, limitSize) => {

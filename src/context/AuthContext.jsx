@@ -19,7 +19,13 @@ export default function AuthContextProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ userInfo, loginByDesktop, loginByMobile, logout }}
+      value={{
+        userInfo,
+        userId: userInfo ? userInfo.uid : null,
+        loginByDesktop,
+        loginByMobile,
+        logout,
+      }}
     >
       {children}
     </AuthContext.Provider>

@@ -4,11 +4,12 @@ import ContentWrapper from "../components/ContentWrapper";
 import Button from "../components/Button";
 import { useAuthContext } from "../context/AuthContext";
 import { useScreenStateContext } from "../context/ScreenStateContext";
-import { updateCart } from "../api/firebase";
 import Toast from "../components/Toast";
+import useCart from "../hooks/useCart";
 
 export default function ProductDetail() {
   const { userInfo, loginByDesktop, loginByMobile } = useAuthContext();
+
   const { isMobile } = useScreenStateContext();
 
   const {
@@ -29,11 +30,15 @@ export default function ProductDetail() {
   const [_selected, setSelected] = useState("");
   const [_success, setSuccess] = useState(false);
 
+  const {
+    updateCart: { mutate: update },
+  } = useCart();
+
   const handleSelected = (e) => {
     setSelected(e.target.value);
   };
 
-  const handelAddCart = () => {
+  const handelAddCart = async () => {
     // 로그인을 하지 않은 경우,
     if (!userInfo) {
       isMobile ? loginByMobile() : loginByDesktop();
@@ -49,12 +54,18 @@ export default function ProductDetail() {
       option: _selected,
       quantity: 1,
     };
-    updateCart(userInfo.uid, _product).then(() => {
-      setSuccess(true);
-      setTimeout(() => {
-        setSuccess(false);
-      }, 4000);
-    });
+
+    await update(
+      { product: { ..._product }, quantity: _product.quantity },
+      {
+        onSuccess: () => {
+          setSuccess(true);
+          setTimeout(() => {
+            setSuccess(false);
+          }, 4000);
+        },
+      }
+    );
   };
 
   return (

@@ -24,7 +24,7 @@ export default function RegistForm() {
   const [files, setFiles] = useState({ ...initFiles });
   const [isUploading, setIsUploading] = useState(false);
   const [success, setSuccess] = useState();
-  const [_id, setId] = useState();
+  const [_id, setId] = useState(null);
 
   const methods = useForm();
   const { handleSubmit, formState } = methods;
@@ -106,6 +106,8 @@ export default function RegistForm() {
           onSubmit={(e) => e.preventDefault()}
           className="flex flex-col gap-y-[24px] p-[16px] bg-background rounded-md md:py-[32px]"
         >
+          <input type="hidden" name="id" value={_id} />
+
           <Input
             id="name"
             name="name"

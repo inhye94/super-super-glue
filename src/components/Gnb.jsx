@@ -5,13 +5,9 @@ import Button from "./Button";
 import LayoutWrapper from "./LayoutWrapper";
 import { useScreenStateContext } from "../context/ScreenStateContext";
 import { useAuthContext } from "../context/AuthContext";
-import {
-  LuPartyPopper,
-  LuShoppingCart,
-  LuTable2,
-  LuPictureInPicture2,
-} from "react-icons/lu";
+import { LuPartyPopper, LuTable2, LuPictureInPicture2 } from "react-icons/lu";
 import { RiMenuAddLine } from "react-icons/ri";
+import CartMenu from "./CartMenu";
 
 const _menu = [
   {
@@ -24,7 +20,6 @@ const _menu = [
   {
     path: "/cart",
     text: "장바구니",
-    icon: <LuShoppingCart aria-hidden="true" />,
     login: false,
     role: "normal",
   },
@@ -89,18 +84,24 @@ export default function Gnb() {
                   return v.login;
                 }
               })
-              .map(({ path, text, icon }, i) => (
-                <li key={i}>
-                  <IconButton
-                    tag="link"
-                    url={path}
-                    icon={icon}
-                    text={text}
-                    size="medium"
-                    color="secondary"
-                  />
-                </li>
-              ))}
+              .map(({ path, text, icon }, i) => {
+                return path === "/cart" ? (
+                  <li key={i}>
+                    <CartMenu />
+                  </li>
+                ) : (
+                  <li key={i}>
+                    <IconButton
+                      tag="link"
+                      url={path}
+                      icon={icon}
+                      text={text}
+                      size="medium"
+                      color="secondary"
+                    />
+                  </li>
+                );
+              })}
             {userInfo && (
               <li className="shrink-0">
                 <img

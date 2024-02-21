@@ -1,21 +1,17 @@
-import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { getAllProducts } from "../api/firebase";
 import Spinner from "./Spinner";
 import ContentWrapper from "./ContentWrapper";
 import ProductCard from "./ProductCard";
+import useProducts from "../hooks/useProducts";
 
 export default function Products() {
-  const { data: productAll, isLoading } = useQuery({
-    queryKey: ["productAll"],
-    queryFn: async () => await getAllProducts(),
-    refetchOnWindowFocus: false,
-    staleTime: 1000 * 60 * 1,
-  });
+  const {
+    productsQuery: { isLoading, data: productAll },
+  } = useProducts();
 
   if (isLoading) return <Spinner text="등록 상품 정보를 불러오는 중입니다!" />;
 
-  if (productAll.length === 0) {
+  if (!productAll || productAll.length === 0) {
     return <p>상품 준비중입니다!</p>;
   } else {
     return (

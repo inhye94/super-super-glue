@@ -139,6 +139,18 @@ function ButtonSection() {
         <IconButton icon={<FiAlertCircle />} text="버튼이에용" size="medium" />
         <IconButton icon={<FiAlertCircle />} text="버튼이에용" size="small" />
       </FlexBox>
+
+      <FlexBox subtitle="icon-button | active">
+        <IconButton icon={<FiAlertCircle />} text="버튼이에용" count={0} />
+        <IconButton icon={<FiAlertCircle />} text="버튼이에용" count={1} />
+        <IconButton icon={<FiAlertCircle />} text="버튼이에용" count={10} />
+        <IconButton icon={<FiAlertCircle />} text="버튼이에용" count={100} />
+        <IconButton
+          icon={<FiAlertCircle />}
+          text="버튼이에용"
+          count={100 + "+"}
+        />
+      </FlexBox>
     </SectionWrapper>
   );
 }

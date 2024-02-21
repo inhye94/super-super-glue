@@ -173,6 +173,7 @@
   --icon-size: 44px;
   @include text.text-style-24;
 
+  flex-shrink: 0;
   position: relative;
   display: flex;
   justify-content: center;

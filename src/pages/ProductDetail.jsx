@@ -41,7 +41,6 @@ export default function ProductDetail() {
     }
 
     // 로그인을 한 경우,
-    // cart 메뉴 활성화
     const _product = {
       id,
       image: image[0],

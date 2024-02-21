@@ -10,6 +10,8 @@ export default function IconButton({
   tag = "button",
   size,
   count,
+  value,
+  disabled,
   callback,
 }) {
   if (tag === "button") {
@@ -18,7 +20,9 @@ export default function IconButton({
         className={classNames("icon-button", color, size)}
         type="button"
         title={text}
+        value={value}
         onClick={callback}
+        disabled={disabled}
       >
         {icon}
         {count ? <span>{count}</span> : ""}
@@ -32,7 +36,9 @@ export default function IconButton({
         className={classNames("icon-button", color, size)}
         title={text}
         to={url}
+        value={value}
         onClick={callback}
+        disabled={disabled}
       >
         {icon}
         {count ? <span>{count}</span> : ""}

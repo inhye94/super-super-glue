@@ -19,14 +19,14 @@ Firebase와 클라우디너리로 리액트 프로젝트 제작
 
 ## 🤩 DB
 
-### Image File
+### Cloudinary
 
-- Cloudinary
+- Image File
 
 ### Firebase Realtime Database
 
 - products
-  - 등록된 데이터 관리
+  - 상품 데이터 관리
   - UserUID마다 Product 데이터 저장
 - cart
   - 장바구니 데이터 관리

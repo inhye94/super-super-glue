@@ -6,13 +6,77 @@
 ```
 Firebase와 클라우디너리로 리액트 프로젝트 제작
 
-- 제작기간: 2024.01 ~
+- 제작기간: 2024.01 ~ 2024.02
 - 구현환경: React
 - 배포방법: Netlify
 - 특징
   - 반응형
   - 네트워크 통신
   - 모듈 생성 후 작업(버튼, 뱃지 등등 컴포넌트보다 작은 단위)
+```
+
+<br/>
+
+## 🤩 DB
+
+### Image File
+
+- Cloudinary
+
+### Firebase Realtime Database
+
+- products
+  - 등록된 데이터 관리
+  - UserUID마다 Product 데이터 저장
+- cart
+  - 장바구니 데이터 관리
+  - UserUID마다 Product 데이터 저장
+- admin
+  - admin 계정 관리
+  - UserUID 저장
+
+```json
+{
+  "admin": ["UserUID", "UserUID", ...],
+  "cart": {
+    "UserUID": {
+      "ProductID": {
+        "id": "ProductID",
+        "image": "cloudinary 이미지 주소",
+        "name": "다 지워졌서",
+        "option": " 지정해서",
+        "price": 2222202,
+        "quantity": 2
+      },
+    },
+    ...
+  },
+  "product": {
+    "UserUID": {
+      "ProductID": {
+        "category": "눈물",
+        "description": "",
+        "detailImage": [
+          "cloudinary 이미지 주소",
+          "cloudinary 이미지 주소"
+        ],
+        "id": "ProductID",
+        "image": [
+          "cloudinary 이미지 주소"
+        ],
+        "name": "다 지워졌서",
+        "option": [
+          "잘못",
+          " 지정해서",
+          " 모두",
+          " 지워졌서"
+        ],
+        "price": 2222202
+      },
+      ...
+    },
+  }
+}
 ```
 
 <br/>
@@ -43,11 +107,6 @@ Firebase와 클라우디너리로 리액트 프로젝트 제작
 ### 라우터
 
 - react-dom-route
-
-### 데이터 저장 및 호출
-
-- firebase
-- cloudinary
 
 ### 폼
 

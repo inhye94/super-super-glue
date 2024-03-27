@@ -84,6 +84,21 @@ Firebase와 클라우디너리로 리액트 프로젝트 제작
 
 <br/>
 
+### 브랜치 관리
+
+- 기능별로 브랜치 생성하여 pull request
+
+| 브랜치명 | 기능 |
+| -- | -- |
+| gnb | 스타일 작업, 로그인, admin 권한, redirect |
+| module | 모듈 생성 ex) Button, Badge, FileInput, Input, Spinner, Toast, ... |
+| feature-cart | 장바구니 담기, 수정, 삭제 구현 |
+| product-list | 상품 데이터 fetching + print |
+| product-detail | 상세 데이터 fetching + print |
+| admin-regist | 상품 등록 |
+
+<br/>
+
 ## 🧚 기능
 
 #### 1. 로그인

@@ -84,6 +84,52 @@ Firebase와 클라우디너리로 리액트 프로젝트 제작
 
 <br/>
 
+## 🧚 기능
+
+#### 1. 로그인
+
+| 로그인 상태 | 메뉴 구성 | 화면 |
+| --- | --- | -- |
+| 비로그인 | 상품보기, 모듈, 로그인 | <img width="1000" alt="스크린샷 2024-03-27 오후 3 44 18" src="https://github.com/DuetoPark/super-super-glue/assets/69448900/6e07cd12-ddd7-462b-99e6-dfb04da7ef8c"> |
+| 일반회원 | 상품보기, 장바구니, 모듈, 로그아웃 | <img width="1000" alt="스크린샷 2024-03-27 오후 3 44 13" src="https://github.com/DuetoPark/super-super-glue/assets/69448900/4dce1d27-571a-4e16-8154-661070dc7a8c"> |
+| 어드민 | 상품보기, 장바구니, 등록상품 리스트, 상품등록, 로그아웃 | <img width="1000" alt="스크린샷 2024-03-27 오후 3 44 32" src="https://github.com/DuetoPark/super-super-glue/assets/69448900/98fcd534-a695-40d6-a738-8720f52de4d3"> |
+  
+https://github.com/DuetoPark/super-super-glue/assets/69448900/00d5d37e-a639-4dd5-a815-7dff960346b4
+
+<br/>
+
+#### 2. 장바구니 추가/수정/삭제
+| 기능 | 페이지 | 상세 기능 |
+| --- | ----- | --- |
+| 추가 | 상품 상세 | 옵션선택, 장바구니 추가 |
+| 수정 | 장바구니 | 수량 변경, 총 금액 변경, 토스트 |
+| 삭제 | 장바구니 | 선택 상품 삭제, 총 금액 변경, 알럿 |
+
+https://github.com/DuetoPark/super-super-glue/assets/69448900/93b9b0cb-ea16-4625-9b5f-77819ecda76a
+
+https://github.com/DuetoPark/super-super-glue/assets/69448900/7a939986-8703-4409-87a3-3f0ce8565500
+
+https://github.com/DuetoPark/super-super-glue/assets/69448900/d21c8f35-9ddc-497f-b64b-34a6891eb9d8
+
+<br/>
+
+### 3. 상품등록
+
+- 필수요소는 유효성검사 진행
+
+| 데이터형 | 저장공간 |
+| --- | ----- |
+| string | `firebase realtime database` |
+| file | `cloudinary`에 저장 하면서 획득한 `url`을 `firebase realtime database`에 저장 |
+
+https://github.com/DuetoPark/super-super-glue/assets/69448900/fb8973ee-29bb-4c7e-8f70-4ec8e529cbd1
+
+https://github.com/DuetoPark/super-super-glue/assets/69448900/7bf1d550-b276-4da6-9aec-b37657543b67
+
+https://github.com/DuetoPark/super-super-glue/assets/69448900/580b3642-94e0-4ac0-a8eb-79eab453455a
+
+<br/>
+
 ## 🤩 DB
 
 ### Cloudinary

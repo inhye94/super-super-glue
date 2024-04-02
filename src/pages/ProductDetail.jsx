@@ -41,7 +41,8 @@ export default function ProductDetail() {
   const handelAddCart = async () => {
     // 로그인을 하지 않은 경우,
     if (!userInfo) {
-      isMobile ? loginByMobile() : loginByDesktop();
+      // isMobile ? loginByMobile() : loginByDesktop();
+      loginByDesktop();
       return;
     }
 

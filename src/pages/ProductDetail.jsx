@@ -3,14 +3,15 @@ import { useLocation } from "react-router-dom";
 import ContentWrapper from "../components/ContentWrapper";
 import Button from "../components/Button";
 import { useAuthContext } from "../context/AuthContext";
-import { useScreenStateContext } from "../context/ScreenStateContext";
+// import { useScreenStateContext } from "../context/ScreenStateContext";
 import Toast from "../components/Toast";
 import useCart from "../hooks/useCart";
 
 export default function ProductDetail() {
-  const { userInfo, loginByDesktop, loginByMobile } = useAuthContext();
+  // const { userInfo, loginByDesktop, loginByMobile } = useAuthContext();
+  const { userInfo, loginByDesktop } = useAuthContext();
 
-  const { isMobile } = useScreenStateContext();
+  // const { isMobile } = useScreenStateContext();
 
   const {
     state: {

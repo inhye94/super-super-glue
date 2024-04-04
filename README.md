@@ -159,13 +159,13 @@ https://github.com/DuetoPark/super-super-glue/assets/69448900/580b3642-94e0-4ac0
     - 모바일: redirect 로그인 (safari에서 서드파티 에러발생하여 수정 중입니다)
 - 리다이렉트
 
-  - <ProtectPage> 컴포넌트를 사용해 **로그인 상태와 회원 등급에 따라 페이지 접근 처리**
+  - `<ProtectPage> 컴포넌트`를 사용해 **로그인 상태와 회원 등급에 따라 페이지 접근 처리**
   - 로그인 상태 확인
     - 로그인: `useAuthContext` 에 저장된 `userInfo != null`
     - 비로그인: `useAuthContext` 에 저장된 `userInfo == null`
     - 비로그인은 장바구니(/cart), 어드민페이지( /admin/…) 접근 불가
   - 회원등급 확인
-    - <ProtectPage> 컴포넌트의 `requiredAdmin` 속성을 선언하고 userInfo.admin을 확인
+    - `<ProtectPage> 컴포넌트`의 `requiredAdmin` 속성을 선언하고 userInfo.admin을 확인
     - 어드민: `userInfo.admin == true`
     - 일반회원: `userInfo.admin == false`
   - 로그인과 회원등급에 따라 헤더 메뉴 변경

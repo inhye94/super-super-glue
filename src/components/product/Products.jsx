@@ -1,8 +1,8 @@
 import React from "react";
-import Spinner from "./Spinner";
-import ContentWrapper from "./wrapper/ContentWrapper";
+import Spinner from "../Spinner";
+import ContentWrapper from "../wrapper/ContentWrapper";
 import ProductCard from "./ProductCard";
-import useProducts from "../hooks/useProducts";
+import useProducts from "../../hooks/useProducts";
 
 export default function Products() {
   const {

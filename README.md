@@ -1,5 +1,3 @@
-# 리액트로 쇼핑몰 만들기
-
 > 페이지 이름이 super-super-glue인 이유는 따로 없다.  
 > 내가 보던 영화의 대사를 가져온 것 뿐이다.
 
@@ -10,11 +8,10 @@
 - 구현환경: React, TailwindCSS, firebase, cloudinary
 - 배포방법: Netlify
 - 특징
-  - 로그인
-  - 상품 등록
-  - 장바구니 추가/수정/삭제
+  - 등록/수정/삭제 구현
+  - 로그인 구현
+  - 회원 등급에 따라 페이지 접근 허용
   - 모듈 생성 후 작업(버튼, 뱃지 등등 컴포넌트보다 작은 단위)
-  - 반응형
 ```
 
 [💚 super-super-glue 💚](https://super-super-glue.netlify.app)

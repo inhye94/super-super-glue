@@ -1,5 +1,5 @@
 import React from "react";
-import IconButton from "./IconButton";
+import IconButton from "../modules/components/button/IconButton";
 import { LuShoppingCart } from "react-icons/lu";
 import useCart from "../hooks/useCart";
 

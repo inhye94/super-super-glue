@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import Badge from "./Badge";
+import Badge from "../modules/components/badge/Badge";
 
 export default function InputError({ message }) {
   return (

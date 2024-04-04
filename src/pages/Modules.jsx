@@ -1,8 +1,8 @@
 import React from "react";
 import Button from "../modules/components/button/Button";
-import IconButton from "../components/IconButton";
+import IconButton from "../modules/components/button/IconButton";
+import Badge from "../modules/components/badge/Badge";
 import { FiAlertCircle } from "react-icons/fi";
-import Badge from "../components/Badge";
 import Input from "../components/Input";
 import { FormProvider, useForm } from "react-hook-form";
 import {

@@ -1,5 +1,5 @@
 import React from "react";
-import "../modules/badge.scss";
+import "./badge.scss";
 import classNames from "classnames";
 import { GoAlertFill } from "react-icons/go";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";

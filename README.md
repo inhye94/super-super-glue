@@ -2,16 +2,14 @@
 > 내가 보던 영화의 대사를 가져온 것 뿐이다.
 
 ```
-✅ Firebase와 클라우디너리로 리액트 프로젝트 제작
+✅ 모듈 제작하고 서버 데이터 업데이트 후 UI 업데이트하기
 
 - 제작기간: 2024.01.08 ~ 2024.02.22
 - 구현환경: React, TailwindCSS, firebase, cloudinary
 - 배포방법: Netlify
 - 특징
-  - 등록/수정/삭제 구현
-  - 로그인 구현
-  - 회원 등급에 따라 페이지 접근 허용
-  - 모듈 생성 후 작업(버튼, 뱃지 등등 컴포넌트보다 작은 단위)
+  - 모듈 제작
+  - 서버 데이터 업데이트 후 UI 업데이트
 ```
 
 [💚 super-super-glue 💚](https://super-super-glue.netlify.app)
@@ -98,14 +96,7 @@
 
 <br/>
 
-## 🧚 기능과 구현 화면
-
-```
-✅ 로그인
-✅ 리다이렉트
-✅ 장바구니 추가/수정/삭제
-✅ 상품등록
-```
+## 🧚 구현 화면
 
 <details>
 <summary>로그인 구현 화면</summary>
@@ -150,46 +141,98 @@ https://github.com/DuetoPark/super-super-glue/assets/69448900/580b3642-94e0-4ac0
 
 <br/>
 
-## 🚀 구현 방법
+## 🚀 특징
+
+### 모듈 제작
+
+- 컴포넌트 제작
+  - Button, Input, Badge처럼 **범용 요소는 컴포넌트**로 제작
+  - modules 폴더로 관리
+- 스타일
+  - 모듈 컴포넌트의 props 값은 style, size, color, rounded 스타일로 반영
+  - 모듈 스타일은 scss의 mixin으로 관리
+  - color, typography와 관련된 상수는 CSS 변수로 관리
+
+### 서버 데이터 업데이트 후 UI 업데이트
+
+- **useMutation 사용해 서버 데이터 CRUD 후 queryKey에 데이터 캐싱**
+- **invalidateQueries에 의해 queryKey에 캐싱된 데이터에 변동이 감지되면 UI 업데이트**
+- ex. product 추가, cart 추가/수정/삭제
+
+<br/>
+
+## 🌎 기능
+
+```
+✅ 로그인
+✅ 리다이렉트
+✅ 장바구니 추가/수정/삭제
+✅ 상품등록
+```
 
 - 로그인
   - firebase google auth를 이용해 로그인 구현
   - 모바일은 signInWithRedirect를 사용해 액세시 차단 에러 수정
     - 데스크탑: popup 로그인
-    - 모바일: redirect 로그인 (safari에서 서드파티 에러발생하여 수정 중입니다)
+    - 모바일: redirect 로그인
 - 리다이렉트
-
-  - `<ProtectPage> 컴포넌트`를 사용해 **로그인 상태와 회원 등급에 따라 페이지 접근 처리**
-  - 로그인 상태 확인
-    - 로그인: `useAuthContext` 에 저장된 `userInfo != null`
-    - 비로그인: `useAuthContext` 에 저장된 `userInfo == null`
-    - 비로그인은 장바구니(/cart), 어드민페이지( /admin/…) 접근 불가
-  - 회원등급 확인
-    - `<ProtectPage> 컴포넌트`의 `requiredAdmin` 속성을 선언하고 userInfo.admin을 확인
-    - 어드민: `userInfo.admin == true`
-    - 일반회원: `userInfo.admin == false`
-  - 로그인과 회원등급에 따라 헤더 메뉴 변경
-
-    - 메뉴 데이터에 role과 login 값을 확인하여 유저의 상태에 따라 메뉴를 filter
-
-      | 로그인 상태 | 헤더 메뉴 구성                                          | 화면                                                                                                                                                                       |
-      | ----------- | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-      | 비로그인    | 상품보기, 모듈, 로그인                                  | <img width="1000" alt="스크린샷 2024-03-27 오후 3 44 18" src="https://github.com/DuetoPark/super-super-glue/assets/69448900/6e07cd12-ddd7-462b-99e6-dfb04da7ef8c"> |
-      | 일반회원    | 상품보기, 장바구니, 모듈, 로그아웃                      | <img width="1000" alt="스크린샷 2024-03-27 오후 3 44 13" src="https://github.com/DuetoPark/super-super-glue/assets/69448900/4dce1d27-571a-4e16-8154-661070dc7a8c"> |
-      | 어드민      | 상품보기, 장바구니, 등록상품 리스트, 상품등록, 로그아웃 | <img width="1000" alt="스크린샷 2024-03-27 오후 3 44 32" src="https://github.com/DuetoPark/super-super-glue/assets/69448900/98fcd534-a695-40d6-a738-8720f52de4d3"> |
-
+  - **커스텀 훅 useAuthContext**
+    - **state를 제공하여 회원 정보를 컴포넌트간에 공유**
+  - `<ProtectPage> 컴포넌트`
+    - useAuthContext의 userInfo state를 사용해 로그인 상태와 회원등급을 구분
+    - return 페이지를 설정
 - 장바구니
-  - 데이터 저장
-    - Firebase realtime database를 사용하여 user.uid마다 장바구니 데이터 저장
-  - `useMutation`을 사용하여 변경된 데이터를 장바구니 메뉴에 반영
-    - 장바구니 데이터에 상품이 없는 경우: 메뉴 비활성
-    - 장바구니 데이터에 상품이 있는 경우: 메뉴에 상품 개수 표기
+  - 데이터 캐싱
+    - **커스텀 훅 useCart 제작하여 queryKey ‘cart’에 데이터 캐싱**
+    - **cart의 데이터에 변동을 감지하면 장바구니 메뉴 UI 업데이트**
 - 상품 등록
+  - 데이터 캐싱
+    - **커스텀 훅 useProduct 제작하여 queryKey ‘product’에 데이터 캐싱**
+    - **product의 데이터에 변동을 감지하면 상품 리스트 UI 업데이트**
   - 유효성 검사
     - `react-hook-form`을 사용하여 string 데이터의 유효성 검사 진행
     - `DataTransfer`를 사용하여 file 데이터의 유효성 검사 진행
   - 데이터 저장
     - Cloudinary에 file 저장하고 획득한 url을 사용해 Firebase realtime database에 상품 데이터 저장
+
+<br/>
+
+## 📌 폴더 구성
+
+```
+📦src
+ ┣ 📂admin ------------------------------ NOTE: 어드민 페이지
+ ┣ 📂api -------------------------------- NOTE: api
+ ┣ 📂components ------------------------- NOTE: 컴포넌트
+ ┃ ┣ 📂cart
+ ┃ ┣ 📂product
+ ┃ ┣ 📂wrapper
+ ┃ ┣ 📜Banner.jsx
+ ┃ ┣ 📜Gnb.jsx
+ ┃ ┣ 📜Logo.jsx
+ ┃ ┣ 📜Spinner.jsx
+ ┃ ┗ 📜Toast.jsx
+ ┣ 📂context ---------------------------- NOTE: 컨텍스트
+ ┣ 📂hooks ------------------------------ NOTE: 커스텀 훅
+ ┣ 📂modules ---------------------------- NOTE: 모듈
+ ┃ ┣ 📂components ---- ( 모듈 컴포넌트 )
+ ┃ ┣ 📂constants  ---- ( 모듈 스타일 상수 )
+ ┃ ┗ 📂mixins     ---- ( 모듈 스타일 )
+ ┣ 📂pages ------------------------------ NOTE: 페이지 컴포넌트
+ ┃ ┣ 📜AllProducts.jsx
+ ┃ ┣ 📜Bookmark.jsx
+ ┃ ┣ 📜Cart.jsx
+ ┃ ┣ 📜Home.jsx
+ ┃ ┣ 📜Modules.jsx
+ ┃ ┣ 📜ProductDetail.jsx
+ ┃ ┗ 📜ProtectPage.jsx
+ ┣ 📂utils ------------------------------ NOTE: 공통 함수
+ ┣ 📜App.js
+ ┣ 📜index.css
+ ┣ 📜index.js
+ ┣ 📜reportWebVitals.js
+ ┗ 📜setupTests.js
+```
 
 <br/>
 

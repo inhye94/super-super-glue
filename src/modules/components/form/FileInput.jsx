@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import React, { useState } from "react";
 import "./form.scss";
-import InputError from "../../../components/InputError";
+import InputError from "./InputError";
 import { LuUpload } from "react-icons/lu";
 import { useFormContext } from "react-hook-form";
 import {

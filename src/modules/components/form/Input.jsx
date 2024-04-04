@@ -1,10 +1,10 @@
 import classNames from "classnames";
 import React from "react";
 import "./form.scss";
+import InputError from "./InputError";
 import { useFormContext } from "react-hook-form";
 import { AnimatePresence } from "framer-motion";
 import { findInputError, isFormInvalid } from "../../../api/form";
-import InputError from "../../../components/InputError";
 
 export default function Input({
   name,

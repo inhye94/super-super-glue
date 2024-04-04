@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../components/Button";
+import Button from "../modules/components/button/Button";
 import IconButton from "../components/IconButton";
 import { FiAlertCircle } from "react-icons/fi";
 import Badge from "../components/Badge";

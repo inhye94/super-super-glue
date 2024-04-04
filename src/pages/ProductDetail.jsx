@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import ContentWrapper from "../components/ContentWrapper";
-import Button from "../components/Button";
+import Button from "../modules/components/button/Button";
 import { useAuthContext } from "../context/AuthContext";
 import { useScreenStateContext } from "../context/ScreenStateContext";
 import Toast from "../components/Toast";

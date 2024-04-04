@@ -1,7 +1,7 @@
 import React from "react";
 import Spinner from "../components/Spinner";
 import ContentWrapper from "../components/ContentWrapper";
-import Button from "../components/Button";
+import Button from "../modules/components/button/Button";
 import CartCard from "../components/CartCard";
 import useCart from "../hooks/useCart";
 

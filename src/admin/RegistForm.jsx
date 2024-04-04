@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Input from "../components/Input";
 import FileInput from "../components/FileInput";
-import Button from "../components/Button";
+import Button from "../modules/components/button/Button";
 import { FormProvider, useForm } from "react-hook-form";
 import {
   required_validation,

@@ -1,7 +1,7 @@
 import React from "react";
 import Logo from "./Logo";
 import IconButton from "./IconButton";
-import Button from "./Button";
+import Button from "../modules/components/button/Button";
 import LayoutWrapper from "./LayoutWrapper";
 import { useScreenStateContext } from "../context/ScreenStateContext";
 import { useAuthContext } from "../context/AuthContext";

@@ -2,8 +2,9 @@ import React from "react";
 import Button from "../modules/components/button/Button";
 import IconButton from "../modules/components/button/IconButton";
 import Badge from "../modules/components/badge/Badge";
+import Input from "../modules/components/form/Input";
+import FileInput from "../modules/components/form/FileInput";
 import { FiAlertCircle } from "react-icons/fi";
-import Input from "../components/Input";
 import { FormProvider, useForm } from "react-hook-form";
 import {
   required_validation,
@@ -13,7 +14,6 @@ import {
   special_validation,
   only_kr_validation,
 } from "../utils/validations";
-import FileInput from "../components/FileInput";
 import ContentWrapper from "../components/ContentWrapper";
 
 export default function Modules() {

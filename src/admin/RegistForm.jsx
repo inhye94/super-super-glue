@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Input from "../components/Input";
-import FileInput from "../components/FileInput";
+import Input from "../modules/components/form/Input";
+import FileInput from "../modules/components/form/FileInput";
 import Button from "../modules/components/button/Button";
 import { FormProvider, useForm } from "react-hook-form";
 import {

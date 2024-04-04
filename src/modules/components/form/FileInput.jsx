@@ -1,14 +1,14 @@
 import classNames from "classnames";
 import React, { useState } from "react";
-import "../modules/form.scss";
-import InputError from "./InputError";
+import "./form.scss";
+import InputError from "../../../components/InputError";
 import { LuUpload } from "react-icons/lu";
 import { useFormContext } from "react-hook-form";
 import {
   findInputError,
   isFormInvalid,
   transferFileToImageSrc,
-} from "../api/form";
+} from "../../../api/form";
 import { AnimatePresence } from "framer-motion";
 
 export default function FileInput({

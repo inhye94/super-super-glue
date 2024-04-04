@@ -1,6 +1,6 @@
-@use "./constants/colors";
-@use "./mixins/text-style.scss" as text;
-@use "./mixins/scrollbar.scss" as scroll;
+@use "../../constants/colors";
+@use "../../mixins/text-style.scss" as text;
+@use "../../mixins/scrollbar.scss" as scroll;
 
 $color-pass: colors.$green-light;
 $color-errer: colors.$pink-dark;

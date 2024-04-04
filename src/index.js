@@ -16,9 +16,9 @@ import Bookmark from "./pages/Bookmark";
 import ProductTable from "./admin/ProductTable";
 import RegistForm from "./admin/RegistForm";
 import Modules from "./pages/Modules";
-import ProtectPage from "./components/ProtectPage";
 import Home from "./pages/Home";
 import AllProducts from "./pages/AllProducts";
+import ProtectPage from "./pages/ProtectPage";
 
 const router = createBrowserRouter([
   {

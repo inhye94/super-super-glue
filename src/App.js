@@ -10,8 +10,8 @@ import { Outlet } from "react-router-dom";
 import Gnb from "./components/Gnb";
 import ScreenStateProvider from "./context/ScreenStateContext";
 import AuthContextProvider from "./context/AuthContext";
-import LayoutWrapper from "./components/LayoutWrapper";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import LayoutWrapper from "./components/wrapper/LayoutWrapper";
 
 const queryClient = new QueryClient();
 

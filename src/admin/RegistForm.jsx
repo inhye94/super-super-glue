@@ -10,7 +10,7 @@ import {
   only_kr_validation,
   option_validation,
 } from "../utils/validations.js";
-import ContentWrapper from "../components/ContentWrapper";
+import ContentWrapper from "../components/wrapper/ContentWrapper";
 import { useAuthContext } from "../context/AuthContext";
 import { uploadFile } from "../api/uploadFile";
 import { mergeFileList } from "../api/form";

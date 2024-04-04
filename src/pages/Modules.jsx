@@ -14,7 +14,7 @@ import {
   special_validation,
   only_kr_validation,
 } from "../utils/validations";
-import ContentWrapper from "../components/ContentWrapper";
+import ContentWrapper from "../components/wrapper/ContentWrapper";
 
 export default function Modules() {
   return (

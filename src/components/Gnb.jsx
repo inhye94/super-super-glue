@@ -2,7 +2,7 @@ import React from "react";
 import Logo from "./Logo";
 import Button from "../modules/components/button/Button";
 import IconButton from "../modules/components/button/IconButton";
-import LayoutWrapper from "./LayoutWrapper";
+import LayoutWrapper from "./wrapper/LayoutWrapper";
 import { useScreenStateContext } from "../context/ScreenStateContext";
 import { useAuthContext } from "../context/AuthContext";
 import { LuPartyPopper, LuTable2, LuPictureInPicture2 } from "react-icons/lu";

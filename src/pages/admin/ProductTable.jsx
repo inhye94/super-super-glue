@@ -1,10 +1,12 @@
 import React from "react";
-import { useAuthContext } from "../context/AuthContext";
+import { useAuthContext } from "../../context/AuthContext";
 import { useQuery } from "@tanstack/react-query";
-import { getUserProduct } from "../api/firebase";
-import ContentWrapper from "../components/wrapper/ContentWrapper";
+import { getUserProduct } from "../../api/firebase";
+import ContentWrapper from "../../components/wrapper/ContentWrapper";
 import { Link } from "react-router-dom";
-import Spinner from "../components/Spinner";
+import Spinner from "../../components/Spinner";
+import Button from "../../modules/components/button/Button";
+import useProducts from "../../hooks/useProducts";
 
 export default function ProductTable() {
   const { userInfo } = useAuthContext();
@@ -15,6 +17,24 @@ export default function ProductTable() {
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 1,
   });
+
+  const {
+    removeProduct: { mutate },
+  } = useProducts();
+
+  const handleRemoveProductItem = async (productId) => {
+    console.log(userInfo.uid);
+    console.log(productId);
+
+    await mutate(
+      { userID: userInfo.uid, productId },
+      {
+        onSuccess: (result) => {
+          console.log("제거!");
+        },
+      }
+    );
+  };
 
   if (isLoading) return <Spinner text="등록 상품 정보를 불러오는 중입니다!" />;
 
@@ -33,6 +53,15 @@ export default function ProductTable() {
                 <p>{product.category}</p>
                 <p>{product.option.join(",")}</p>
                 <p>{product.description}</p>
+
+                <Button color="secondary">수정</Button>
+                <Button
+                  color="secondary"
+                  buttonStyle="outlined"
+                  clickCallback={handleRemoveProductItem.bind(null, product.id)}
+                >
+                  삭제
+                </Button>
               </div>
 
               <div className="flex flex-col flex-wrap gap-[16px] mt-[12px] md:flex-row">

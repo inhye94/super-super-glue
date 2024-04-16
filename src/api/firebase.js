@@ -108,6 +108,15 @@ export const getUserProduct = (userId) => {
     });
 };
 
+export const removeProduct = (userId, productId) => {
+  return remove(ref(database, `product/${userId}/${productId}`)).catch(
+    (error) => {
+      alert(`(${error.code}) ${error.message}`);
+      return null;
+    }
+  );
+};
+
 export const getAllProducts = () => {
   return get(ref(database, "product"))
     .then((snapshot) => {

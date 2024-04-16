@@ -1,5 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getAllProducts, registProduct } from "../api/firebase";
+import {
+  getAllProducts,
+  registProduct,
+  removeProduct as removeItem,
+} from "../api/firebase";
 
 export default function useProducts() {
   const queryClient = useQueryClient();
@@ -17,5 +21,10 @@ export default function useProducts() {
     onSuccess: () => queryClient.invalidateQueries(["productAll"]),
   });
 
-  return { productsQuery, addProduct };
+  const removeProduct = useMutation({
+    mutationFn: ({ userID, productId }) => removeItem(userID, productId),
+    onSuccess: () => queryClient.invalidateQueries(["productAll"]),
+  });
+
+  return { productsQuery, addProduct, removeProduct };
 }

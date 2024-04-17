@@ -60,14 +60,14 @@ export const onUserStateChanged = (callback) => {
 const addUserData = (user) => {
   return get(ref(database))
     .then((snapshot) => {
-      if (snapshot.exists()) {
-        const data = snapshot.val();
-        const isAdmin = data.admin.includes(user.uid);
-
-        return { ...user, isAdmin };
+      if (!snapshot.exists()) {
+        return user;
       }
 
-      return user;
+      const data = snapshot.val();
+      const isAdmin = data.admin.includes(user.uid);
+
+      return { ...user, isAdmin };
     })
     .catch((error) => {
       alert(`(${error.code}) ${error.message}`);
@@ -96,13 +96,11 @@ export const registProduct = async (userId, data, image, detailImage) => {
 export const getUserProduct = (userId) => {
   return get(ref(database, `product/${userId}`))
     .then((snapshot) => {
-      if (snapshot.exists()) {
-        const data = snapshot.val();
-
-        return data;
+      if (!snapshot.exists()) {
+        return null;
       }
 
-      return null;
+      return snapshot.val();
     })
     .catch((error) => {
       alert(`(${error.code}) ${error.message}`);
@@ -113,19 +111,16 @@ export const getUserProduct = (userId) => {
 export const getAllProducts = () => {
   return get(ref(database, "product"))
     .then((snapshot) => {
-      if (snapshot.exists()) {
-        const data = snapshot.val();
-
-        const allProducts = [];
-
-        [...Object.values(data)].forEach((v) =>
-          allProducts.push(...Object.values(v))
-        );
-
-        return allProducts;
+      if (!snapshot.exists()) {
+        return null;
       }
 
-      return null;
+      const allData = snapshot.val();
+
+      return Object.values(allData).reduce(
+        (acc, userProducts) => [...acc, ...Object.values(userProducts)],
+        []
+      );
     })
     .catch((error) => {
       alert(`(${error.code}) ${error.message}`);
@@ -136,13 +131,12 @@ export const getAllProducts = () => {
 export const getCart = (userId) => {
   return get(ref(database, `cart/${userId}`))
     .then((snapshot) => {
-      if (snapshot.exists()) {
-        const data = snapshot.val() || {};
-
-        return Object.values(data);
+      if (!snapshot.exists()) {
+        return null;
       }
 
-      return null;
+      const data = snapshot.val() || {};
+      return Object.values(data);
     })
     .catch((error) => {
       alert(`(${error.code}) ${error.message}`);

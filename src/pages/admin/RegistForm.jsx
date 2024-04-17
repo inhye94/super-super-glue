@@ -23,6 +23,7 @@ export default function RegistForm() {
   const [isUploading, setIsUploading] = useState(false);
   const [success, setSuccess] = useState();
   const [_id, setId] = useState(null);
+  const [_text, setText] = useState("저장");
 
   const methods = useForm();
   const { handleSubmit, formState } = methods;
@@ -40,6 +41,20 @@ export default function RegistForm() {
       document.body.style.overflow = "unset";
     }
   }, [formState]);
+
+  useEffect(() => {
+    if (isUploading) {
+      setText("처리중 ...");
+      return;
+    }
+
+    if (success) {
+      setText("등록 완료");
+      return;
+    }
+
+    setText("등록");
+  }, [isUploading, success]);
 
   const handleFormSubmit = async (data) => {
     // 이미지 url로 변경 & image와 detailImage 덮어쓰기
@@ -60,8 +75,8 @@ export default function RegistForm() {
 
           setSuccess(true);
           setTimeout(() => {
-            setSuccess(false);
-          }, 4000);
+            window.location.replace("/");
+          }, 2000);
         },
         onError: (error) => {
           console.error(error);
@@ -148,9 +163,9 @@ export default function RegistForm() {
             type="submit"
             color="primary"
             clickCallback={handleSubmit(handleFormSubmit)}
-            disabled={isUploading}
+            disabled={isUploading || success}
           >
-            {isUploading ? "처리중 ... " : "저장"}
+            {_text}
           </Button>
         </div>
       </FormProvider>

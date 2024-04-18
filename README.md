@@ -2,14 +2,12 @@
 > 내가 보던 영화의 대사를 가져온 것 뿐이다.
 
 ```
-✅ 모듈 제작하고 서버 데이터 업데이트 후 UI 업데이트하기
+✅ 자주 사용하는 공통 컴포넌트는 모듈로 분리
+✅ 서버 데이터를 변경하면 UI 업데이트
 
 - 제작기간: 2024.01.08 ~ 2024.02.22
 - 구현환경: React, TailwindCSS, firebase, cloudinary
 - 배포방법: Netlify
-- 특징
-  - 모듈 제작
-  - 서버 데이터 업데이트 후 UI 업데이트
 ```
 
 [💚 super-super-glue 💚](https://super-super-glue.netlify.app)
@@ -143,57 +141,32 @@ https://github.com/DuetoPark/super-super-glue/assets/69448900/580b3642-94e0-4ac0
 
 ## 🚀 특징
 
-### 모듈 제작
-
-- 컴포넌트 제작
-  - Button, Input, Badge처럼 **범용 요소는 컴포넌트**로 제작
-  - modules 폴더로 관리
-- 스타일
-  - 모듈 컴포넌트의 props 값은 style, size, color, rounded 스타일로 반영
-  - 모듈 스타일은 scss의 mixin으로 관리
-  - color, typography와 관련된 상수는 CSS 변수로 관리
-
-### 서버 데이터 업데이트 후 UI 업데이트
-
-- **useMutation 사용해 서버 데이터 CRUD 후 queryKey에 데이터 캐싱**
-- **invalidateQueries에 의해 queryKey에 캐싱된 데이터에 변동이 감지되면 UI 업데이트**
-- ex. product 추가, cart 추가/수정/삭제
+- **모듈 제작**
+  - **범용 요소는 컴포넌트**로 제작 (Button, Input, Badge, …)
+  - modules 폴더에 관리
+  - **SCSS의 mixin**으로 모듈 스타일을 관리
+  - SCSS의 변수에 디자인 가이드 관련된 상수 설정하여 관리 (color, typo, …)
+- 서버 데이터 업데이트 후 UI 업데이트
+  - **useMutation** 사용해 **서버 데이터 CRUD 후 queryKey에 데이터 캐싱**
+  - **invalidateQueries**에 의해 **queryKey에 캐싱된 데이터에 변동이 감지되면 UI 업데이트**
+  - ex. product 추가, cart 추가/수정/삭제
 
 <br/>
 
 ## 🌎 기능
 
-```
-✅ 로그인
-✅ 리다이렉트
-✅ 장바구니 추가/수정/삭제
-✅ 상품등록
-```
-
 - 로그인
-  - firebase google auth를 이용해 로그인 구현
-  - 모바일은 signInWithRedirect를 사용해 액세시 차단 에러 수정
-    - 데스크탑: popup 로그인
-    - 모바일: redirect 로그인
-- 리다이렉트
-  - **커스텀 훅 useAuthContext**
-    - **state를 제공하여 회원 정보를 컴포넌트간에 공유**
-  - `<ProtectPage> 컴포넌트`
-    - useAuthContext의 userInfo state를 사용해 로그인 상태와 회원등급을 구분
-    - return 페이지를 설정
+  - **firebase google auth** 이용
+  - 회원정보를 공유하기위해 커스텀 훅 useAuthContext를 제작
+  - 회원등급에 따라 페이지 진입하면 **redirect**
 - 장바구니
-  - 데이터 캐싱
-    - **커스텀 훅 useCart 제작하여 queryKey ‘cart’에 데이터 캐싱**
-    - **cart의 데이터에 변동을 감지하면 장바구니 메뉴 UI 업데이트**
-- 상품 등록
-  - 데이터 캐싱
-    - **커스텀 훅 useProduct 제작하여 queryKey ‘product’에 데이터 캐싱**
-    - **product의 데이터에 변동을 감지하면 상품 리스트 UI 업데이트**
-  - 유효성 검사
-    - `react-hook-form`을 사용하여 string 데이터의 유효성 검사 진행
-    - `DataTransfer`를 사용하여 file 데이터의 유효성 검사 진행
-  - 데이터 저장
-    - Cloudinary에 file 저장하고 획득한 url을 사용해 Firebase realtime database에 상품 데이터 저장
+  - **useMutation** 사용해 **cart의 데이터를 변경하면 UI 업데이트**
+  - 카트 추가/수정/삭제 기능을 담은 커스텀 훅 useCart를 제작
+- 상품 등록/삭제
+  - **useMutation** 사용해 product**의 데이터를 변경하면 UI 업데이트**
+  - **react-hook-form**을 사용하여 string 데이터의 유효성 검사 진행
+  - **DataTransfer**를 사용하여 file 데이터의 유효성 검사 진행
+  - submit 전에 **file을 Cloudinary에 저장**하고 url을 획득
 
 <br/>
 

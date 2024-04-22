@@ -16,7 +16,7 @@ const errorMsg = (error) => {
   return null;
 };
 
-export const noData = (snapshot) => {
+const noData = (snapshot) => {
   return !snapshot.exists();
 };
 

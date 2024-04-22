@@ -3,7 +3,7 @@ import {
   getAllProducts,
   registProduct,
   removeProduct as removeItem,
-} from "../api/firebase";
+} from "../api/product";
 
 export default function useProducts() {
   const queryClient = useQueryClient();

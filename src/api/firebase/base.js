@@ -11,17 +11,25 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const database = getDatabase(app);
 
-const errorMsg = (error) => {
-  alert(`(${error.code}) ${error.message}`);
-  return null;
-};
-
 const noData = (snapshot) => {
   return !snapshot.exists();
 };
 
+const getRef = (dataPath) => {
+  if (dataPath) {
+    return ref(database, dataPath);
+  }
+
+  return ref(database);
+};
+
+export const errorMsg = (error) => {
+  alert(`(${error.code}) ${error.message}`);
+  return null;
+};
+
 export const getData = (dataPath) => {
-  return get(ref(database, dataPath))
+  return get(getRef(dataPath))
     .then((snapshot) => {
       if (noData(snapshot)) {
         return null;

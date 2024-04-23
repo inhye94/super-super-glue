@@ -7,7 +7,7 @@ export const getCart = (userId) => {
         return Object.values(data.val());
       }
 
-      return {};
+      return null;
     });
 };
 

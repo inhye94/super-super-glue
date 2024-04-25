@@ -4,20 +4,15 @@ import ContentWrapper from "../components/wrapper/ContentWrapper";
 import Button from "../modules/components/button/Button";
 import useCart from "../hooks/useCart";
 import CartCard from "../components/cart/CartCard";
-
-const _delivery = 5000;
+import { getTotalPrice } from "../utils/price";
+import { DELIVERY } from "../constants/price";
 
 export default function Cart() {
   const {
     cartQuery: { data: cart, isLoading },
   } = useCart();
 
-  const _totalPrice =
-    cart &&
-    cart.reduce((acc, cur) => {
-      const price = cur.price === "무료" ? 0 : cur.price;
-      return acc + price * cur.quantity;
-    }, 0);
+  const _totalPrice = cart && getTotalPrice(cart);
 
   if (isLoading) return <Spinner text="장바구니 데이터를 불러오고 있습니다!" />;
 
@@ -58,7 +53,7 @@ export default function Cart() {
               </div>
               <div>
                 <dt>총 배송비</dt>
-                <dd>+ {_delivery.toLocaleString()}원</dd>
+                <dd>+ {DELIVERY.toLocaleString()}원</dd>
               </div>
               <div>
                 <dt>총 할인금액</dt>
@@ -67,14 +62,14 @@ export default function Cart() {
               <div className="text-dark font-bold">
                 <dt>결제금액</dt>
                 <dd className="text-[24px]">
-                  {(_totalPrice + _delivery).toLocaleString()}원
+                  {(_totalPrice + DELIVERY).toLocaleString()}원
                 </dd>
               </div>
             </dl>
 
             <div className="flex items-center gap-[8px]">
               <p className="shrink-0 text-dark text-[16px] font-semibold md:hidden">
-                {(_totalPrice + _delivery).toLocaleString()}원
+                {(_totalPrice + DELIVERY).toLocaleString()}원
               </p>
               <Button>바로구매</Button>
             </div>

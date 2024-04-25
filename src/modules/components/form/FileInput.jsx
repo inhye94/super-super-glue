@@ -4,45 +4,52 @@ import "./form.scss";
 import InputError from "./InputError";
 import { LuUpload } from "react-icons/lu";
 import { useFormContext } from "react-hook-form";
-import {
-  findInputError,
-  isFormInvalid,
-  transferFileToImageSrc,
-} from "../../../api/form";
-import { AnimatePresence } from "framer-motion";
+import { findInputError, isFormInvalid } from "../../../api/form";
+import { mergeFileList, transferFileToImageSrc } from "../../../api/file";
 
+import { AnimatePresence } from "framer-motion";
+import { getLimitSize } from "../../../utils/file";
+
+// NOTE: e.target의 file을 변경
 export default function FileInput({
   name,
   id,
   label,
-  limitSize,
+  limitSize = 10,
   limitCount = 1,
   validation,
-  changeCallback,
 }) {
   const {
     register,
     formState: { errors },
   } = useFormContext();
 
-  const [preview, setPreview] = useState();
+  const [preview, setPreview] = useState(null);
+  const [savedData, setSavedData] = useState(new DataTransfer());
 
   const _inputError = findInputError(errors, id);
   const _isInvalid = isFormInvalid(_inputError);
 
-  const handleFile = (e) => {
-    const [_newDataTransfer, _savedDataTrasfer] = changeCallback(
-      e,
-      limitCount,
-      limitSize
-    );
+  const handleFileChange = (e) => {
+    const selectedFiles = e.target.files;
+    let mergedData = null;
 
-    if (_newDataTransfer) {
-      setPreview((prev) => transferFileToImageSrc(_newDataTransfer));
-      e.target.files = _newDataTransfer.files;
-    } else {
-      e.target.files = _savedDataTrasfer.files;
+    if (selectedFiles && selectedFiles.length) {
+      mergedData = mergeFileList({
+        savedData,
+        selectedFiles,
+        limitCount,
+        limitSize,
+      });
+
+      setSavedData(mergedData);
     }
+
+    if (mergedData) {
+      setPreview((prev) => transferFileToImageSrc(mergedData));
+    }
+
+    e.target.files = mergedData ? mergedData.files : savedData.files;
   };
 
   return (
@@ -64,11 +71,8 @@ export default function FileInput({
         <span>
           .png, .jpeg, .jpg, .gif 파일만 등록 가능하며,
           <br />
-          최대 {limitCount ? limitCount : 1}장까지 등록할 수 있습니다. (최대
-          {limitSize < 1000
-            ? `${limitSize}MB`
-            : `${Math.floor(limitSize / 1000)}GB`}
-          )
+          최대 {limitCount}장까지 등록할 수 있습니다. (최대
+          {getLimitSize(limitSize)})
         </span>
       </label>
 
@@ -78,7 +82,7 @@ export default function FileInput({
         className="visually-hidden"
         accept="image/png, image/jpeg, image/jpg, image/gif"
         multiple={limitCount > 1 ? true : false}
-        {...register(name, { ...validation, onChange: handleFile })}
+        {...register(name, { ...validation, onChange: handleFileChange })}
       />
 
       {preview && (

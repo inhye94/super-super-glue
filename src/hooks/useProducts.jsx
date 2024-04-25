@@ -3,7 +3,7 @@ import {
   getAllProducts,
   registProduct,
   removeProduct as removeItem,
-} from "../api/firebase";
+} from "../api/product";
 
 export default function useProducts() {
   const queryClient = useQueryClient();
@@ -16,14 +16,15 @@ export default function useProducts() {
   });
 
   const addProduct = useMutation({
-    mutationFn: ({ userID, data, image, detailImage }) =>
-      registProduct(userID, data, image, detailImage),
+    mutationFn: ({ userID, data }) => registProduct(userID, data),
     onSuccess: () => queryClient.invalidateQueries(["productAll"]),
+    onError: (error) => console.error(error),
   });
 
   const removeProduct = useMutation({
     mutationFn: ({ userID, productId }) => removeItem(userID, productId),
     onSuccess: () => queryClient.invalidateQueries(["productAll"]),
+    onError: (error) => console.error(error),
   });
 
   return { productsQuery, addProduct, removeProduct };

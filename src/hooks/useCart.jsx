@@ -3,7 +3,7 @@ import {
   getCart,
   removeCartItem as fetchRemove,
   updateCart as fetchUpdate,
-} from "../api/firebase";
+} from "../api/cart";
 import { useAuthContext } from "../context/AuthContext";
 
 export default function useCart() {

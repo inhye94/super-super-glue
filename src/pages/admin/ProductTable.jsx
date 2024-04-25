@@ -1,7 +1,7 @@
 import React from "react";
 import { useAuthContext } from "../../context/AuthContext";
 import { useQuery } from "@tanstack/react-query";
-import { getUserProduct } from "../../api/firebase";
+import { getUserProduct } from "../../api/product";
 import ContentWrapper from "../../components/wrapper/ContentWrapper";
 import { Link } from "react-router-dom";
 import Spinner from "../../components/Spinner";

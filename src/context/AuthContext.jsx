@@ -4,7 +4,7 @@ import {
   loginByDesktop,
   loginByMobile,
   logout,
-} from "../api/firebase";
+} from "../api/auth";
 
 const AuthContext = createContext();
 

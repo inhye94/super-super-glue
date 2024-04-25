@@ -12,8 +12,7 @@ import {
 } from "../../utils/validations.js";
 import ContentWrapper from "../../components/wrapper/ContentWrapper";
 import { useAuthContext } from "../../context/AuthContext";
-import { uploadFile } from "../../api/uploadFile";
-import { mergeFileList } from "../../api/form";
+import { uploadFile } from "../../api/file";
 import Spinner from "../../components/Spinner";
 import Toast from "../../components/Toast";
 import useProducts from "../../hooks/useProducts";
@@ -21,7 +20,6 @@ import useProducts from "../../hooks/useProducts";
 export default function RegistForm() {
   const { userInfo } = useAuthContext();
 
-  const [files, setFiles] = useState({ ...initFiles });
   const [isUploading, setIsUploading] = useState(false);
   const [success, setSuccess] = useState();
   const [_id, setId] = useState(null);
@@ -44,22 +42,18 @@ export default function RegistForm() {
   }, [formState]);
 
   const handleFormSubmit = async (data) => {
-    // 이미지 url로 변경
+    // 이미지 url로 변경 & image와 detailImage 덮어쓰기
     const image = await Promise.all(
-      [...files.image.datatransfer.files].map(
-        async (file) => await uploadFile(file)
-      )
+      [...data.image].map(async (file) => await uploadFile(file))
     );
 
     const detailImage = await Promise.all(
-      [...files.detailImage.datatransfer.files].map(
-        async (file) => await uploadFile(file)
-      )
+      [...data.detailImage].map(async (file) => await uploadFile(file))
     );
 
     // 데이터 저장
     await mutate(
-      { userID: userInfo.uid, data, image, detailImage },
+      { userID: userInfo.uid, data: { ...data, image, detailImage } },
       {
         onSuccess: (result) => {
           setId(result);
@@ -69,30 +63,11 @@ export default function RegistForm() {
             setSuccess(false);
           }, 4000);
         },
+        onError: (error) => {
+          console.error(error);
+        },
       }
     );
-  };
-
-  const handleFiles = (e, limitCount, limitSize) => {
-    const { name, files: _selectedFiles } = e.target;
-    const _savedDataTrasfer = files[name].datatransfer;
-
-    let _newDataTransfer = null;
-
-    if (_selectedFiles && _selectedFiles.length) {
-      _newDataTransfer = mergeFileList({
-        _savedDataTrasfer,
-        _selectedFiles,
-        limitCount,
-        limitSize,
-      });
-
-      files[name].datatransfer = _newDataTransfer;
-
-      setFiles((prev) => ({ ...files }));
-    }
-
-    return [_newDataTransfer, _savedDataTrasfer];
   };
 
   return (
@@ -106,7 +81,7 @@ export default function RegistForm() {
           onSubmit={(e) => e.preventDefault()}
           className="flex flex-col gap-y-[24px] p-[16px] bg-background rounded-md md:py-[32px]"
         >
-          <input type="hidden" name="id" value={_id} />
+          <input type="hidden" name="id" value={_id || ""} />
 
           <Input
             id="name"
@@ -147,9 +122,8 @@ export default function RegistForm() {
             name="image"
             label="대표 이미지"
             limitCount="5"
-            limitSize="10"
+            limitSize="1"
             validation={{ ...required_validation() }}
-            changeCallback={handleFiles}
           />
 
           <FileInput
@@ -159,7 +133,6 @@ export default function RegistForm() {
             limitCount="20"
             limitSize="2500"
             validation={{ ...required_validation() }}
-            changeCallback={handleFiles}
           />
 
           <Input
@@ -186,8 +159,3 @@ export default function RegistForm() {
     </ContentWrapper>
   );
 }
-
-const initFiles = {
-  image: { url: [], datatransfer: new DataTransfer() },
-  detailImage: { url: [], datatransfer: new DataTransfer() },
-};

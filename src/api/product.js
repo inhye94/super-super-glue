@@ -18,15 +18,13 @@ export const getUserProduct = (userId) => {
     .then((data) => data.val());
 };
 
-export const registProduct = async (userId, data, image, detailImage) => {
+export const registProduct = async (userId, data) => {
   const _path = `product/${userId}`;
   const id = data.id || push(child(ref(database), _path)).key;
 
   return updateData(`${_path}/${id}`, {
     ...data,
     id,
-    image,
-    detailImage,
   }).then(() => {
     return id;
   });

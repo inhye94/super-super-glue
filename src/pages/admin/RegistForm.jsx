@@ -26,7 +26,7 @@ export default function RegistForm() {
   const [_text, setText] = useState("저장");
 
   const methods = useForm();
-  const { handleSubmit, formState } = methods;
+  const { handleSubmit, formState, reset } = methods;
 
   const {
     addProduct: { mutate },
@@ -72,9 +72,10 @@ export default function RegistForm() {
       {
         onSuccess: (result) => {
           setId(result);
-
           setSuccess(true);
+
           setTimeout(() => {
+            reset();
             window.location.replace("/");
           }, 2000);
         },

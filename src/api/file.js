@@ -38,6 +38,32 @@ const getTotalFileSize = (filesOfDataTransfer) => {
   );
 };
 
+const isFileExist = (data) => {
+  return data && data.files.length > 0;
+};
+
+const transferFileToImageSrc = ({ files }) => {
+  return [...files].map((v) => URL.createObjectURL(v));
+};
+
+export const genFileImageSrc = (data) => {
+  if (isFileExist(data)) {
+    return transferFileToImageSrc(data);
+  }
+
+  return null;
+};
+
+export const genNewData = (data) => {
+  const newData = new DataTransfer();
+
+  for (let file of data.files) {
+    newData.items.add(file);
+  }
+
+  return newData;
+};
+
 export const mergeFileList = ({
   savedData,
   selectedFiles,
@@ -50,6 +76,7 @@ export const mergeFileList = ({
   const selectedFileSize = getTotalFileSize(selectedFiles);
   const selectedFileCount = selectedFiles.length;
 
+  // NOTE: 사용자에게 알림
   if (!isFileCountValid(savedFileCount + selectedFileCount, limitCount)) {
     alert(`파일은 ${limitCount}개까지 첨부할 수 있어요.`);
   } else {
@@ -58,7 +85,8 @@ export const mergeFileList = ({
     }
   }
 
-  const newData = savedData;
+  // NOTE: 병합된 새 데이터 반환 (이전 선택 + 지금 선택)
+  const newData = genNewData(savedData);
 
   Array.from(selectedFiles)
     .slice(0, limitCount - savedFileCount)
@@ -69,8 +97,4 @@ export const mergeFileList = ({
     .forEach((file) => newData.items.add(file));
 
   return newData;
-};
-
-export const transferFileToImageSrc = ({ files }) => {
-  return [...files].map((v) => URL.createObjectURL(v));
 };

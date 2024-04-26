@@ -69,11 +69,31 @@ $color-border: colors.$gray-light;
   margin-top: 16px;
   animation: 300ms ease-in-out 0s fadeIn;
 
-  img {
-    object-fit: cover;
+  .preview-card {
+    position: relative;
     border: 1px solid $color-border;
     border-radius: 16px;
     animation: 300ms ease-in-out 0s fadeIn;
+    overflow: hidden;
+  }
+
+  img {
+    object-fit: cover;
+    transition: filter 150ms ease-in-out;
+  }
+
+  .icon-button {
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &:hover {
+    img {
+      filter: brightness(70%);
+    }
   }
 }
 

@@ -9,7 +9,6 @@ export const uploadFile = async (file) => {
   return axios
     .post(process.env.REACT_APP_CLOUDINARY_URL, formdata)
     .then((response) => response.data)
-    .then((data) => data.url)
     .catch((error) => console.log("error", error));
 };
 

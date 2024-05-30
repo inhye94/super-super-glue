@@ -32,6 +32,7 @@ export default function RegistForm() {
     addProduct: { mutate },
   } = useProducts();
 
+  // NOTE: formState에 따라 isUploading 값 토글, body overflow 변경
   useEffect(() => {
     setIsUploading(formState.isSubmitting);
 
@@ -42,6 +43,7 @@ export default function RegistForm() {
     }
   }, [formState]);
 
+  // NOTE: isUploading과 success에 따라 text 변경
   useEffect(() => {
     if (isUploading) {
       setText("처리중 ...");

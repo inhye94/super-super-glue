@@ -1,14 +1,15 @@
 import classNames from "classnames";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./form.scss";
 import InputError from "./InputError";
-import { LuUpload } from "react-icons/lu";
+import IconButton from "../button/IconButton";
 import { useFormContext } from "react-hook-form";
 import { findInputError, isFormInvalid } from "../../../api/form";
-import { mergeFileList, transferFileToImageSrc } from "../../../api/file";
-
+import { mergeFileList, genNewData, genFileImageSrc } from "../../../api/file";
 import { AnimatePresence } from "framer-motion";
 import { getLimitSize } from "../../../utils/file";
+import { LuUpload } from "react-icons/lu";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
 // NOTE: e.target의 file을 변경
 export default function FileInput({
@@ -30,27 +31,31 @@ export default function FileInput({
   const _inputError = findInputError(errors, id);
   const _isInvalid = isFormInvalid(_inputError);
 
-  const handleFileChange = (e) => {
+  const updateFiles = (e) => {
     const selectedFiles = e.target.files;
-    let mergedData = null;
+    const mergedData = mergeFileList({
+      savedData,
+      selectedFiles,
+      limitCount,
+      limitSize,
+    });
 
-    if (selectedFiles && selectedFiles.length) {
-      mergedData = mergeFileList({
-        savedData,
-        selectedFiles,
-        limitCount,
-        limitSize,
-      });
-
-      setSavedData(mergedData);
-    }
-
-    if (mergedData) {
-      setPreview((prev) => transferFileToImageSrc(mergedData));
-    }
-
-    e.target.files = mergedData ? mergedData.files : savedData.files;
+    setSavedData(mergedData);
+    e.target.files = mergedData.files;
   };
+
+  const removeSelectedFile = (index) => {
+    setSavedData((prev) => {
+      prev.items.remove(index);
+
+      return genNewData(prev);
+    });
+  };
+
+  // Note: preview는 savedData에 의존
+  useEffect(() => {
+    setPreview((prev) => genFileImageSrc(savedData));
+  }, [savedData]);
 
   return (
     <div className={classNames("input-wrapper", "file", _isInvalid && "error")}>
@@ -82,13 +87,22 @@ export default function FileInput({
         className="visually-hidden"
         accept="image/png, image/jpeg, image/jpg, image/gif"
         multiple={limitCount > 1 ? true : false}
-        {...register(name, { ...validation, onChange: handleFileChange })}
+        {...register(name, { ...validation, onChange: updateFiles })}
       />
 
       {preview && (
         <div className="image-preview">
-          {preview.map((v) => (
-            <img key={v} src={v} alt="" />
+          {preview.map((v, i) => (
+            <div className="preview-card" key={v}>
+              <img src={v} alt="" />
+
+              <IconButton
+                icon={<IoIosCloseCircleOutline />}
+                text="파일 삭제"
+                color="orange"
+                callback={removeSelectedFile.bind(null, i)}
+              />
+            </div>
           ))}
         </div>
       )}

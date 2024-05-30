@@ -44,7 +44,7 @@ export default function CartCard({
       <div className="flex gap-[12px]">
         <img
           className="shrink-0 w-[80px] h-[80px] object-cover rounded-md"
-          src={image}
+          src={image.url}
           alt={`${name}의 썸네일`}
         />
 

@@ -76,7 +76,7 @@ export default function ProductDetail() {
         <div className="w-full aspect-square rounded-lg overflow-hidden md:w-7/12">
           <img
             className="w-full h-full object-contain"
-            src={image[0]}
+            src={image[0].url}
             alt={`${name}의 썸네일`}
           />
         </div>
@@ -142,14 +142,14 @@ export default function ProductDetail() {
 
         <ul className="flex flex-col gap-[8px] w-full max-w-[900px] mx-auto md:gap-[16px]">
           {image &&
-            image.map((url, i) => (
+            image.map(({ url }, i) => (
               <li key={i}>
                 <img src={url} alt={`대표 이미지 ${i + 1}`} />
               </li>
             ))}
 
           {detailImage &&
-            detailImage.map((url, i) => (
+            detailImage.map(({ url }, i) => (
               <li key={i}>
                 <img src={url} alt={`상세 이미지 ${i + 1}`} />
               </li>

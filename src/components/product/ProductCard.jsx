@@ -2,15 +2,22 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function ProductCard({
-  product: { image, name, price, category, id },
+  product: {
+    image: [{ url }],
+    name,
+    price,
+    category,
+    id,
+  },
   product,
 }) {
+  // console.log(url);
   return (
     <article className="group w-full h-full">
       <Link className="block w-full" to={`/product/${id}`} state={{ product }}>
         <div className="w-full aspect-square mb-[12px] rounded-lg overflow-hidden">
           <img
-            src={image[0]}
+            src={url}
             alt={`${name}의 썸네일`}
             className="w-full h-full object-cover transition-transform group-hover:scale-110"
           />

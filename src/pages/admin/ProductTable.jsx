@@ -23,9 +23,6 @@ export default function ProductTable() {
   } = useProducts();
 
   const handleRemoveProductItem = async (productId) => {
-    console.log(userInfo.uid);
-    console.log(productId);
-
     await mutate(
       { userID: userInfo.uid, productId },
       {
@@ -68,8 +65,8 @@ export default function ProductTable() {
                 {[...product.image, ...product.detailImage].map((v) => (
                   <img
                     className="md:max-w-[120px] aspect-square object-cover rounded-md"
-                    src={v}
-                    alt={`${product.image}의 이미지`}
+                    src={v.url}
+                    alt={`${product.name}의 이미지`}
                   />
                 ))}
               </div>

@@ -23,14 +23,16 @@ export default function RegistForm() {
   const [isUploading, setIsUploading] = useState(false);
   const [success, setSuccess] = useState();
   const [_id, setId] = useState(null);
+  const [_text, setText] = useState("저장");
 
   const methods = useForm();
-  const { handleSubmit, formState } = methods;
+  const { handleSubmit, formState, reset } = methods;
 
   const {
     addProduct: { mutate },
   } = useProducts();
 
+  // NOTE: formState에 따라 isUploading 값 토글, body overflow 변경
   useEffect(() => {
     setIsUploading(formState.isSubmitting);
 
@@ -40,6 +42,21 @@ export default function RegistForm() {
       document.body.style.overflow = "unset";
     }
   }, [formState]);
+
+  // NOTE: isUploading과 success에 따라 text 변경
+  useEffect(() => {
+    if (isUploading) {
+      setText("처리중 ...");
+      return;
+    }
+
+    if (success) {
+      setText("등록 완료");
+      return;
+    }
+
+    setText("등록");
+  }, [isUploading, success]);
 
   const handleFormSubmit = async (data) => {
     // 이미지 url로 변경 & image와 detailImage 덮어쓰기
@@ -57,11 +74,12 @@ export default function RegistForm() {
       {
         onSuccess: (result) => {
           setId(result);
-
           setSuccess(true);
+
           setTimeout(() => {
-            setSuccess(false);
-          }, 4000);
+            reset();
+            window.location.replace("/");
+          }, 2000);
         },
         onError: (error) => {
           console.error(error);
@@ -148,9 +166,9 @@ export default function RegistForm() {
             type="submit"
             color="primary"
             clickCallback={handleSubmit(handleFormSubmit)}
-            disabled={isUploading}
+            disabled={isUploading || success}
           >
-            {isUploading ? "처리중 ... " : "저장"}
+            {_text}
           </Button>
         </div>
       </FormProvider>

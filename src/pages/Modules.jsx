@@ -1,9 +1,9 @@
 import React from "react";
-import Button from "../modules/components/button/Button";
-import IconButton from "../modules/components/button/IconButton";
-import Badge from "../modules/components/badge/Badge";
-import Input from "../modules/components/form/Input";
-import FileInput from "../modules/components/form/FileInput";
+import Button from "../shared/modules/button/Button";
+import IconButton from "../shared/modules/button/IconButton";
+import Badge from "../shared/modules/badge/Badge";
+import Input from "../shared/modules/form/Input";
+import FileInput from "../shared/modules/form/FileInput";
 import { FiAlertCircle } from "react-icons/fi";
 import { FormProvider, useForm } from "react-hook-form";
 import {
@@ -13,7 +13,7 @@ import {
   kr_en_validation,
   special_validation,
   only_kr_validation,
-} from "../utils/validations";
+} from "../shared/utils/validations";
 import ContentWrapper from "../components/wrapper/ContentWrapper";
 
 export default function Modules() {

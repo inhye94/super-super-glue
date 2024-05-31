@@ -7,7 +7,7 @@ import { useFormContext } from "react-hook-form";
 import { findInputError, isFormInvalid } from "../../../api/form";
 import { mergeFileList, genNewData, genFileImageSrc } from "../../../api/file";
 import { AnimatePresence } from "framer-motion";
-import { getLimitSize } from "../../../utils/file";
+import { getLimitSize } from "../../utils/file";
 import { LuUpload } from "react-icons/lu";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 

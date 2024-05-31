@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import IconButton from "../../modules/components/button/IconButton";
+import IconButton from "../../shared/modules/button/IconButton";
 import { PiPlusCircle, PiMinusCircle } from "react-icons/pi";
 import { IoMdClose } from "react-icons/io";
 import Toast from "../Toast";

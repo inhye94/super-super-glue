@@ -1,5 +1,5 @@
-@use "../../constants/colors";
-@use "../../mixins/text-style.scss" as text;
+@use "../../styles/constants/colors";
+@use "../../styles/mixins/text-style.scss" as text;
 
 @mixin matchColorAndStyle($color, $style) {
   @if ($color == "primary") {

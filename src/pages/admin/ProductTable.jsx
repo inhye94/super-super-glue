@@ -5,8 +5,7 @@ import { getUserProduct } from "../../api/product";
 import ContentWrapper from "../../components/wrapper/ContentWrapper";
 import { Link } from "react-router-dom";
 import Spinner from "../../components/Spinner";
-import Button from "../../modules/components/button/Button";
-import useProducts from "../../hooks/useProducts";
+import MyProductCard from "../../components/admin/MyProductCard/MyProductCard";
 
 export default function ProductTable() {
   const { userInfo } = useAuthContext();
@@ -17,21 +16,6 @@ export default function ProductTable() {
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 1,
   });
-
-  const {
-    removeProduct: { mutate },
-  } = useProducts();
-
-  const handleRemoveProductItem = async (productId) => {
-    await mutate(
-      { userID: userInfo.uid, productId },
-      {
-        onSuccess: (result) => {
-          console.log("제거!");
-        },
-      }
-    );
-  };
 
   if (isLoading) return <Spinner text="등록 상품 정보를 불러오는 중입니다!" />;
 
@@ -44,32 +28,7 @@ export default function ProductTable() {
               key={product.id}
               className="p-[16px] bg-gray-light bg-opacity-55 rounded-md"
             >
-              <div className="flex flex-col gap-[16px] md:flex-row">
-                <p className="max-w-[540px] font-bold">{product.name}</p>
-                <p>{product.price}</p>
-                <p>{product.category}</p>
-                <p>{product.option.join(",")}</p>
-                <p>{product.description}</p>
-
-                <Button color="secondary">수정</Button>
-                <Button
-                  color="secondary"
-                  buttonStyle="outlined"
-                  clickCallback={handleRemoveProductItem.bind(null, product.id)}
-                >
-                  삭제
-                </Button>
-              </div>
-
-              <div className="flex flex-col flex-wrap gap-[16px] mt-[12px] md:flex-row">
-                {[...product.image, ...product.detailImage].map((v) => (
-                  <img
-                    className="md:max-w-[120px] aspect-square object-cover rounded-md"
-                    src={v.url}
-                    alt={`${product.name}의 이미지`}
-                  />
-                ))}
-              </div>
+              <MyProductCard product={product} />
             </li>
           ))}
         </ul>

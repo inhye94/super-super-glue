@@ -1,0 +1,47 @@
+// NOTE: object-fit
+@mixin object-fit($fit: cover, $position: center) {
+  width: 100%;
+  height: 100%;
+  object-fit: $fit;
+  object-position: $position;
+
+  // fit
+  @if ($fit == "cover") {
+    object-fit: cover;
+  }
+
+  @if ($fit == "contain") {
+    object-fit: contain;
+  }
+
+  @if ($fit == "fill") {
+    object-fit: fill;
+  }
+
+  // position
+  @if ($position == "center") {
+    object-position: center;
+  }
+}
+
+// NOTE: aspect-ratio
+@mixin aspect-ratio($ratio: "square") {
+  width: 100%;
+  aspect-ratio: $ratio;
+
+  @if ($ratio == "square") {
+    aspect-ratio: 1 / 1;
+  }
+
+  @if ($ratio == "photo") {
+    aspect-ratio: 3 / 2;
+  }
+
+  @if ($ratio == "video") {
+    aspect-ratio: 4 / 3;
+  }
+
+  @if ($ratio == "wide") {
+    aspect-ratio: 16 / 9;
+  }
+}

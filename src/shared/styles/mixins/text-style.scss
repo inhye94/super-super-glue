@@ -1,5 +1,8 @@
 @use "../constants/typograhpy" as font;
 
+/**
+* size: 10/12/14/16/18/20/24/28/36
+*/
 @mixin text-style-10() {
   font-size: font.$font-size-10;
   line-height: font.$line-height-10;

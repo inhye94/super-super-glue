@@ -1,0 +1,88 @@
+@use "../../../shared/styles/constants/colors";
+@use "../../../shared/styles/mixins/text-style.scss" as text;
+@use "../../../shared/styles/mixins/flexbox.scss" as flexbox;
+@use "../../../shared/styles/mixins/sizing.scss" as sizing;
+@use "../../../shared/styles/mixins/responsive.scss" as screen;
+
+.card {
+  @include flexbox.column-flexbox();
+  @include flexbox.gap(12px, 12px);
+
+  @include screen.tablet {
+    @include flexbox.flexbox();
+  }
+}
+
+.image-box {
+  @include flexbox.no-resize();
+  @include sizing.aspect-ratio();
+  order: 1;
+  border-radius: 8px;
+  overflow: hidden;
+
+  @include screen.tablet {
+    max-width: 120px;
+  }
+}
+
+.image-box img {
+  @include sizing.object-fit();
+}
+
+.text-box {
+  order: 2;
+}
+
+.title {
+  @include text.text-style(20);
+  margin-bottom: 12px;
+  font-weight: 700;
+  color: colors.$primary;
+
+  @include screen.tablet {
+    margin-bottom: 6px;
+  }
+}
+
+.desc {
+  @include flexbox.inline-flexbox();
+  @include flexbox.flex-wrap(wrap);
+  @include flexbox.gap(4px);
+  @include text.text-style(14);
+  color: colors.$tertiary;
+}
+
+.desc dt {
+  margin-right: 4px;
+  font-weight: 500;
+  color: colors.$secondary;
+}
+
+.desc dt:not(:first-child)::before {
+  content: "|";
+  margin: 0 4px;
+  font-weight: 400;
+  color: colors.$gray-dark;
+}
+
+.desc dd {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.button-box {
+  @include flexbox.no-resize();
+  @include flexbox.flexbox();
+  @include flexbox.gap(4px, 4px);
+  order: 3;
+  width: 100%;
+  min-width: 120px;
+
+  @include screen.tablet {
+    @include flexbox.column-flexbox();
+    max-width: 120px;
+    margin-left: auto;
+  }
+}

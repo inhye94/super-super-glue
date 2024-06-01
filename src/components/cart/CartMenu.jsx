@@ -12,11 +12,12 @@ export default function CartMenu() {
     <IconButton
       tag="link"
       url="/cart"
-      icon={<LuShoppingCart aria-hidden="true" />}
       text="장바구니"
       size="medium"
       color="secondary"
       count={cart && cart.length}
-    />
+    >
+      <LuShoppingCart aria-hidden="true" />
+    </IconButton>
   );
 }

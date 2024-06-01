@@ -62,20 +62,22 @@ export default function CartCard({
         <div className="shrink-0 inline-flex items-center">
           <IconButton
             text="수량 빼기"
-            icon={<PiMinusCircle aria-hidden />}
             value={-1}
             disabled={quantity === 1}
             callback={handleUpdateQuantity}
-          />
+          >
+            <PiMinusCircle aria-hidden />
+          </IconButton>
 
           <p className="w-[24px] text-center text-dark font-bold">{quantity}</p>
 
           <IconButton
             text="수량 더하기"
-            icon={<PiPlusCircle aria-hidden />}
             value={1}
             callback={handleUpdateQuantity}
-          />
+          >
+            <PiPlusCircle aria-hidden />
+          </IconButton>
         </div>
       </div>
 
@@ -87,9 +89,10 @@ export default function CartCard({
         <IconButton
           text="장바구니에서 삭제"
           size="medium"
-          icon={<IoMdClose aria-hidden />}
           callback={handleRemoveCartItem}
-        />
+        >
+          <IoMdClose aria-hidden />
+        </IconButton>
       </div>
     </article>
   );

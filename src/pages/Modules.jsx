@@ -94,62 +94,77 @@ function ButtonSection() {
       </FlexBox>
 
       <FlexBox subtitle="icon-button | color">
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" color="black" />
+        <IconButton text="버튼이에용" color="black">
+          <FiAlertCircle />
+        </IconButton>
 
-        <IconButton
-          icon={<FiAlertCircle />}
-          text="버튼이에용"
-          color="primary"
-        />
+        <IconButton text="버튼이에용" color="primary">
+          <FiAlertCircle />
+        </IconButton>
 
-        <IconButton
-          icon={<FiAlertCircle />}
-          text="버튼이에용"
-          color="secondary"
-        />
+        <IconButton text="버튼이에용" color="secondary">
+          <FiAlertCircle />
+        </IconButton>
 
-        <IconButton
-          icon={<FiAlertCircle />}
-          text="버튼이에용"
-          color="tertiary"
-        />
+        <IconButton text="버튼이에용" color="tertiary">
+          <FiAlertCircle />
+        </IconButton>
 
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" color="orange" />
+        <IconButton text="버튼이에용" color="orange">
+          <FiAlertCircle />
+        </IconButton>
 
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" color="yellow" />
+        <IconButton text="버튼이에용" color="yellow">
+          <FiAlertCircle />
+        </IconButton>
 
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" color="green" />
+        <IconButton text="버튼이에용" color="green">
+          <FiAlertCircle />
+        </IconButton>
 
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" color="pink" />
+        <IconButton text="버튼이에용" color="pink">
+          <FiAlertCircle />
+        </IconButton>
       </FlexBox>
 
       <FlexBox subtitle="icon-button | type">
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" />
+        <IconButton text="버튼이에용">
+          <FiAlertCircle />
+        </IconButton>
 
-        <IconButton
-          icon={<FiAlertCircle />}
-          text="링크에용"
-          tag="link"
-          url="/"
-        />
+        <IconButton text="링크에용" tag="link" url="/">
+          <FiAlertCircle />
+        </IconButton>
       </FlexBox>
 
       <FlexBox subtitle="icon-button | size">
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" />
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" size="medium" />
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" size="small" />
+        <IconButton text="버튼이에용">
+          <FiAlertCircle />
+        </IconButton>
+        <IconButton text="버튼이에용" size="medium">
+          <FiAlertCircle />
+        </IconButton>
+        <IconButton text="버튼이에용" size="small">
+          <FiAlertCircle />
+        </IconButton>
       </FlexBox>
 
       <FlexBox subtitle="icon-button | active">
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" count={0} />
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" count={1} />
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" count={10} />
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" count={100} />
-        <IconButton
-          icon={<FiAlertCircle />}
-          text="버튼이에용"
-          count={100 + "+"}
-        />
+        <IconButton text="버튼이에용" count={0}>
+          <FiAlertCircle />
+        </IconButton>
+        <IconButton text="버튼이에용" count={1}>
+          <FiAlertCircle />
+        </IconButton>
+        <IconButton text="버튼이에용" count={10}>
+          <FiAlertCircle />
+        </IconButton>
+        <IconButton text="버튼이에용" count={100}>
+          <FiAlertCircle />
+        </IconButton>
+        <IconButton text="버튼이에용" count={100 + "+"}>
+          <FiAlertCircle />
+        </IconButton>
       </FlexBox>
     </SectionWrapper>
   );

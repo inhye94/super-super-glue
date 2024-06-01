@@ -3,7 +3,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function IconButton({
-  icon,
   text,
   url,
   color = "primary",
@@ -13,6 +12,7 @@ export default function IconButton({
   value,
   disabled,
   callback,
+  children,
 }) {
   if (tag === "button") {
     return (
@@ -24,7 +24,7 @@ export default function IconButton({
         onClick={callback}
         disabled={disabled}
       >
-        {icon}
+        {children}
         {count ? <span>{count}</span> : ""}
       </button>
     );
@@ -40,7 +40,7 @@ export default function IconButton({
         onClick={callback}
         disabled={disabled}
       >
-        {icon}
+        {children}
         {count ? <span>{count}</span> : ""}
       </Link>
     );

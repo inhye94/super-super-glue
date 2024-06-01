@@ -94,11 +94,12 @@ export default function Gnb() {
                     <IconButton
                       tag="link"
                       url={path}
-                      icon={icon}
                       text={text}
                       size="medium"
                       color="secondary"
-                    />
+                    >
+                      {icon}
+                    </IconButton>
                   </li>
                 );
               })}

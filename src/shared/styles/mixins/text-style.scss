@@ -1,8 +1,15 @@
 @use "../constants/typograhpy" as font;
 
 /**
-* size: 10/12/14/16/18/20/24/28/36
+text-style
+@param {number} $size 10/12/14/16/18/20/24/28/36
 */
+
+/**
+line-clamp
+@param {number} $line
+*/
+
 @mixin text-style-10() {
   font-size: font.$font-size-10;
   line-height: font.$line-height-10;
@@ -57,6 +64,8 @@
   letter-spacing: font.$letter-spacing-36;
 }
 
+//////////////////////////////////////////
+
 @mixin text-style($size) {
   @if ($size == 10) {
     @include text-style-10;
@@ -93,4 +102,13 @@
   @if ($size == 36) {
     @include text-style-36;
   }
+}
+
+//////////////////////////////////////////
+
+@mixin line-clamp($line) {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
 }

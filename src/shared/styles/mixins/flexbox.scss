@@ -1,3 +1,42 @@
+/**
+flexbox
+@param {string} $justify (start)/center/end/between/around
+@param {string} $align (start)/center/end/between/around
+*/
+
+/**
+column-flexbox
+@param {string} $justify (start)/center/end/between/around
+@param {string} $align (start)/center/end/between/around
+*/
+
+/**
+inline-flexbox
+@param {string} $justify (start)/center/end/between/around
+@param {string} $align (start)/center/end/between/around
+*/
+
+/**
+gap
+@param {number} $rowGap (0)
+@param {number} $columnGap (0)
+*/
+
+/**
+no-shrink()
+no-grow()
+no-resize()
+
+resize
+@param {number} $growSize (1)
+@param {number} $shrinkSize (1)
+*/
+
+/**
+flex-wrap($wrap)
+@param {string} $wrap (wrap)/no/reverse
+*/
+
 // NOTE: row flexbox
 @mixin flexbox($justify: "start", $align: "start") {
   display: flex;
@@ -96,7 +135,7 @@
 //////////////////////////////////////////
 
 // NOTE: flex-wrap
-@mixin flex-wrap($wrap) {
+@mixin flex-wrap($wrap: "wrap") {
   @if ($wrap == "wrap") {
     flex-wrap: wrap;
   }

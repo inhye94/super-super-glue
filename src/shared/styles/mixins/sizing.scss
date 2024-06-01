@@ -1,3 +1,14 @@
+/**
+object-fit
+@param {string} $fit cover/contain/fill
+@param {string | px | %} $position
+*/
+
+/**
+aspect-ratio
+@param {string} $ratio square/photo/video/wide
+*/
+
 // NOTE: object-fit
 @mixin object-fit($fit: cover, $position: center) {
   width: 100%;

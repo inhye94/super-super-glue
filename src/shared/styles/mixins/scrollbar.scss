@@ -1,3 +1,11 @@
+/**
+no-scrollbar
+
+scrollbar($axis, $backgroundColor)
+@param {string} $axis x/y
+@param {string} $backgroundColor 스크롤바 색상
+*/
+
 @mixin no-scrollbar() {
   &::-webkit-scrollbar {
     display: none !important;

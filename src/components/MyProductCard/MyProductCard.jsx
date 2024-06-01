@@ -1,7 +1,7 @@
 import React from "react";
-import Button from "../../../shared/modules/button/Button";
-import useProducts from "../../../hooks/useProducts";
-import { useAuthContext } from "../../../context/AuthContext";
+import Button from "../../shared/modules/button/Button";
+import useProducts from "../../hooks/useProducts";
+import { useAuthContext } from "../../context/AuthContext";
 import styles from "./MyProductCard.module.scss";
 
 export default function MyProductCard({ product }) {

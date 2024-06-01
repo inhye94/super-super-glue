@@ -5,7 +5,7 @@ import { getUserProduct } from "../../api/product";
 import ContentWrapper from "../../components/wrapper/ContentWrapper";
 import { Link } from "react-router-dom";
 import Spinner from "../../components/Spinner";
-import MyProductCard from "../../components/admin/MyProductCard/MyProductCard";
+import MyProductCard from "../../components/MyProductCard/MyProductCard";
 
 export default function ProductTable() {
   const { userInfo } = useAuthContext();

@@ -1,8 +1,8 @@
-@use "../../../shared/styles/constants/colors";
-@use "../../../shared/styles/mixins/text-style.scss" as text;
-@use "../../../shared/styles/mixins/flexbox.scss" as flexbox;
-@use "../../../shared/styles/mixins/sizing.scss" as sizing;
-@use "../../../shared/styles/mixins/responsive.scss" as screen;
+@use "../../shared/styles/constants/colors";
+@use "../../shared/styles/mixins/text-style.scss" as text;
+@use "../../shared/styles/mixins/flexbox.scss" as flexbox;
+@use "../../shared/styles/mixins/sizing.scss" as sizing;
+@use "../../shared/styles/mixins/responsive.scss" as screen;
 
 .card {
   @include flexbox.column-flexbox();

@@ -1,9 +1,8 @@
-@use "../../shared/styles/mixins/flexbox.scss";
-@use "../../shared/styles/mixins/responsive.scss" as screen;
+@use "../../shared/styles/main.scss" as *;
 
 .list {
-  @include flexbox.flexbox();
-  @include flexbox.flex-wrap();
+  @include flexbox();
+  @include flex-wrap();
   margin: 0 -4px;
 }
 
@@ -11,7 +10,7 @@
   width: 50%;
   padding: 4px;
 
-  @include screen.tablet {
+  @include screen-tablet {
     width: 25%;
     padding: 8px;
   }

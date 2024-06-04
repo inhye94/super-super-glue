@@ -1,8 +1,7 @@
-@use "../../styles/constants/colors";
-@use "../../styles/mixins/text-style.scss" as text;
+@use "../../styles/main.scss" as *;
 
 .badge {
-  @include text.text-style(12);
+  @include text-style(12);
   display: inline-flex;
   align-items: center;
   column-gap: 4px;
@@ -24,17 +23,17 @@
 
   // NOTE: color
   &.gray {
-    background-color: colors.$gray-light;
-    color: colors.$secondary;
+    background-color: $gray-light;
+    color: $secondary;
   }
 
   &.red {
-    background-color: colors.$pink-light;
-    color: colors.$orange-dark;
+    background-color: $pink-light;
+    color: $orange-dark;
   }
 
   &.green {
-    background-color: colors.$green-bright;
-    color: colors.$green;
+    background-color: $green-bright;
+    color: $green;
   }
 }

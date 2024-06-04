@@ -1,7 +1,4 @@
-@use "../../shared/styles/constants/colors";
-@use "../../shared/styles/mixins/sizing.scss";
-@use "../../shared/styles/mixins/text-style.scss" as text;
-@use "../../shared/styles/mixins/responsive.scss" as screen;
+@use "../../shared/styles/main.scss" as *;
 
 .card {
   width: 100%;
@@ -17,12 +14,12 @@
   }
 
   &:hover .title {
-    color: colors.$gray-dark;
+    color: $gray-dark;
   }
 }
 
 .image-box {
-  @include sizing.aspect-ratio();
+  @include aspect-ratio();
   width: 100%;
   margin-bottom: 12px;
   border-radius: 8px;
@@ -30,31 +27,31 @@
 }
 
 .image-box img {
-  @include sizing.object-fit();
+  @include object-fit();
   transition: transform 150ms ease-in-out;
 }
 
 .category {
-  @include text.text-style(12);
-  color: colors.$gray-dark;
+  @include text-style(12);
+  color: $gray-dark;
 
-  @include screen.tablet {
+  @include screen-tablet {
     margin-bottom: 2px;
   }
 }
 
 .title {
-  @include text.text-style(14);
-  @include text.line-clamp(2);
-  color: colors.$secondary;
+  @include text-style(14);
+  @include line-clamp(2);
+  color: $secondary;
   transition: color 150ms ease-in-out;
 
-  @include screen.tablet {
+  @include screen-tablet {
     margin-bottom: 4px;
   }
 }
 
 .price {
-  @include text.text-style(18);
-  color: colors.$dark;
+  @include text-style(18);
+  color: $dark;
 }

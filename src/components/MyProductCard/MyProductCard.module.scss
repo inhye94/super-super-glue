@@ -1,32 +1,28 @@
-@use "../../shared/styles/constants/colors";
-@use "../../shared/styles/mixins/text-style.scss" as text;
-@use "../../shared/styles/mixins/flexbox.scss" as flexbox;
-@use "../../shared/styles/mixins/sizing.scss" as sizing;
-@use "../../shared/styles/mixins/responsive.scss" as screen;
+@use "../../shared/styles/main.scss" as *;
 
 .card {
-  @include flexbox.column-flexbox();
-  @include flexbox.gap(12px, 12px);
+  @include column-flexbox();
+  @include gap(12px, 12px);
 
-  @include screen.tablet {
-    @include flexbox.flexbox();
+  @include screen-tablet {
+    @include flexbox();
   }
 }
 
 .image-box {
-  @include flexbox.no-resize();
-  @include sizing.aspect-ratio();
+  @include no-resize();
+  @include aspect-ratio();
   order: 1;
   border-radius: 8px;
   overflow: hidden;
 
-  @include screen.tablet {
+  @include screen-tablet {
     max-width: 120px;
   }
 }
 
 .image-box img {
-  @include sizing.object-fit();
+  @include object-fit();
 }
 
 .text-box {
@@ -34,35 +30,35 @@
 }
 
 .title {
-  @include text.text-style(20);
+  @include text-style(20);
   margin-bottom: 12px;
   font-weight: 700;
-  color: colors.$primary;
+  color: $primary;
 
-  @include screen.tablet {
+  @include screen-tablet {
     margin-bottom: 6px;
   }
 }
 
 .desc {
-  @include flexbox.inline-flexbox();
-  @include flexbox.flex-wrap(wrap);
-  @include flexbox.gap(4px);
-  @include text.text-style(14);
-  color: colors.$tertiary;
+  @include inline-flexbox();
+  @include flex-wrap(wrap);
+  @include gap(4px);
+  @include text-style(14);
+  color: $tertiary;
 }
 
 .desc dt {
   margin-right: 4px;
   font-weight: 500;
-  color: colors.$secondary;
+  color: $secondary;
 }
 
 .desc dt:not(:first-child)::before {
   content: "|";
   margin: 0 4px;
   font-weight: 400;
-  color: colors.$gray-dark;
+  color: $gray-dark;
 }
 
 .desc dd {
@@ -73,15 +69,15 @@
 }
 
 .button-box {
-  @include flexbox.no-resize();
-  @include flexbox.flexbox();
-  @include flexbox.gap(4px, 4px);
+  @include no-resize();
+  @include flexbox();
+  @include gap(4px, 4px);
   order: 3;
   width: 100%;
   min-width: 120px;
 
-  @include screen.tablet {
-    @include flexbox.column-flexbox();
+  @include screen-tablet {
+    @include column-flexbox();
     max-width: 120px;
     margin-left: auto;
   }

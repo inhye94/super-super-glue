@@ -1,12 +1,11 @@
-@use "../../styles/constants/colors";
-@use "../../styles/mixins/text-style.scss" as text;
+@use "../../styles/main.scss" as *;
 
 @mixin matchColorAndStyle($color, $style) {
   @if ($color == "primary") {
-    $bg-main: colors.$green-light;
-    $bg-hover: colors.$green-dark;
-    $text-main: colors.$white;
-    $text-hover: colors.$white;
+    $bg-main: $green-light;
+    $bg-hover: $green-dark;
+    $text-main: $white;
+    $text-hover: $white;
 
     @if ($style == "full") {
       @include fullStyle($bg-main, $bg-hover, $text-main);
@@ -22,10 +21,10 @@
   }
 
   @if ($color == "secondary") {
-    $bg-main: colors.$pink;
-    $bg-hover: colors.$pink-dark;
-    $text-main: colors.$green;
-    $text-hover: colors.$green-dark;
+    $bg-main: $pink;
+    $bg-hover: $pink-dark;
+    $text-main: $green;
+    $text-hover: $green-dark;
 
     @if ($style == "full") {
       @include fullStyle($bg-main, $bg-hover, $text-main);
@@ -41,10 +40,10 @@
   }
 
   @if ($color == "tertiary") {
-    $bg-main: colors.$gray;
-    $bg-hover: colors.$gray-dark;
-    $text-main: colors.$white;
-    $text-hover: colors.$white;
+    $bg-main: $gray;
+    $bg-hover: $gray-dark;
+    $text-main: $white;
+    $text-hover: $white;
 
     @if ($style == "full") {
       @include fullStyle($bg-main, $bg-hover, $text-main);
@@ -71,7 +70,7 @@
 }
 
 @mixin outlinedStyle($main, $hover) {
-  background-color: colors.$white;
+  background-color: $white;
   border: 1px solid $main;
   color: $main;
 
@@ -82,7 +81,7 @@
 }
 
 @mixin ghostStyle($main, $hover) {
-  background-color: colors.$white;
+  background-color: $white;
   color: $main;
 
   &:hover {
@@ -91,7 +90,7 @@
 }
 
 .button {
-  @include text.text-style(16);
+  @include text-style(16);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -106,17 +105,17 @@
 
   // NOTE: size
   &.tiny {
-    @include text.text-style(12);
+    @include text-style(12);
     height: 32px;
   }
 
   &.small {
-    @include text.text-style(14);
+    @include text-style(14);
     height: 40px;
   }
 
   &.medium {
-    @include text.text-style(14);
+    @include text-style(14);
     height: 44px;
   }
 
@@ -171,7 +170,7 @@
 
 .icon-button {
   --icon-size: 44px;
-  @include text.text-style-24;
+  @include text-style-24;
 
   flex-shrink: 0;
   position: relative;
@@ -184,7 +183,7 @@
   transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
 
   span {
-    @include text.text-style-10;
+    @include text-style-10;
     position: absolute;
     right: 2px;
     top: 4px;
@@ -196,20 +195,20 @@
     border-radius: 100px;
     padding: 0 4px;
     font-weight: 700;
-    background-color: colors.$pink-dark;
-    color: colors.$white;
+    background-color: $pink-dark;
+    color: $white;
   }
 
   // NOTE: size
   &.medium {
-    @include text.text-style-20;
+    @include text-style-20;
     --icon-size: 40px;
     width: var(--icon-size);
     height: var(--icon-size);
   }
 
   &.small {
-    @include text.text-style-16;
+    @include text-style-16;
     --icon-size: 32px;
     width: var(--icon-size);
     height: var(--icon-size);
@@ -217,58 +216,58 @@
 
   // NOTE: color
   &.black {
-    color: colors.$black;
+    color: $black;
   }
 
   &.dark {
-    color: colors.$dark;
+    color: $dark;
   }
 
   &.primary {
-    color: colors.$primary;
+    color: $primary;
   }
 
   &.secondary {
-    color: colors.$secondary;
+    color: $secondary;
   }
 
   &.tertiary {
-    color: colors.$tertiary;
+    color: $tertiary;
   }
 
   &.orange {
-    color: colors.$orange;
+    color: $orange;
 
     &:hover {
-      color: colors.$orange-dark;
+      color: $orange-dark;
     }
   }
 
   &.yellow {
-    color: colors.$yellow;
+    color: $yellow;
 
     &:hover {
-      color: colors.$yellow-dark;
+      color: $yellow-dark;
     }
   }
 
   &.green {
-    color: colors.$green;
+    color: $green;
 
     &:hover {
-      color: colors.$green-dark;
+      color: $green-dark;
     }
   }
 
   &.pink {
-    color: colors.$pink;
+    color: $pink;
 
     &:hover {
-      color: colors.$pink-dark;
+      color: $pink-dark;
     }
   }
 
   &:hover {
-    background-color: colors.$gray-light;
+    background-color: $gray-light;
   }
 }

@@ -1,13 +1,13 @@
 import React from "react";
 import Logo from "./Logo";
-import Button from "../modules/components/button/Button";
-import IconButton from "../modules/components/button/IconButton";
+import Button from "../shared/modules/button/Button";
+import IconButton from "../shared/modules/button/IconButton";
 import LayoutWrapper from "./wrapper/LayoutWrapper";
 import { useScreenStateContext } from "../context/ScreenStateContext";
 import { useAuthContext } from "../context/AuthContext";
 import { LuPartyPopper, LuTable2, LuPictureInPicture2 } from "react-icons/lu";
 import { RiMenuAddLine } from "react-icons/ri";
-import CartMenu from "./cart/CartMenu";
+import CartMenu from "./CartMenu";
 
 const _menu = [
   {
@@ -94,11 +94,12 @@ export default function Gnb() {
                     <IconButton
                       tag="link"
                       url={path}
-                      icon={icon}
                       text={text}
                       size="medium"
                       color="secondary"
-                    />
+                    >
+                      {icon}
+                    </IconButton>
                   </li>
                 );
               })}

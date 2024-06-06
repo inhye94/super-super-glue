@@ -1,11 +1,11 @@
 import React from "react";
 import Spinner from "../components/Spinner";
 import ContentWrapper from "../components/wrapper/ContentWrapper";
-import Button from "../modules/components/button/Button";
+import Button from "../shared/modules/button/Button";
 import useCart from "../hooks/useCart";
-import CartCard from "../components/cart/CartCard";
-import { getTotalPrice } from "../utils/price";
-import { DELIVERY } from "../constants/price";
+import CartCard from "../components/CartCard/CartCard";
+import { getTotalPrice } from "../shared/utils/price";
+import { DELIVERY } from "../shared/utils/constants/price";
 
 export default function Cart() {
   const {

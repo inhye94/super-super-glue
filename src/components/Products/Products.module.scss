@@ -1,0 +1,17 @@
+@use "../../shared/styles/main.scss" as *;
+
+.list {
+  @include flexbox();
+  @include flex-wrap();
+  margin: 0 -4px;
+}
+
+.item {
+  width: 50%;
+  padding: 4px;
+
+  @include screen-tablet {
+    width: 25%;
+    padding: 8px;
+  }
+}

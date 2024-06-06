@@ -1,13 +1,11 @@
-@use "../../constants/colors";
-@use "../../mixins/text-style.scss" as text;
-@use "../../mixins/scrollbar.scss" as scroll;
+@use "../../styles/main.scss" as *;
 
-$color-pass: colors.$green-light;
-$color-errer: colors.$pink-dark;
-$color-border: colors.$gray-light;
+$color-pass: $green-light;
+$color-errer: $pink-dark;
+$color-border: $gray-light;
 
 %inputBase {
-  @include text.text-style(16);
+  @include text-style(16);
   display: block;
   width: 100%;
   min-width: 150px;
@@ -16,22 +14,22 @@ $color-border: colors.$gray-light;
   border: 1px solid $color-border;
   border-radius: 8px;
   font-weight: 500;
-  color: colors.$primary;
-  background-color: colors.$white;
+  color: $primary;
+  background-color: $white;
   transition: border-color 150ms ease-in-out;
 
   &::placeholder {
-    color: colors.$gray-dark;
+    color: $gray-dark;
   }
 
   &:active,
   &:focus {
-    border-color: colors.$gray-dark;
+    border-color: $gray-dark;
   }
 
   &:disabled {
-    background-color: colors.$gray-light;
-    color: colors.$gray-dark;
+    background-color: $gray-light;
+    color: $gray-dark;
   }
 }
 
@@ -40,7 +38,7 @@ $color-border: colors.$gray-light;
   padding: 16px;
   border: 1px solid $color-border;
   border-radius: 16px;
-  background-color: colors.$white;
+  background-color: $white;
 }
 
 .form,
@@ -49,7 +47,7 @@ $color-border: colors.$gray-light;
 }
 
 .input-text {
-  @include text.text-style(14);
+  @include text-style(14);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -57,7 +55,7 @@ $color-border: colors.$gray-light;
   min-height: 28px;
   margin-bottom: 4px;
   font-weight: 600;
-  color: colors.$dark;
+  color: $dark;
 }
 
 .image-preview {
@@ -107,11 +105,11 @@ $color-border: colors.$gray-light;
 .file {
   .input-label {
     @extend %boxBase;
-    @include text.text-style(12);
+    @include text-style(12);
     display: block;
     padding: 32px 16px;
     text-align: center;
-    color: colors.$tertiary;
+    color: $tertiary;
     word-break: keep-all;
     cursor: pointer;
     transition: color 150ms ease-in-out, border-color 150ms ease-in-out;
@@ -126,7 +124,7 @@ $color-border: colors.$gray-light;
       border-radius: 50%;
       font-size: 24px;
       background-color: $color-border;
-      color: colors.$white;
+      color: $white;
       transition: background-color 150ms ease-in-out;
     }
 
@@ -170,7 +168,7 @@ $color-border: colors.$gray-light;
 // NOTE: 반응형 (데스크탑)
 @media screen and (min-width: 768px) {
   .image-preview {
-    @include scroll.scrollbar("x", colors.$white);
+    @include scrollbar("x", $white);
     flex-wrap: nowrap;
 
     img {

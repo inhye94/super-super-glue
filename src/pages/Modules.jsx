@@ -1,9 +1,9 @@
 import React from "react";
-import Button from "../modules/components/button/Button";
-import IconButton from "../modules/components/button/IconButton";
-import Badge from "../modules/components/badge/Badge";
-import Input from "../modules/components/form/Input";
-import FileInput from "../modules/components/form/FileInput";
+import Button from "../shared/modules/button/Button";
+import IconButton from "../shared/modules/button/IconButton";
+import Badge from "../shared/modules/badge/Badge";
+import Input from "../shared/modules/form/Input";
+import FileInput from "../shared/modules/form/FileInput";
 import { FiAlertCircle } from "react-icons/fi";
 import { FormProvider, useForm } from "react-hook-form";
 import {
@@ -13,7 +13,7 @@ import {
   kr_en_validation,
   special_validation,
   only_kr_validation,
-} from "../utils/validations";
+} from "../shared/utils/validations";
 import ContentWrapper from "../components/wrapper/ContentWrapper";
 
 export default function Modules() {
@@ -94,62 +94,77 @@ function ButtonSection() {
       </FlexBox>
 
       <FlexBox subtitle="icon-button | color">
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" color="black" />
+        <IconButton text="버튼이에용" color="black">
+          <FiAlertCircle />
+        </IconButton>
 
-        <IconButton
-          icon={<FiAlertCircle />}
-          text="버튼이에용"
-          color="primary"
-        />
+        <IconButton text="버튼이에용" color="primary">
+          <FiAlertCircle />
+        </IconButton>
 
-        <IconButton
-          icon={<FiAlertCircle />}
-          text="버튼이에용"
-          color="secondary"
-        />
+        <IconButton text="버튼이에용" color="secondary">
+          <FiAlertCircle />
+        </IconButton>
 
-        <IconButton
-          icon={<FiAlertCircle />}
-          text="버튼이에용"
-          color="tertiary"
-        />
+        <IconButton text="버튼이에용" color="tertiary">
+          <FiAlertCircle />
+        </IconButton>
 
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" color="orange" />
+        <IconButton text="버튼이에용" color="orange">
+          <FiAlertCircle />
+        </IconButton>
 
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" color="yellow" />
+        <IconButton text="버튼이에용" color="yellow">
+          <FiAlertCircle />
+        </IconButton>
 
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" color="green" />
+        <IconButton text="버튼이에용" color="green">
+          <FiAlertCircle />
+        </IconButton>
 
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" color="pink" />
+        <IconButton text="버튼이에용" color="pink">
+          <FiAlertCircle />
+        </IconButton>
       </FlexBox>
 
       <FlexBox subtitle="icon-button | type">
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" />
+        <IconButton text="버튼이에용">
+          <FiAlertCircle />
+        </IconButton>
 
-        <IconButton
-          icon={<FiAlertCircle />}
-          text="링크에용"
-          tag="link"
-          url="/"
-        />
+        <IconButton text="링크에용" tag="link" url="/">
+          <FiAlertCircle />
+        </IconButton>
       </FlexBox>
 
       <FlexBox subtitle="icon-button | size">
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" />
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" size="medium" />
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" size="small" />
+        <IconButton text="버튼이에용">
+          <FiAlertCircle />
+        </IconButton>
+        <IconButton text="버튼이에용" size="medium">
+          <FiAlertCircle />
+        </IconButton>
+        <IconButton text="버튼이에용" size="small">
+          <FiAlertCircle />
+        </IconButton>
       </FlexBox>
 
       <FlexBox subtitle="icon-button | active">
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" count={0} />
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" count={1} />
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" count={10} />
-        <IconButton icon={<FiAlertCircle />} text="버튼이에용" count={100} />
-        <IconButton
-          icon={<FiAlertCircle />}
-          text="버튼이에용"
-          count={100 + "+"}
-        />
+        <IconButton text="버튼이에용" count={0}>
+          <FiAlertCircle />
+        </IconButton>
+        <IconButton text="버튼이에용" count={1}>
+          <FiAlertCircle />
+        </IconButton>
+        <IconButton text="버튼이에용" count={10}>
+          <FiAlertCircle />
+        </IconButton>
+        <IconButton text="버튼이에용" count={100}>
+          <FiAlertCircle />
+        </IconButton>
+        <IconButton text="버튼이에용" count={100 + "+"}>
+          <FiAlertCircle />
+        </IconButton>
       </FlexBox>
     </SectionWrapper>
   );

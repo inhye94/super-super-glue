@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Input from "../../modules/components/form/Input";
-import FileInput from "../../modules/components/form/FileInput";
-import Button from "../../modules/components/button/Button";
+import Input from "../../shared/modules/form/Input";
+import FileInput from "../../shared/modules/form/FileInput";
+import Button from "../../shared/modules/button/Button";
 import { FormProvider, useForm } from "react-hook-form";
 import {
   required_validation,
@@ -9,7 +9,7 @@ import {
   price_validation,
   only_kr_validation,
   option_validation,
-} from "../../utils/validations.js";
+} from "../../shared/utils/validations.js";
 import ContentWrapper from "../../components/wrapper/ContentWrapper";
 import { useAuthContext } from "../../context/AuthContext";
 import { uploadFile } from "../../api/file";

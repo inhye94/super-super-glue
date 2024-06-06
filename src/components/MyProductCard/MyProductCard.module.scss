@@ -1,0 +1,84 @@
+@use "../../shared/styles/main.scss" as *;
+
+.card {
+  @include column-flexbox();
+  @include gap(12px, 12px);
+
+  @include screen-tablet {
+    @include flexbox();
+  }
+}
+
+.image-box {
+  @include no-resize();
+  @include aspect-ratio();
+  order: 1;
+  border-radius: 8px;
+  overflow: hidden;
+
+  @include screen-tablet {
+    max-width: 120px;
+  }
+}
+
+.image-box img {
+  @include object-fit();
+}
+
+.text-box {
+  order: 2;
+}
+
+.title {
+  @include text-style(20);
+  margin-bottom: 12px;
+  font-weight: 700;
+  color: $primary;
+
+  @include screen-tablet {
+    margin-bottom: 6px;
+  }
+}
+
+.desc {
+  @include inline-flexbox();
+  @include flex-wrap(wrap);
+  @include gap(4px);
+  @include text-style(14);
+  color: $tertiary;
+}
+
+.desc dt {
+  margin-right: 4px;
+  font-weight: 500;
+  color: $secondary;
+}
+
+.desc dt:not(:first-child)::before {
+  content: "|";
+  margin: 0 4px;
+  font-weight: 400;
+  color: $gray-dark;
+}
+
+.desc dd {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.button-box {
+  @include no-resize();
+  @include flexbox();
+  @include gap(4px, 4px);
+  order: 3;
+  width: 100%;
+  min-width: 120px;
+
+  @include screen-tablet {
+    @include column-flexbox();
+    max-width: 120px;
+    margin-left: auto;
+  }
+}

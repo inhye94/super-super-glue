@@ -1,0 +1,150 @@
+/**
+flexbox
+@param {string} $justify (start)/center/end/between/around
+@param {string} $align (start)/center/end/between/around
+*/
+
+/**
+column-flexbox
+@param {string} $justify (start)/center/end/between/around
+@param {string} $align (start)/center/end/between/around
+*/
+
+/**
+inline-flexbox
+@param {string} $justify (start)/center/end/between/around
+@param {string} $align (start)/center/end/between/around
+*/
+
+/**
+gap
+@param {number} $rowGap (0)
+@param {number} $columnGap (0)
+*/
+
+/**
+no-shrink()
+no-grow()
+no-resize()
+
+resize
+@param {number} $growSize (1)
+@param {number} $shrinkSize (1)
+*/
+
+/**
+flex-wrap($wrap)
+@param {string} $wrap (wrap)/no/reverse
+*/
+
+// NOTE: row flexbox
+@mixin flexbox($justify: "start", $align: "start") {
+  display: flex;
+  flex-direction: row;
+
+  // justify
+  @if ($justify == "start") {
+    justify-content: flex-start;
+  }
+
+  @if ($justify == "center") {
+    justify-content: center;
+  }
+
+  @if ($justify == "end") {
+    justify-content: flex-end;
+  }
+
+  @if ($justify == "between") {
+    justify-content: space-between;
+  }
+
+  @if ($justify == "around") {
+    justify-content: space-around;
+  }
+
+  // align
+  @if ($align == "start") {
+    align-items: flex-start;
+  }
+
+  @if ($align == "center") {
+    align-items: center;
+  }
+
+  @if ($align == "end") {
+    align-items: flex-end;
+  }
+
+  @if ($align == "between") {
+    align-items: space-between;
+  }
+
+  @if ($align == "around") {
+    align-items: space-around;
+  }
+}
+
+//////////////////////////////////////////
+
+// NOTE: column flexbox
+@mixin column-flexbox($justify: "start", $align: "start") {
+  @include flexbox($justify, $align);
+  flex-direction: column;
+}
+
+//////////////////////////////////////////
+
+// NOTE: inline-flex
+@mixin inline-flexbox($justify: "start", $align: "start") {
+  @include flexbox($justify, $align);
+  display: inline-flex;
+}
+
+//////////////////////////////////////////
+
+// NOTE: gap
+@mixin gap($rowGap: 0, $columnGap: 0) {
+  row-gap: $rowGap;
+  column-gap: $columnGap;
+}
+
+//////////////////////////////////////////
+
+// NOTE: shrink
+@mixin no-shrink() {
+  flex-shrink: 0;
+}
+
+// NOTE: grow
+@mixin no-grow() {
+  flex-grow: 0;
+}
+
+// NOTE: resize
+@mixin resize($growSize: 1, $shrinkSize: 1) {
+  flex-grow: $growSize;
+  flex-shrink: $shrinkSize;
+}
+
+@mixin no-resize() {
+  @include no-shrink();
+  @include no-grow();
+}
+
+//////////////////////////////////////////
+
+// NOTE: flex-wrap
+@mixin flex-wrap($wrap: "wrap") {
+  @if ($wrap == "wrap") {
+    flex-wrap: wrap;
+  }
+
+  @if ($wrap == "no") {
+    flex-wrap: nowrap;
+  }
+
+  @if ($wrap == "reverse") {
+    flex-wrap: wrap-reverse;
+  }
+}

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import IconButton from "../../modules/components/button/IconButton";
+import IconButton from "../../shared/modules/button/IconButton";
 import { PiPlusCircle, PiMinusCircle } from "react-icons/pi";
 import { IoMdClose } from "react-icons/io";
 import Toast from "../Toast";
 import useCart from "../../hooks/useCart";
+import styles from "./CartCard.module.scss";
 
 export default function CartCard({
   product,
@@ -38,58 +39,55 @@ export default function CartCard({
   };
 
   return (
-    <article className="relative flex flex-col gap-[8px] md:gap-[16px]">
+    <article className={styles.card}>
       {_success && <Toast text="수량이 변경되었습니다!" />}
 
-      <div className="flex gap-[12px]">
-        <img
-          className="shrink-0 w-[80px] h-[80px] object-cover rounded-md"
-          src={image.url}
-          alt={`${name}의 썸네일`}
-        />
+      <div className={styles["image-box"]}>
+        <img src={image.url} alt={`${name}의 썸네일`} />
 
-        <h3 className="w-1/2 text-[16px] font-semibold text-secondary md:w-5/6">
-          {name}
-        </h3>
+        <h3>{name}</h3>
       </div>
 
-      <div className="flex flex-col gap-[8px] p-[8px] rounded-lg bg-background">
-        <dl className="text-[14px] text-tertiary">
+      <div className={styles["option-box"]}>
+        <dl>
           <dt className="visually-hidden">옵션</dt>
           <dd>{option}</dd>
         </dl>
 
-        <div className="shrink-0 inline-flex items-center">
+        <div className={styles["button-wrapper"]}>
           <IconButton
             text="수량 빼기"
-            icon={<PiMinusCircle aria-hidden />}
             value={-1}
             disabled={quantity === 1}
             callback={handleUpdateQuantity}
-          />
+          >
+            <PiMinusCircle aria-hidden />
+          </IconButton>
 
-          <p className="w-[24px] text-center text-dark font-bold">{quantity}</p>
+          <p>{quantity}</p>
 
           <IconButton
             text="수량 더하기"
-            icon={<PiPlusCircle aria-hidden />}
             value={1}
             callback={handleUpdateQuantity}
-          />
+          >
+            <PiPlusCircle aria-hidden />
+          </IconButton>
         </div>
       </div>
 
-      <p className="text-[20px] font-bold text-dark text-right">
+      <p className={styles.price}>
         {price > 0 ? price.toLocaleString() + "원" : "무료"}
       </p>
 
-      <div className="absolute -right-[8px] -top-[8px]">
+      <div className={styles.remove}>
         <IconButton
           text="장바구니에서 삭제"
           size="medium"
-          icon={<IoMdClose aria-hidden />}
           callback={handleRemoveCartItem}
-        />
+        >
+          <IoMdClose aria-hidden />
+        </IconButton>
       </div>
     </article>
   );

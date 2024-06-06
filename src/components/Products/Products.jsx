@@ -1,8 +1,9 @@
 import React from "react";
 import Spinner from "../Spinner";
 import ContentWrapper from "../wrapper/ContentWrapper";
-import ProductCard from "./ProductCard";
+import ProductCard from "../ProductCard/ProductCard";
 import useProducts from "../../hooks/useProducts";
+import styles from "./Products.module.scss";
 
 export default function Products() {
   const {
@@ -16,12 +17,9 @@ export default function Products() {
   } else {
     return (
       <ContentWrapper>
-        <ul className="flex flex-wrap -mx-[4px]">
+        <ul className={styles.list}>
           {productAll.map((product) => (
-            <li
-              key={product.id}
-              className="w-[50%] p-[4px] md:w-[25%] md:p-[8px]"
-            >
+            <li key={product.id} className={styles.item}>
               <ProductCard product={product} />
             </li>
           ))}

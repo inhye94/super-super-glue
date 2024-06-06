@@ -1,7 +1,7 @@
 import React from "react";
-import IconButton from "../../modules/components/button/IconButton";
+import IconButton from "../shared/modules/button/IconButton";
 import { LuShoppingCart } from "react-icons/lu";
-import useCart from "../../hooks/useCart";
+import useCart from "../hooks/useCart";
 
 export default function CartMenu() {
   const {
@@ -12,11 +12,12 @@ export default function CartMenu() {
     <IconButton
       tag="link"
       url="/cart"
-      icon={<LuShoppingCart aria-hidden="true" />}
       text="장바구니"
       size="medium"
       color="secondary"
       count={cart && cart.length}
-    />
+    >
+      <LuShoppingCart aria-hidden="true" />
+    </IconButton>
   );
 }

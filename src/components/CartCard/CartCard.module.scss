@@ -1,0 +1,76 @@
+@use "../../shared/styles/main.scss" as *;
+
+.card {
+  @include column-flexbox(start, stretch);
+  @include gap(8px, 8px);
+  position: relative;
+
+  @include screen-tablet {
+    @include gap(16px, 16px);
+  }
+}
+
+.image-box {
+  @include flexbox();
+  @include gap(12px, 12px);
+  width: 100%;
+
+  img {
+    @include no-shrink();
+    @include object-fit();
+    width: 80px;
+    height: 80px;
+    border-radius: 6px;
+  }
+
+  h3 {
+    @include text-style(16);
+    width: 50%;
+    font-weight: 500;
+    color: $secondary;
+  }
+
+  @include screen-tablet {
+    h3 {
+      width: 83%;
+    }
+  }
+}
+
+.option-box {
+  @include column-flexbox(start, stretch);
+  @include gap(8px, 8px);
+  padding: 8px;
+  border-radius: 8px;
+  background-color: $background;
+
+  dl {
+    @include text-style(14);
+    color: $tertiary;
+  }
+
+  .button-wrapper {
+    @include inline-flexbox(start, center);
+    @include no-shrink();
+  }
+
+  p {
+    width: 24px;
+    font-weight: 700;
+    text-align: center;
+    color: $dark;
+  }
+}
+
+.price {
+  @include text-style(20);
+  font-weight: 700;
+  color: $dark;
+  text-align: right;
+}
+
+.remove {
+  position: absolute;
+  right: -8px;
+  top: -8px;
+}

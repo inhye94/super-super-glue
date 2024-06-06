@@ -7,7 +7,7 @@ import { useScreenStateContext } from "../context/ScreenStateContext";
 import { useAuthContext } from "../context/AuthContext";
 import { LuPartyPopper, LuTable2, LuPictureInPicture2 } from "react-icons/lu";
 import { RiMenuAddLine } from "react-icons/ri";
-import CartMenu from "./cart/CartMenu";
+import CartMenu from "./CartMenu";
 
 const _menu = [
   {

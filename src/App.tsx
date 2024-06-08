@@ -15,7 +15,7 @@ import LayoutWrapper from "./components/wrapper/LayoutWrapper";
 
 const queryClient = new QueryClient();
 
-function App() {
+const App: React.FC = () => {
   return (
     <AuthContextProvider>
       <ScreenStateProvider>
@@ -31,6 +31,6 @@ function App() {
       </ScreenStateProvider>
     </AuthContextProvider>
   );
-}
+};
 
 export default App;

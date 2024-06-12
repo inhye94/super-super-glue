@@ -3,7 +3,16 @@ import React, { PropsWithChildren } from "react";
 
 interface IconButtonPropsType {
   text: string;
-  color?: "primary" | "secondary" | "tertiary";
+  color?:
+    | "black"
+    | "dark"
+    | "primary"
+    | "secondary"
+    | "tertiary"
+    | "orange"
+    | "yellow"
+    | "green"
+    | "pink";
   size?: "tiny" | "small" | "medium";
   count?: number;
   value?: number | string;

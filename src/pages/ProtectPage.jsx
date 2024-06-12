@@ -1,16 +1,8 @@
 import { Navigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import Spinner from "../components/Spinner";
-import { PropsWithChildren } from "react";
 
-interface ProtectPagePropsType {
-  requiredAdmin?: boolean;
-}
-
-const ProtectPage: React.FC<PropsWithChildren<ProtectPagePropsType>> = ({
-  children,
-  requiredAdmin,
-}) => {
+const ProtectPage = ({ children, requiredAdmin }) => {
   const { userInfo } = useAuthContext();
 
   if (userInfo === undefined) {

@@ -3,36 +3,60 @@ import React, { useEffect, useState } from "react";
 import "./form.scss";
 import InputError from "./InputError";
 import IconButton from "../button/IconButton";
-import { useFormContext } from "react-hook-form";
-import { findInputError, isFormInvalid } from "../../../api/form";
+import {
+  FieldError,
+  FieldValues,
+  RegisterOptions,
+  useFormContext,
+} from "react-hook-form";
+import { findInputError, isFormValid } from "../../../api/form";
 import { mergeFileList, genNewData, genFileImageSrc } from "../../../api/file";
 import { AnimatePresence } from "framer-motion";
 import { getLimitSize } from "../../utils/file";
 import { LuUpload } from "react-icons/lu";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
+interface FileInputPropsType {
+  name: string;
+  id: string;
+  label: string;
+  limitSize?: number;
+  limitCount?: number;
+  validation?: RegisterOptions;
+}
+
+interface InputErrorType {
+  error: FieldError;
+}
+
 // NOTE: e.target의 file을 변경
-export default function FileInput({
+const FileInput: React.FC<FileInputPropsType> = ({
   name,
   id,
   label,
   limitSize = 10,
   limitCount = 1,
   validation,
-}) {
+}) => {
   const {
     register,
     formState: { errors },
-  } = useFormContext();
+  } = useFormContext<FieldValues>();
 
-  const [preview, setPreview] = useState(null);
+  const [preview, setPreview] = useState<string[] | null>(null);
   const [savedData, setSavedData] = useState(new DataTransfer());
 
-  const _inputError = findInputError(errors, id);
-  const _isInvalid = isFormInvalid(_inputError);
+  const _inputError = findInputError(errors, id) as InputErrorType;
+  const _isValid: boolean = isFormValid(_inputError);
 
-  const updateFiles = (e) => {
+  const isRequired: boolean =
+    validation?.required === true ||
+    (typeof validation?.required === "object" && validation.required.value);
+
+  const updateFiles = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const selectedFiles = e.target.files;
+    if (!selectedFiles) return;
+
     const mergedData = mergeFileList({
       savedData,
       selectedFiles,
@@ -44,7 +68,7 @@ export default function FileInput({
     e.target.files = mergedData.files;
   };
 
-  const removeSelectedFile = (index) => {
+  const removeSelectedFile = (index: number): void => {
     setSavedData((prev) => {
       prev.items.remove(index);
 
@@ -58,11 +82,13 @@ export default function FileInput({
   }, [savedData]);
 
   return (
-    <div className={classNames("input-wrapper", "file", _isInvalid && "error")}>
+    <div className={classNames("input-wrapper", "file", !_isValid && "error")}>
       <div className="input-text">
-        {label} {validation && validation.required.value && "*"}
+        {label} {isRequired && "*"}
         <AnimatePresence mode="wait" initial={false}>
-          {_isInvalid && <InputError message={_inputError.error.message} />}
+          {_inputError?.error?.message && (
+            <InputError message={_inputError.error.message} />
+          )}
         </AnimatePresence>
       </div>
 
@@ -97,15 +123,18 @@ export default function FileInput({
               <img src={v} alt="" />
 
               <IconButton
-                icon={<IoIosCloseCircleOutline />}
                 text="파일 삭제"
                 color="orange"
-                callback={removeSelectedFile.bind(null, i)}
-              />
+                callback={() => removeSelectedFile(i)}
+              >
+                <IoIosCloseCircleOutline />
+              </IconButton>
             </div>
           ))}
         </div>
       )}
     </div>
   );
-}
+};
+
+export default FileInput;

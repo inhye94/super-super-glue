@@ -6,7 +6,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
+import "./style.css";
 import reportWebVitals from "./reportWebVitals";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "./App";
@@ -19,6 +19,7 @@ import Modules from "./pages/Modules";
 import Home from "./pages/Home";
 import AllProducts from "./pages/AllProducts";
 import ProtectPage from "./pages/ProtectPage";
+import Test from "./pages/Test";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,7 @@ const router = createBrowserRouter([
           </ProtectPage>
         ),
       },
+      { path: "/test", element: <Test /> },
     ],
   },
 ]);

@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import Spinner from "../components/Spinner";
 
-export default function ProtectPage({ children, requiredAdmin }) {
+const ProtectPage = ({ children, requiredAdmin }) => {
   const { userInfo } = useAuthContext();
 
   if (userInfo === undefined) {
@@ -12,4 +12,6 @@ export default function ProtectPage({ children, requiredAdmin }) {
   } else {
     return children;
   }
-}
+};
+
+export default ProtectPage;

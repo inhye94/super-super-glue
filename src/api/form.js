@@ -6,7 +6,7 @@ export function findInputError(errors, name) {
     }, {});
 }
 
-export const isFormInvalid = (err) => {
-  if (Object.keys(err).length > 0) return true;
-  return false;
+export const isFormValid = (err) => {
+  if (Object.keys(err).length > 0) return false;
+  return true;
 };

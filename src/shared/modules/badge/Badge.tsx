@@ -5,7 +5,21 @@ import { GoAlertFill } from "react-icons/go";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import { IoCloseCircle } from "react-icons/io5";
 
-export default function Badge({ text, alert, check, close, color = "gray" }) {
+interface BadgePropsType {
+  text: string;
+  alert?: boolean;
+  check?: boolean;
+  close?: boolean;
+  color?: "gray" | "red" | "green";
+}
+
+const Badge: React.FC<BadgePropsType> = ({
+  text,
+  alert,
+  check,
+  close,
+  color = "gray",
+}) => {
   return (
     <strong className={classNames("badge", color)}>
       {alert && <GoAlertFill className="badge-icon is-alert" aria-hidden />}
@@ -19,4 +33,5 @@ export default function Badge({ text, alert, check, close, color = "gray" }) {
       {text}
     </strong>
   );
-}
+};
+export default Badge;

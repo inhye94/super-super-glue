@@ -97,11 +97,12 @@ export default function FileInput({
               <img src={v} alt="" />
 
               <IconButton
-                icon={<IoIosCloseCircleOutline />}
                 text="파일 삭제"
                 color="orange"
                 callback={removeSelectedFile.bind(null, i)}
-              />
+              >
+                <IoIosCloseCircleOutline />
+              </IconButton>
             </div>
           ))}
         </div>

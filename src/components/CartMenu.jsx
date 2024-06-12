@@ -1,7 +1,7 @@
 import React from "react";
-import IconButton from "../shared/modules/button/IconButton";
 import { LuShoppingCart } from "react-icons/lu";
 import useCart from "../hooks/useCart";
+import IconLink from "../shared/modules/button/IconLink";
 
 export default function CartMenu() {
   const {
@@ -9,8 +9,7 @@ export default function CartMenu() {
   } = useCart();
 
   return (
-    <IconButton
-      tag="link"
+    <IconLink
       url="/cart"
       text="장바구니"
       size="medium"
@@ -18,6 +17,6 @@ export default function CartMenu() {
       count={cart && cart.length}
     >
       <LuShoppingCart aria-hidden="true" />
-    </IconButton>
+    </IconLink>
   );
 }

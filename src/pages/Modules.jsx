@@ -15,6 +15,7 @@ import {
   only_kr_validation,
 } from "../shared/utils/validations";
 import ContentWrapper from "../components/wrapper/ContentWrapper";
+import IconLink from "../shared/modules/button/IconLink";
 
 export default function Modules() {
   return (
@@ -127,16 +128,6 @@ function ButtonSection() {
         </IconButton>
       </FlexBox>
 
-      <FlexBox subtitle="icon-button | type">
-        <IconButton text="버튼이에용">
-          <FiAlertCircle />
-        </IconButton>
-
-        <IconButton text="링크에용" tag="link" url="/">
-          <FiAlertCircle />
-        </IconButton>
-      </FlexBox>
-
       <FlexBox subtitle="icon-button | size">
         <IconButton text="버튼이에용">
           <FiAlertCircle />
@@ -165,6 +156,12 @@ function ButtonSection() {
         <IconButton text="버튼이에용" count={100 + "+"}>
           <FiAlertCircle />
         </IconButton>
+      </FlexBox>
+
+      <FlexBox subtitle="icon-link">
+        <IconLink text="링크에용" url="/">
+          <FiAlertCircle />
+        </IconLink>
       </FlexBox>
     </SectionWrapper>
   );

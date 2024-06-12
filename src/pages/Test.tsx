@@ -8,6 +8,7 @@ import InputError from "../shared/modules/form/InputError";
 import Input from "../shared/modules/form/Input";
 import { FormProvider, useForm } from "react-hook-form";
 import { required_validation } from "../shared/utils/validations";
+import FileInput from "../shared/modules/form/FileInput";
 
 const Test: React.FC = () => {
   const method = useForm();
@@ -63,6 +64,16 @@ const Test: React.FC = () => {
               name="bar"
               validation={{ ...required_validation() }}
             />
+
+            <FileInput
+              id="detailImage"
+              name="detailImage"
+              label="상세 이미지"
+              limitCount={20}
+              limitSize={2500}
+              validation={{ ...required_validation() }}
+            />
+
             <button
               type="button"
               onClick={handleSubmit((data) => {

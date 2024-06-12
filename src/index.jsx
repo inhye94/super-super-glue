@@ -19,6 +19,7 @@ import Modules from "./pages/Modules";
 import Home from "./pages/Home";
 import AllProducts from "./pages/AllProducts";
 import ProtectPage from "./pages/ProtectPage";
+import Test from "./pages/Test";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,7 @@ const router = createBrowserRouter([
           </ProtectPage>
         ),
       },
+      { path: "/test", element: <Test /> },
     ],
   },
 ]);

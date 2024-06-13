@@ -1,7 +1,11 @@
 import React from "react";
 import PacmanLoader from "react-spinners/PacmanLoader";
 
-export default function Spinner({ text }) {
+interface SpinnerPropsType {
+  text: string;
+}
+
+const Spinner: React.FC<SpinnerPropsType> = ({ text }) => {
   return (
     <div className="fixed w-full h-full left-0 top-0 z-50 flex flex-col items-center justify-center text-center">
       <PacmanLoader color="#36d7b7" />
@@ -13,4 +17,6 @@ export default function Spinner({ text }) {
       ></div>
     </div>
   );
-}
+};
+
+export default Spinner;

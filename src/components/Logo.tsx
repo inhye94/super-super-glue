@@ -7,7 +7,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Logo() {
+const Logo: React.FC = () => {
   return (
     <h1>
       <Link
@@ -18,4 +18,6 @@ export default function Logo() {
       </Link>
     </h1>
   );
-}
+};
+
+export default Logo;

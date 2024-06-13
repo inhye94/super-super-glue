@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Banner() {
+const Banner: React.FC = () => {
   return (
     <section className="relative h-[320px] -mt-[16px] md:-mt-[36px]">
       <h2 className="visually-hidden">배너</h2>
@@ -16,4 +16,6 @@ export default function Banner() {
       </div>
     </section>
   );
-}
+};
+
+export default Banner;

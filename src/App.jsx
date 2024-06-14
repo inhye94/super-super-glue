@@ -7,7 +7,7 @@
  */
 
 import { Outlet } from "react-router-dom";
-import Gnb from "./components/Gnb";
+import Gnb from "./components/Gnb/Gnb";
 import ScreenStateProvider from "./context/ScreenStateContext";
 import AuthContextProvider from "./context/AuthContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

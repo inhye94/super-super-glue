@@ -1,0 +1,79 @@
+@use "../../shared/styles/main.scss" as *;
+
+@mixin border-mobile() {
+  border-top: 2px solid $pink;
+  border-bottom: 2px solid $pink;
+  background-color: $white;
+}
+
+@mixin gnb-border-tablet() {
+  border-top-width: 4px;
+  border-bottom-width: 4px;
+}
+
+@mixin menu-border-tablet() {
+  background-color: transparent;
+  border: none;
+}
+
+////////////////////////////////////////////////
+
+.gnb {
+  @include border-mobile();
+  position: sticky;
+  left: 0;
+  top: 0;
+  z-index: 20;
+  padding: 8px 0;
+  border-top: 2px solid $pink;
+  border-bottom: 2px solid $pink;
+
+  @include screen-tablet {
+    @include gnb-border-tablet();
+  }
+}
+
+.nav {
+  @include flexbox("start", "center");
+}
+
+.menu {
+  @include border-mobile();
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+
+  @include screen-tablet {
+    @include menu-border-tablet();
+    position: static;
+  }
+}
+
+.menu-list {
+  @include flexbox(evenly, center);
+  @include gap(0, 8px);
+  width: 100%;
+
+  @include screen-tablet {
+    @include flexbox(end, center);
+  }
+}
+
+.profile {
+  @include no-shrink();
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.auth {
+  min-width: 64px;
+  margin-left: 4px;
+
+  @include screen-tablet {
+    min-width: 100px;
+    margin-left: 24px;
+  }
+}

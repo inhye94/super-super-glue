@@ -1,7 +1,7 @@
 import React from "react";
-import Spinner from "../Spinner";
-import ContentWrapper from "../wrapper/ContentWrapper";
-import ProductCard from "../ProductCard/ProductCard";
+import Spinner from "../../components/Spinner";
+import ContentWrapper from "../../components/wrapper/ContentWrapper";
+import ProductCard from "../../components/ProductCard/ProductCard";
 import useProducts from "../../hooks/useProducts";
 import styles from "./Products.module.scss";
 

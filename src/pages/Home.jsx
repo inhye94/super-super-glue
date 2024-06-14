@@ -1,6 +1,6 @@
 import React from "react";
 import Banner from "../components/Banner";
-import Products from "../components/Products/Products";
+import Products from "../widgets/product/Products";
 
 const Home = () => {
   return (

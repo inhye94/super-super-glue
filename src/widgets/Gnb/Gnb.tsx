@@ -1,11 +1,11 @@
 import React from "react";
-import Logo from "../Logo";
+import Logo from "../../components/Logo";
 import Button from "../../shared/modules/button/Button";
-import LayoutWrapper from "../wrapper/LayoutWrapper";
+import LayoutWrapper from "../../components/wrapper/LayoutWrapper";
 import { useScreenStateContext } from "../../context/ScreenStateContext";
 import { useAuthContext } from "../../context/AuthContext";
-import GnbMenus from "../../widgets/menu/GnbMenu";
-import Profile from "../Profile/Profile";
+import GnbMenus from "../menu/GnbMenu";
+import Profile from "../../components/Profile/Profile";
 import styles from "./Gnb.module.scss";
 
 const Gnb: React.FC = () => {

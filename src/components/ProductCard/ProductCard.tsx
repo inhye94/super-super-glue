@@ -17,7 +17,6 @@ const ProductCard: React.FC<ProductPropsType> = ({
   },
   product,
 }) => {
-  console.log("product", product);
   return (
     <article className={styles.card}>
       <Link className={styles.link} to={`/product/${id}`} state={{ product }}>

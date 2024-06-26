@@ -1,8 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./ProductCard.module.scss";
+import { ProductType } from "../../model/product";
 
-export default function ProductCard({
+interface ProductPropsType {
+  product: ProductType;
+}
+
+const ProductCard: React.FC<ProductPropsType> = ({
   product: {
     image: [{ url }],
     name,
@@ -11,7 +16,8 @@ export default function ProductCard({
     id,
   },
   product,
-}) {
+}) => {
+  console.log("product", product);
   return (
     <article className={styles.card}>
       <Link className={styles.link} to={`/product/${id}`} state={{ product }}>
@@ -28,4 +34,6 @@ export default function ProductCard({
       </Link>
     </article>
   );
-}
+};
+
+export default ProductCard;

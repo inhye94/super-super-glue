@@ -4,6 +4,9 @@ interface cloudinaryResource {
   url: string;
 }
 
+export type UserIdType = string;
+export type ProductIdType = string;
+
 export interface ProductType {
   category: string;
   description?: string;
@@ -13,4 +16,8 @@ export interface ProductType {
   name: string;
   option: string[];
   price: number | "무료";
+  userId: UserIdType;
 }
+
+export type registResultType = string | null;
+export type removeResultType = void | null;

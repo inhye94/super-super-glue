@@ -1,22 +1,27 @@
 import React from "react";
 import Button from "../../shared/modules/button/Button";
 import useProducts from "../../hooks/useProducts";
-import { useAuthContext } from "../../context/AuthContext";
+import { ProductType } from "../../model/product";
+
 import styles from "./MyProductCard.module.scss";
 
-export default function MyProductCard({ product }) {
-  const { userInfo } = useAuthContext();
+interface ProductPropsType {
+  product: ProductType;
+}
 
+const MyProductCard: React.FC<ProductPropsType> = ({ product }) => {
   const {
     removeProduct: { mutate },
   } = useProducts();
 
-  const handleRemoveProductItem = async (productId) => {
+  const handleRemoveProductItem = async (productId: string) => {
+    if (!window.confirm("정말 삭제하시겠습니까?")) return;
+
     await mutate(
-      { userID: userInfo.uid, productId },
+      { productId },
       {
         onSuccess: (result) => {
-          console.log("제거!");
+          window.location.reload();
         },
       }
     );
@@ -55,4 +60,6 @@ export default function MyProductCard({ product }) {
       </div>
     </article>
   );
-}
+};
+
+export default MyProductCard;

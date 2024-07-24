@@ -2,8 +2,8 @@
 
 <img width="1000" alt="스크린샷 2024-03-21 오후 2 40 50" src="https://github.com/DuetoPark/super-super-glue/assets/69448900/bbf3de72-e087-4dc2-9c26-a3da104b0947">
 
-
 ## 개요 및 제작 목표
+
 - 개요: React와 Firebase, Cloudinary를 사용하여 온라인 쇼핑몰 웹사이트 개발. 주요 기능으로는 상품 등록/삭제/수정, 장바구니 등이 포함됨.
 - 역할 및 책임: 개인 프로젝트이며 전체 기획 및 UI 구현을 담당.
 - 제작 목표: 프레젠테이셔널 UI 제작하고, 사용자 권한에 따른 redirect 구현
@@ -44,6 +44,7 @@
 - 반응형 디자인
 
 ## 프로젝트 구조
+
 - Page layer
   - 웹 사이트를 구성하는 Page 계층
   - Home, Cart, RegistForm, ...
@@ -58,43 +59,49 @@
   - context, hook, api
 - Shared layer
   - 공통적으로 사용되는 함수 및 스타일 그룹
-  - util 함수, 공통 UI,  ...
+  - util 함수, 공통 UI, ...
 - Model layer
   - 데이터 타입을 모아둔 Model 계층
   - productType, authType, ...
-<img width="3336" alt="chat-app_before" src="https://github.com/user-attachments/assets/755c486c-55b3-4fe5-b4e7-eb9140049ae2">
+    <img width="3336" alt="chat-app_before" src="https://github.com/user-attachments/assets/755c486c-55b3-4fe5-b4e7-eb9140049ae2">
 
 ### Page layer
+
 <img width="3072" alt="chat-app_page" src="https://github.com/user-attachments/assets/19f596b2-746e-4ca3-b03e-3c9e66e53599">
 
 ### Widget layer
+
 <img width="3072" alt="chat-app_widget" src="https://github.com/user-attachments/assets/ec201e5f-83e5-4dfe-981f-e022c1c7b073">
 
 ### Component layer
+
 <img width="3072" alt="chat-app_compo" src="https://github.com/user-attachments/assets/2b7f565d-9ef8-40cc-9d31-2be8bab0d593">
 
 ### Feature layer
+
 <img width="3072" alt="chat-app_feature" src="https://github.com/user-attachments/assets/75e7074a-2ad7-4f36-baa1-bda86de6b041">
 
 ### Shared layer
+
 <img width="3072" alt="chat-app_shared" src="https://github.com/user-attachments/assets/8d7838ce-5f82-4028-a234-91a88b120aab">
 
 ### Model layer
+
 <img width="1624" alt="chat-app_model" src="https://github.com/user-attachments/assets/79df15da-9a1f-4397-936a-79d844a36cfd">
 
 ## 프로젝트 설계
+
 - 화살표 방향으로 호출
 - 색상 블럭: 전역 변수를 가진 context, 일반 함수를 공유하는 hook
 
 <img width="4496" alt="super-super-glue-layer" src="https://github.com/user-attachments/assets/22ae22f1-71bf-40a8-99ef-1c41847c6972">
 
-
 ## 문제 해결
 
 1. react-hook-form에서 다중 file의 유효성 검사 기능이 없음
    - 해결: useState와 DataTransfer를 사용하여 용량과 개수에 대한 유효성 검사 구현
-2. 함수 인자에 잘못된 타입의 데이터를 전달하여 에러가 발생
-   - 해결: Typescript 도입하여 인자에 정확한 데이터를 전달
+2. page → component 순서로 Typescript를 적용하다가 산발적인 에러 발생으로 많은 시간을 소요함
+   - 해결: 에러 범위를 좁히기 위해 가장 말단의 component부터 순차적으로 진행
 
 ## 브랜치 관리
 

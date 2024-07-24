@@ -1,5 +1,5 @@
 import React from "react";
-import Products from "../widgets/product/Products";
+import Products from "../widgets/Product/Products";
 
 const AllProducts: React.FC = () => {
   return <Products />;

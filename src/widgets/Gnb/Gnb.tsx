@@ -16,6 +16,11 @@ const Gnb: React.FC = () => {
     isMobile ? loginByMobile() : loginByDesktop();
   };
 
+  const handleLogout = () => {
+    logout();
+    window.location.reload();
+  };
+
   return (
     <header className={styles.gnb}>
       <LayoutWrapper extraStyle="flex justify-between flex-wrap gap-y-[6px] items-center">
@@ -37,7 +42,7 @@ const Gnb: React.FC = () => {
 
           <div className={styles.auth}>
             {userInfo ? (
-              <Button size="tiny" color="tertiary" clickCallback={logout}>
+              <Button size="tiny" color="tertiary" clickCallback={handleLogout}>
                 로그아웃
               </Button>
             ) : (

@@ -19,7 +19,7 @@ const Products: React.FC = () => {
     return (
       <ContentWrapper>
         <ul className={styles.list}>
-          {productAll.map((product: ProductType) => (
+          {[...productAll].reverse().map((product: ProductType) => (
             <li key={product.id} className={styles.item}>
               <ProductCard product={product} />
             </li>

@@ -6,10 +6,16 @@ import { useAuthContext } from "../context/AuthContext";
 import { useScreenStateContext } from "../context/ScreenStateContext";
 import Toast from "../components/Toast";
 import useCart from "../hooks/useCart";
+import { ProductType } from "../model/product";
 
-export default function ProductDetail() {
+interface LocationStateType {
+  state: {
+    product: ProductType;
+  };
+}
+
+const ProductDetail: React.FC = () => {
   const { userInfo, loginByDesktop, loginByMobile } = useAuthContext();
-
   const { isMobile } = useScreenStateContext();
 
   const {
@@ -25,16 +31,16 @@ export default function ProductDetail() {
         description,
       },
     },
-  } = useLocation();
+  } = useLocation() as LocationStateType;
 
-  const [_selected, setSelected] = useState("");
-  const [_success, setSuccess] = useState(false);
+  const [_selected, setSelected] = useState<string>("");
+  const [_success, setSuccess] = useState<boolean>(false);
 
   const {
     updateCart: { mutate: update },
   } = useCart();
 
-  const handleSelected = (e) => {
+  const handleSelected = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelected(e.target.value);
   };
 
@@ -158,4 +164,6 @@ export default function ProductDetail() {
       </section>
     </ContentWrapper>
   );
-}
+};
+
+export default ProductDetail;

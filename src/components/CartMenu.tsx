@@ -3,7 +3,7 @@ import { LuShoppingCart } from "react-icons/lu";
 import useCart from "../hooks/useCart";
 import IconLink from "../shared/modules/button/IconLink";
 
-export default function CartMenu() {
+const CartMenu: React.FC = () => {
   const {
     cartQuery: { data: cart },
   } = useCart();
@@ -19,4 +19,6 @@ export default function CartMenu() {
       <LuShoppingCart aria-hidden="true" />
     </IconLink>
   );
-}
+};
+
+export default CartMenu;

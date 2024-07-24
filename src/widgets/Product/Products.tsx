@@ -1,11 +1,12 @@
 import React from "react";
-import Spinner from "../Spinner";
-import ContentWrapper from "../wrapper/ContentWrapper";
-import ProductCard from "../ProductCard/ProductCard";
+import Spinner from "../../components/Spinner";
+import ContentWrapper from "../../components/wrapper/ContentWrapper";
+import ProductCard from "../../components/ProductCard/ProductCard";
 import useProducts from "../../hooks/useProducts";
 import styles from "./Products.module.scss";
+import { ProductType } from "../../model/product";
 
-export default function Products() {
+const Products: React.FC = () => {
   const {
     productsQuery: { isLoading, data: productAll },
   } = useProducts();
@@ -18,7 +19,7 @@ export default function Products() {
     return (
       <ContentWrapper>
         <ul className={styles.list}>
-          {productAll.map((product) => (
+          {[...productAll].reverse().map((product: ProductType) => (
             <li key={product.id} className={styles.item}>
               <ProductCard product={product} />
             </li>
@@ -27,4 +28,6 @@ export default function Products() {
       </ContentWrapper>
     );
   }
-}
+};
+
+export default Products;

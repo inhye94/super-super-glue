@@ -1,6 +1,13 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 
-const ContentWrapper = ({ children, title }) => {
+interface ContentWrapperPropsType {
+  title?: string;
+}
+
+const ContentWrapper: React.FC<PropsWithChildren<ContentWrapperPropsType>> = ({
+  children,
+  title,
+}) => {
   return (
     <section className="flex flex-col gap-y-[64px] pb-[32px] pt-[24px]">
       {title && (

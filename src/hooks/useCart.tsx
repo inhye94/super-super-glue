@@ -5,6 +5,16 @@ import {
   updateCart as fetchUpdate,
 } from "../api/cart";
 import { useAuthContext } from "../context/AuthContext";
+import { ShortcutProductType } from "../model/cart";
+
+interface RemoveCartItemParams {
+  id: string;
+}
+
+interface UpdateCartParamse {
+  product: ShortcutProductType;
+  quantity: number;
+}
 
 export default function useCart() {
   const { userId } = useAuthContext();
@@ -18,14 +28,16 @@ export default function useCart() {
   });
 
   const removeCartItem = useMutation({
-    mutationFn: ({ id }) => fetchRemove(userId, id),
-    onSuccess: () => queryClient.invalidateQueries(["cart", userId]),
+    mutationFn: ({ id }: RemoveCartItemParams) => fetchRemove(userId, id),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ["cart", userId] }),
   });
 
   const updateCart = useMutation({
-    mutationFn: ({ product, quantity }) =>
+    mutationFn: ({ product, quantity }: UpdateCartParamse) =>
       fetchUpdate(userId, { ...product, quantity }),
-    onSuccess: () => queryClient.invalidateQueries(["cart", userId]),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ["cart", userId] }),
   });
 
   return { cartQuery, removeCartItem, updateCart };

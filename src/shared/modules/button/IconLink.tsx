@@ -16,7 +16,7 @@ interface IconLinkPropsType {
   size?: "medium" | "small";
   text: string;
   url: string;
-  count?: number;
+  count?: number | null;
 }
 
 const IconLink: React.FC<PropsWithChildren<IconLinkPropsType>> = ({

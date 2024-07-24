@@ -6,11 +6,14 @@ import ContentWrapper from "../../components/wrapper/ContentWrapper";
 import { Link } from "react-router-dom";
 import Spinner from "../../components/Spinner";
 import MyProductCard from "../../components/MyProductCard/MyProductCard";
+import { ProductType } from "../../model/product";
 
-export default function ProductTable() {
+type ProductListType = ProductType[] | null;
+
+const ProductTable: React.FC = () => {
   const { userInfo } = useAuthContext();
 
-  const { data: productList, isLoading } = useQuery({
+  const { data: productList, isLoading } = useQuery<ProductListType>({
     queryKey: ["products"],
     queryFn: async () => await getUserProduct(userInfo.uid),
     refetchOnWindowFocus: false,
@@ -23,7 +26,7 @@ export default function ProductTable() {
     <ContentWrapper title="✨ 등록 상품 리스트 ✨">
       {productList ? (
         <ul className="flex flex-col gap-y-[8px]">
-          {[...Object.values(productList)].map((product) => (
+          {[...Object.values(productList)].reverse().map((product) => (
             <li
               key={product.id}
               className="p-[16px] bg-gray-light bg-opacity-55 rounded-md"
@@ -42,4 +45,6 @@ export default function ProductTable() {
       )}
     </ContentWrapper>
   );
-}
+};
+
+export default ProductTable;

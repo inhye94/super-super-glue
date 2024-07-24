@@ -31,9 +31,11 @@ export const getUserProduct = async (
 
     const allProducts = data.val();
 
-    return (Object.values(allProducts) as ProductType[]).filter(
-      (product: ProductType) => product.userId === userId
-    );
+    const filteredProducts = (
+      Object.values(allProducts) as ProductType[]
+    ).filter((product: ProductType) => product.userId === userId);
+
+    return filteredProducts.length === 0 ? null : filteredProducts;
   } catch (error) {
     console.error("Error getting user products:", error);
     return null;

@@ -14,7 +14,7 @@ const Products: React.FC = () => {
   if (isLoading) return <Spinner text="등록 상품 정보를 불러오는 중입니다!" />;
 
   if (!productAll || productAll.length === 0) {
-    return <p>상품 준비중입니다!</p>;
+    return <p className={styles.empty}>상품 준비중입니다!</p>;
   } else {
     return (
       <ContentWrapper>

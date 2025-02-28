@@ -17,7 +17,11 @@ export default function Cart() {
   if (isLoading) return <Spinner text="장바구니 데이터를 불러오고 있습니다!" />;
 
   if (!cart) {
-    return <p>장바구니가 비어잇어요!</p>;
+    return (
+      <p className="border border-gray text-tertiary rounded-lg flex justify-center items-center h-[20vh]">
+        장바구니가 비어있어요!
+      </p>
+    );
   } else {
     return (
       <ContentWrapper title="✨ 장바구니 ✨">
